@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_return(int cond_value, int ok_value, int error_value, char *error_msg)
+int		ft_return(int cond_value, int ok_value, int err_val, char *error_msg)
 {
 	if (cond_value == 0)
-		return (ft_puterror(error_value, error_msg));
+		return (ft_puterror(err_val, error_msg));
 	return (ok_value);
 }

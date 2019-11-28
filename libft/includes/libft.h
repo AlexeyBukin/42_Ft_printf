@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2019/11/28 17:38:58 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/11/28 18:43:40 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ typedef char			t_bool;
 
 # define FALSE 0
 # define TRUE  1
+
+/*
+** atoi-itoa
+*/
+
+int				ft_atoi(const char *s);
+int				ft_atoi_base(const char *s, char base);
+
+# define BASE16U ("0123456789ABCDEF")
+# define BASE16L ("0123456789abcdef")
+
+char			*ft_itoa(int n);
+char			*ft_itoa_base(int value, char *base);
+
+char			*ft_lltoa(long long int n);
+
+char			*ft_mtob(void const *ptr, size_t byte_size);
+
+char			*ft_utoa(unsigned int num);
 
 /*
 ** is
@@ -87,7 +106,7 @@ void			ft_putstr_free(char *s);
 */
 
 char			**ft_str_div_by(char const *str, int divisor);
-char			*ft_str_div_by_ins(char const *str, int divisor, char const *ins);
+char			*ft_str_div_by_ins(char const *str, int d, char const *ins);
 
 char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strcfnr(const char *s, int find, int replace);
@@ -134,17 +153,10 @@ char			*ft_strtrim(char const *s);
 */
 
 int				ft_abs(int a);
-int				ft_atoi(const char *s);
-int				ft_atoi_base(const char *s, char base);
 
 void			*ft_bzero(void *buf, size_t len);
 
 void			ft_free_char_2d_arr(char ***input);
-
-char			*ft_itoa(int n);
-char			*ft_itoa_base(int value, char *base);
-
-char			*ft_mtob(void const *ptr, size_t bits);
 
 int				ft_pow(int num, int pow);
 

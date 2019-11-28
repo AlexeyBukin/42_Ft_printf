@@ -6,13 +6,13 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:45:50 by kcharla           #+#    #+#             */
-/*   Updated: 2019/11/28 16:48:05 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/11/28 18:35:28 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		power_ten(int power)
+static unsigned int		power_ten(int power)
 {
 	int		i;
 
@@ -25,7 +25,7 @@ static int		power_ten(int power)
 	return (i);
 }
 
-static char		*do_if_ok(uint8_t len, int n)
+static char				*do_if_ok(uint8_t len, unsigned int n)
 {
 	char	*res;
 
@@ -45,7 +45,7 @@ static char		*do_if_ok(uint8_t len, int n)
 	return (res);
 }
 
-char			*ft_utoa(unsigned int n)
+char					*ft_utoa(unsigned int n)
 {
 	uint8_t	len;
 	char	*res;
