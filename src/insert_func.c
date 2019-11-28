@@ -6,12 +6,11 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 17:21:46 by lmelina           #+#    #+#             */
-/*   Updated: 2019/11/26 19:35:00 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/11/28 17:14:19 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../printf.h"
+#include "printf.h"
 
 char	*insert_from_to2(char *res, char *input, size_t to, int i)
 {

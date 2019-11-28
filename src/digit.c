@@ -6,12 +6,11 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 16:04:23 by lmelina           #+#    #+#             */
-/*   Updated: 2019/11/28 15:36:19 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/11/28 17:02:41 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../printf.h"
-#include <stdio.h>
+#include "printf.h"
 
 #define PRECISION 0
 #define PLUS 1

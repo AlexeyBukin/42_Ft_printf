@@ -1,8 +1,10 @@
-NAME = libft.a
+NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I includes/
+LIB_FT = libft/
+LIB_FT_FILE = $(LIB_FT)/libft.a
+INCLUDES = -I includes/ -I libft/includes
 
 O_DIR = objects/
 SRC_DIR = src/
@@ -18,8 +20,11 @@ O_DIRS = $(patsubst $(SRC_DIR)%, $(O_DIR)%, $(SRC_DIRS))
 all: $(NAME)
 	@echo "make: Done building \`$(NAME)'."
 
-$(NAME): $(O_DIRS) $(O_FILES)
+$(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
 	@ranlib $(NAME)
+
+$(LIB_FT_FILE):
+	@make -C $(LIB_FT)
 
 $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
@@ -29,12 +34,26 @@ $(O_DIR)%.o: $(SRC_DIR)%.c
 	@ar rc $(NAME) $@
 
 clean:
+	@make clean -C $(LIB_FT)
 	@rm -rf $(O_DIR)
 	@echo "make: Done clean of \`$(NAME)'."
 
-fclean: clean
+fclean: lclean
+	@make fclean -C $(LIB_FT)
 	@rm -f $(NAME)
 	@echo "make: Done full clean of \`$(NAME)'."
 
 re: fclean all
 	@echo "make: Done recompile of \`$(NAME)'."
+
+
+lclean:
+	@rm -rf $(O_DIR)
+	@echo "make: Done local clean of \`$(NAME)'."
+
+lfclean: lclean
+	@rm -f $(NAME)
+	@echo "make: Done local full clean of \`$(NAME)'."
+
+lre: lfclean all
+	@echo "make: Done local recompile of \`$(NAME)'."

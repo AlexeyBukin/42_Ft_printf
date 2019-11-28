@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2019/11/27 12:46:41 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/11/28 17:38:58 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void			ft_putstr_free(char *s);
 ** str
 */
 
+char			**ft_str_div_by(char const *str, int divisor);
+char			*ft_str_div_by_ins(char const *str, int divisor, char const *ins);
+
 char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strcfnr(const char *s, int find, int replace);
 char			*ft_strchr(const char *s, int c);
@@ -135,6 +138,8 @@ int				ft_atoi(const char *s);
 int				ft_atoi_base(const char *s, char base);
 
 void			*ft_bzero(void *buf, size_t len);
+
+void			ft_free_char_2d_arr(char ***input);
 
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int value, char *base);

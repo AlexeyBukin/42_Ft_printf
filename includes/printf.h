@@ -6,12 +6,15 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/11/27 12:51:52 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/11/28 16:56:49 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
+
+//TODO delete stdio.h
+#include <stdio.h>
 
 # include <stdarg.h>
 # include "libft.h"
