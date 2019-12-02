@@ -10,12 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define h_or_l 1;
-#define H_OR_L 2;
-#define _OPEN_SYS_ITOA_EXT
-
-//flags[h_or_l]
-
 #include "printf.h"
 
 int		ft_printf(const char *restrict format, ...)
@@ -25,21 +19,10 @@ int		ft_printf(const char *restrict format, ...)
 	int		i;
 	char	*string;
 
-
-	//@requires char * insert_from_to(string input, size_t from, size_t to, string insertion);
-	//string = do_all_ints(string);
-	//string = do_all_floats(string);
-	//string = do_all_char_strings(string);
-
-	//last part - %%
-	//string = do_all_ints(string);
-
 	i = -1;
 	all_byte = 0;
 	va_start(arg, format);
 	string = (char *)format;
-
-
 
 	while (string[++i] != '\0')
 	{
@@ -59,6 +42,7 @@ int		ft_printf(const char *restrict format, ...)
 
 int main ()
 {
-	ft_printf("h");
+    printf("%%%u\n", 01023);
+	ft_printf("%%%u", 01023);
 	return 0;
 }
