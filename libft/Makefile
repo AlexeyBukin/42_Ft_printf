@@ -28,7 +28,7 @@ $(O_DIR)%.o: $(SRC_DIR)%.c
 	@clang -c $(FLAGS) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
 
-clean:
+clean: a b c
 	@rm -rf $(O_DIR)
 	@echo "make: Done clean of \`$(NAME)'."
 

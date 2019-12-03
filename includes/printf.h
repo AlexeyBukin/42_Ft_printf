@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/11/28 18:46:29 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/11/28 19:26:26 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,12 @@ char		*insert_from_to(char *inp, char *ins, size_t from, size_t to);
 char		*insert_from_to2(char *res, char *input, size_t to, int i);
 char		*ft_resolve_arg(char *string, int i, va_list arg);
 char		*ft_insert_d(char *input, int i, int d);
+
+
+typedef struct	s_double
+{
+	char	*d310;
+	char	precision;
+}				t_double;
 
 #endif
