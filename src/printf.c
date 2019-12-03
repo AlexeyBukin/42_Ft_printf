@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/03 16:08:10 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/03 17:19:27 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int		ft_printf(const char *restrict format, ...)
 
 int main ()
 {
-    printf("%%%u\n", 01023);
-	ft_printf("%%%u", 01023);
+	ft_printf("% -+#01000.0001000d", 100);
 	return 0;
 }
