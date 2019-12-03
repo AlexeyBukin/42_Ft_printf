@@ -107,6 +107,7 @@ void			ft_putstr_free(char *s);
 
 char			**ft_str_div_by(char const *str, int divisor);
 char			*ft_str_div_by_ins(char const *str, int d, char const *ins);
+char			*ft_str_spam(const char *s, int repetitions);
 
 char			*ft_strcat(char *s1, const char *s2);
 char			*ft_strcfnr(const char *s, int find, int replace);
