@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 17:14:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/03 17:14:37 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/03 17:25:18 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_str_spam(const char *s, int repetitions)
 	if (res != NULL)
 	{
 		i = 0;
-		while (i < (int) len * repetitions)
+		while (i < (int)len * repetitions)
 		{
 			res[i] = s[i % len];
 			i++;
