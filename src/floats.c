@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/03 17:15:47 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/03 18:34:56 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 #define zero        4 //to fill with 0
 #define w1          5 //width before dot
 #define w2          6 //width after dot
-#define error       7
-#define flags_num   8
+#define space       7 //space before positive num
+#define error       8
+#define flags_num   9
 
 #include "printf.h"
 
@@ -31,31 +32,8 @@ char	*ft_long_float(char *flags_str, long double num);
 
 int main()
 {
-	printf("res   = \'%s\'\n", ft_float("%#100.010f", 1.1));
-	printf("res_p = \'%#100.010f\'", 1.1);
-//	printf("%10.3f\n", (double)1 / 0);
-//	printf("%#.0f\n", (double)10);
-
-	//double num = 1.5;
-//
-//	printf("exponent of %f = %d, %016x\n\n", num, 5, get_exponent(num));
-//	unsigned long long a = 0x3ff0000000000000;
-//
-//	ft_memcpy(&num, &a, 8);
-//	printf("%f\n", num);
-//	print_double_as_binary(num);
-//
-//	a = 0x3ff1000000000000;
-//	ft_memcpy(&num, &a, 8);
-//	printf("%f\n", num);
-//	print_double_as_binary(num);
-//
-//	a = 0x0000000000000000;
-//	ft_memcpy(&num, &a, 8);
-//	a = 0x3ff0001000010001;
-//	ft_memcpy(&num, (&a), 8);
-//	printf("%f\n", num);
-//	print_double_as_binary(num);
+	printf("res   = \'%s\'\n", ft_float("% +f", 1.2));
+	printf("res_p = \'% +f\'", 1.2);
 }
 
 int		parse_flags(char *args, int *flags)
@@ -68,22 +46,37 @@ int		parse_flags(char *args, int *flags)
 		return (-1);
 	while (args[i] != 0)
 	{
-		if (args[i] == '.' && dot_pass == 0)
+		if (args[i] == '-')
+			flags[shift] = 1;
+		else if (args[i] == '+')
+			flags[sign] = 1;
+		else if (args[i] == ' ')
+			flags[space] = 1;
+		else if (args[i] == '#')
+			flags[alt] = 1;
+		else if (args[i] == '.' && dot_pass == 0)
 			dot_pass = 1;
-		else if (args[i] == '0'&& dot_pass == 0)
+		else if (args[i] == '0' && dot_pass == 0)
 			flags[zero] = 1;
-		else if (args[i] > '0' && args[i] <= '9')
+		else if ((args[i] > '0' && args[i] <= '9') || (args[i] == '0' && dot_pass == 1))
 		{
 			if (dot_pass == 0)
 				flags[w1] = ft_atoi(&(args[i]));
 			else
-				flags[w2] = ft_atoi(&(args[i]));
+				if ((flags[w2] = ft_atoi(&(args[i]))) == 0)
+					flags[w2] = -1;
 			while (args[i] >= '0' && args[i] <= '9')
 				i++;
 			continue ;
 		}
+		else if (args[i] == 'F')
+			flags[f_or_F] = 1;
 		i++;
 	}
+	if (flags[w2] == 0)
+		flags[w2] = 6;
+	else if (flags[w2] == -1)
+		flags[w2] = 0;
 	return (0);
 }
 
@@ -94,22 +87,36 @@ static char		*try_special(int *flags, double num)
 	return (NULL);
 }
 
-char	*bad_afterdot(double num)
+char	*bad_afterdot(double num, int w, int f_alt)
 {
 	int		i;
 	char	b;
+	char	n;
 	char	a[360];
 
 	ft_bzero(a, 360);
 	a[0] = '.';
 	i = 0;
-	while (num > 0)
+
+	if (w == 0)
+	{
+		if (f_alt == 1)
+			return (ft_strdup("."));
+		else
+			return (ft_strdup(""));
+	}
+	num = num * 10;
+	b = (char) num;
+	num -= b;
+
+	while (i < w)
 	{
 		i++;
 		num = num * 10;
-		b = (char) num;
+		n = (char) num;
 		num -= b;
 		a[i] = b + '0';
+		//if (a[i] > '9')
 	}
 	return (ft_strdup(a));
 }
@@ -128,9 +135,12 @@ char	*bad_way(int *flags, double num)
 	if (num < 0)
 		num *= -1;
 
+
 	if (flags[sign] == 1 && num >= 0)
 		bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
-	bdot_a = ft_strjoin_free(bdot_a, bad_afterdot(num));
+	else if (flags[space] == 1 && num >= 0)
+		bdot_a = ft_strjoin_free(ft_strdup(" "), bdot_a);
+	bdot_a = ft_strjoin_free(bdot_a, bad_afterdot(num, flags[w2], flags[alt]));
 	return (bdot_a);
 }
 
@@ -146,14 +156,14 @@ char	*ft_float(char *flags_str, double num)
 	if (parse_flags(flags_str, flags) < 0)
 		return (NULL);
 
-	printf("alt    = %d\n", flags[alt]);
+	printf("\nalt    = %d\n", flags[alt]);
 	printf("f_or_F = %d\n", flags[f_or_F]);
 	printf("shift  = %d\n", flags[shift]);
 	printf("sign   = %d\n", flags[sign]);
 	printf("zero   = %d\n", flags[zero]);
 	printf("sign   = %d\n", flags[sign]);
 	printf("w1     = %d\n", flags[w1]);
-	printf("w2     = %d\n", flags[w2]);
+	printf("w2     = %d\n\n", flags[w2]);
 
 	res = try_special(flags, num);
 	if (flags[error] < 0) //error
@@ -166,7 +176,10 @@ char	*ft_float(char *flags_str, double num)
 	len = ft_strlen(res);
 	if ((int) len < flags[w1])
 	{
-		res = ft_strjoin_free(ft_str_spam(" ", flags[w1] - len), res);
+		if (flags[shift] == 0)
+			res = ft_strjoin_free(ft_str_spam((flags[zero] ? "0" : " "), flags[w1] - len), res);
+		else
+			res = ft_strjoin_free(res, ft_str_spam(" ", flags[w1] - len));
 	}
 	return (res);
 }
