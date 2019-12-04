@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/03 17:30:37 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/04 16:39:56 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ int		ft_printf(const char *restrict format, ...)
 
 int main ()
 {
-	ft_printf("% -+#01000.0001000d", 100);
-	return 0;
+    int x1 = 1;
+    printf("%d - %p\n", x1, &x1);
+    ft_printf("%d - %p\n", x1, &x1);
+    ft_printf("\n");
+    int x2 = 2;
+    printf("%d - %p\n", x2, &x2);
+    ft_printf("%d - %p\n", x2, &x2);
+    return 0;
 }

@@ -15,12 +15,13 @@ O_FILES = $(patsubst $(SRC_DIR)%.c, $(O_DIR)%.o, $(SRC_FILES))
 SRC_DIRS = $(shell find $(SRC_DIR) -type d)
 O_DIRS = $(patsubst $(SRC_DIR)%, $(O_DIR)%, $(SRC_DIRS))
 
-.PHONY: clean fclean all
+.PHONY: clean fclean
 
 all: $(NAME)
-	@echo "make: Done building \`$(NAME)'."
+#	@echo "make: Done building \`$(NAME)'."
 
 $(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
+	@ar rc $(NAME) $(LIB_FT_FILE)
 	@ranlib $(NAME)
 
 $(LIB_FT_FILE):
