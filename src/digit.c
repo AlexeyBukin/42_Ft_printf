@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 16:04:23 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/04 16:39:13 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/04 16:57:22 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,27 @@ char	*ft_alternative_insert_x(char *input, int start, int i, int d)
     zero[1] = 'x';
     zero[2] = '\0';
     num = ft_itoa_base(d, "0123456789abcdef");
+    num = ft_strjoin(zero, num);
+    input = insert_from_to(input, num, start, i);
+    return (input);
+}
+
+char	*ft_insert_p(char *input, int start, int i, int d)
+{
+    char *num;
+    char zero[3];
+    char ffff[5];
+
+    zero[0] = '0';
+    zero[1] = 'x';
+    zero[2] = '\0';
+    ffff[0] = '7';
+    ffff[1] = 'f';
+    ffff[2] = 'f';
+    ffff[3] = 'f';
+    ffff[4] = '\0';
+    num = ft_itoa_base(d, "0123456789abcdef");
+    num = ft_strjoin(ffff, num);
     num = ft_strjoin(zero, num);
     input = insert_from_to(input, num, start, i);
     return (input);
@@ -198,7 +219,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     else if (string[i] == 'p')
     {
         d = va_arg(arg, int);
-        string = ft_alternative_insert_x(string, start, i, d);
+        string = ft_insert_p(string, start, i, d);
         return (string);
     }
     else if (string[i] == 'o')
