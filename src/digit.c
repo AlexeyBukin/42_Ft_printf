@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 16:04:23 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/04 16:57:22 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/04 18:08:07 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 #define SPACE 4
 #define WIDTH 5
 #define SHARP 6
+#define HH 7
+#define H 8
+#define LL 9
+#define L 10
 
 char	*ft_insert_d(char *input, int start, int i, int d)
 {
@@ -129,7 +133,7 @@ char	*ft_insert_u(char *input, int start, int i, int d)
 
 char	*ft_resolve_arg(char *string, int i, va_list arg)
 {
-    int flags[7];
+    int flags[11];
     char *insert;
     char character[2];
     int d;
@@ -142,7 +146,8 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
 	while (string[i] && !(string[i] >= '1' && string[i] <= '9') &&
 	string[i] != '.' && !(string[i] == 'd' || string[i] == 'i' ||
 	string[i] == 's' || string[i] == 'c' || string[i] == 'x' || string[i] == 'p' ||
-	string[i] == 'X' || string[i] == 'o' || string[i] == 'u' || string[i] == '%'))
+	string[i] == 'X' || string[i] == 'o' || string[i] == 'u' || string[i] == '%' ||
+	string[i] == 'h' || string[i] == 'l'))
 	{
 		if (string[i] == '-')
             flags[MINUS] = 1;
@@ -179,16 +184,43 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     //////////////////////////////////////////////////////
 
     ///////////////////модификаторы///////////////////////
-
+    if (string[i] == 'h' && string[i + 1] == 'h')
+    {
+        flags[HH] = 1;
+        while (string[i] && string[i] == 'h')
+            i++;
+    }
+    if (string[i] == 'h')
+    {
+        flags[H] = 1;
+        while (string[i] && string[i] == 'h')
+            i++;
+    }
+    if (string[i] == 'l' && string[i + 1] == 'l')
+    {
+        flags[LL] = 1;
+        while (string[i] && string[i] == 'l')
+            i++;
+    }
+    if (string[i] == 'l')
+    {
+        flags[L] = 1;
+        while (string[i] && string[i] == 'l')
+            i++;
+    }
     //////////////////////////////////////////////////////
 
-//    printf("Minus flag: %d\n", flags[MINUS]);
-//    printf("Plus flag: %d\n", flags[PLUS]);
-//    printf("Space flag: %d\n", flags[SPACE]);
-//    printf("Sharp flag: %d\n", flags[SHARP]);
-//    printf("Zero flag: %d\n", flags[ZERO]);
-//    printf("Width size: %d\n", width);
-//    printf("Precision size: %d\n", precision);
+    printf("Minus flag: %d\n", flags[MINUS]);
+    printf("Plus flag: %d\n", flags[PLUS]);
+    printf("Space flag: %d\n", flags[SPACE]);
+    printf("Sharp flag: %d\n", flags[SHARP]);
+    printf("Zero flag: %d\n", flags[ZERO]);
+    printf("Width size: %d\n", width);
+    printf("Precision size: %d\n", precision);
+    printf("hh flag: %d\n", flags[HH]);
+    printf("h flag: %d\n", flags[H]);
+    printf("ll flag: %d\n", flags[LL]);
+    printf("l flag: %d\n", flags[L]);
 
     ///////////////////тип преобразования/////////////////
     if (string[i] == 's')
@@ -248,6 +280,10 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
         else
             string = ft_insert_upperx(string, start, i, d);
         return (string);
+    }
+    else if (string[i] == 'f')
+    {
+
     }
     else if (string[i] == '%')
     {
