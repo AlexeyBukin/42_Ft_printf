@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 17:21:46 by lmelina           #+#    #+#             */
-/*   Updated: 2019/11/28 17:14:19 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/06 21:59:35 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ char	*insert_from_to(char *input, char *insertion, size_t from, size_t to)
 	size_t	j;
 	char	*res;
 
+	//TODO delete me
+	//printf("from %zu to %zu\n", from, to);
+
 	len1 = ft_strlen(input) - (to - from + 1);
 	len2 = ft_strlen(insertion);
 	i = 0;
 	j = 0;
 	if (!(res = (char*)malloc(sizeof(char) * (len1 + len2 + 1))))
 		return (NULL);
+
 	while (i < from)
 	{
 		res[i] = input[i];
@@ -49,6 +53,7 @@ char	*insert_from_to(char *input, char *insertion, size_t from, size_t to)
 		i++;
 		j++;
 	}
+
 	res = insert_from_to2(res, input, ++to, i);
 	return (res);
 }

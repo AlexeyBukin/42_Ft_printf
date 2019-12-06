@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/06 19:30:35 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/06 21:15:24 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     int d;
     int start;
 
-    start = i - 1;
+    start = i ++ ;
     ///////////////////флаги//////////////////////////////
 	while (string[i] && !(string[i] >= '1' && string[i] <= '9') &&
 	string[i] != '.' && !(string[i] == 'd' || string[i] == 'i' ||
@@ -55,6 +55,8 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     if (string[i] == '.')
     {
         flags[PRECISION] = ft_atoi(&string[++i]);
+        if(flags[PRECISION] == 0)
+        	flags[PRECISION] = -1;
         while (string[i] && (string[i] >= '0' && string[i] <= '9'))
             i++;
     }
@@ -103,6 +105,9 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     if (string[i] == 's')
     {
         insert = va_arg(arg, char*);
+
+        //printf("\nstart:string: \'%s\'\ninsert: \'%s\'\n", string, insert);
+
         string = insert_from_to(string, insert, start, i);
         return (string);
     }
@@ -140,22 +145,11 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
             string = ft_insert_o(string, start, i, d);
         return (string);
     }
-    else if (string[i] == 'x')
+    else if (string[i] == 'x' || string [i] == 'X')
     {
         d = va_arg(arg, int);
-        if (flags[SHARP] == 1)
-            string = ft_alternative_insert_x(string, start, i, d, flags);
-        else
-            string = ft_insert_x(string, start, i, d, flags);
-        return (string);
-    }
-    else if (string[i] == 'X')
-    {
-        d = va_arg(arg, int);
-        if (flags[SHARP] == 1)
-            string = ft_alternative_insert_upperx(string, start, i, d);
-        else
-            string = ft_insert_upperx(string, start, i, d);
+		string = ft_insert_x(string, start, i, d, flags, string[i] == 'X');
+		//ft_putendl("here 3");
         return (string);
     }
     else if (string[i] == 'f')

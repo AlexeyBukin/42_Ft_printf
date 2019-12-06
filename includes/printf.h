@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/03 18:38:46 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/06 20:28:46 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char		*ft_resolve_arg(char *string, int i, va_list arg);
 char		*ft_insert_d(char *input, int start, int i, int d, int *flags);
 char	    *ft_insert_o(char *input, int start, int i, int d);
 char	    *ft_alternative_insert_o(char *input, int start, int i, int d);
-char	    *ft_insert_x(char *input, int start, int i, int d, int *flags);
-char	    *ft_alternative_insert_x(char *input, int start, int i, int d, int *flags);
+char	    *ft_insert_x(char *input, int start, int i, int d, int *flags, int is_x_big);
+char	    *ft_alternative_insert_x(char *input, int start, int i, int d, int *flags, char *num);
 char	    *ft_alternative_insert_upperx(char *input, int start, int i, int d);
 char	    *ft_insert_upperx(char *input, int start, int i, int d);
 char	    *ft_insert_u(char *input, int start, int i, int d);

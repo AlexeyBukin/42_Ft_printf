@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/03 18:38:46 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/06 20:09:09 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char			*ft_lltoa(long long int n);
 char			*ft_mtob(void const *ptr, size_t byte_size);
 
 char			*ft_utoa(unsigned int num);
+char			*ft_utoa_base(unsigned int value, char *base);
 
 /*
 ** is
