@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 16:04:23 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/04 18:08:07 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/04 22:14:25 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,56 @@
 #define LL 9
 #define L 10
 
-char	*ft_insert_d(char *input, int start, int i, int d)
+char	*ft_insert_d(char *input, int start, int i, int d, int *flags)
 {
-	char *num;
+	char	*num;
+	int		len;
 
-	num = ft_itoa(d);
+	//TODO normal ft_ulltoa();
+	num = ft_utoa(ft_abs(d));
+
+	if (flags[PRECISION] > 0)
+		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - ft_strlen(num)), num);
+
+	if (flags[ZERO] == 1 && flags[PRECISION] == 0)
+	{
+		len = (int)ft_strlen(num);
+		if (flags[PLUS] == 1 || flags[SPACE] == 1 || d < 0)
+			len ++;
+		num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
+	}
+
+	if (d < 0)
+		num = ft_strjoin_free(ft_strdup("-"), num);
+
+	if (flags[PLUS] == 1 && d >= 0)
+		num = ft_strjoin_free(ft_strdup("+"), num);
+
+	if (flags[SPACE] == 1 && flags[PLUS] == 0 && d >= 0)
+		num = ft_strjoin_free(ft_strdup(" "), num);
+
+	if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])
+	{
+		len = (int)ft_strlen(num);
+		num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
+	}
+
+	if (flags[MINUS])
+	{
+		int pos = 0;
+		int j = 0;
+		while (num[j] != '\0')
+		{
+			if (num[j] != ' ')
+			{
+				num[pos] = num[j];
+				num[j] = ' ';
+				pos++;
+			}
+			j++;
+		}
+	}
+
 	input = insert_from_to(input, num, start, i);
 	return (input);
 }
@@ -138,8 +183,6 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     char character[2];
     int d;
     int start;
-    int width = 0;
-    int precision = 0;
 
     start = i - 1;
     ///////////////////флаги//////////////////////////////
@@ -166,8 +209,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     ///////////////////ширина/////////////////////////////
     if (string[i] >= '1' && string[i] <= '9')
     {
-        width = atoi(&string[i]);
-        flags[WIDTH] = 1;
+        flags[WIDTH] = ft_atoi(&string[i]);
         while (string[i] && (string[i] >= '0' && string[i] <= '9'))
             i++;
     }
@@ -176,8 +218,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     ///////////////////точность///////////////////////////
     if (string[i] == '.')
     {
-        precision = atoi(&string[++i]);
-        flags[PRECISION] = 1;
+        flags[PRECISION] = ft_atoi(&string[++i]);
         while (string[i] && (string[i] >= '0' && string[i] <= '9'))
             i++;
     }
@@ -210,17 +251,17 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     }
     //////////////////////////////////////////////////////
 
-    printf("Minus flag: %d\n", flags[MINUS]);
-    printf("Plus flag: %d\n", flags[PLUS]);
-    printf("Space flag: %d\n", flags[SPACE]);
-    printf("Sharp flag: %d\n", flags[SHARP]);
-    printf("Zero flag: %d\n", flags[ZERO]);
-    printf("Width size: %d\n", width);
-    printf("Precision size: %d\n", precision);
-    printf("hh flag: %d\n", flags[HH]);
-    printf("h flag: %d\n", flags[H]);
-    printf("ll flag: %d\n", flags[LL]);
-    printf("l flag: %d\n", flags[L]);
+//    printf("Minus flag: %d\n", flags[MINUS]);
+//    printf("Plus flag: %d\n", flags[PLUS]);
+//    printf("Space flag: %d\n", flags[SPACE]);
+//    printf("Sharp flag: %d\n", flags[SHARP]);
+//    printf("Zero flag: %d\n", flags[ZERO]);
+//    printf("Width size: %d\n", flags[WIDTH]);
+//    printf("Precision size: %d\n", flags[PRECISION]);
+//    printf("hh flag: %d\n", flags[HH]);
+//    printf("h flag: %d\n", flags[H]);
+//    printf("ll flag: %d\n", flags[LL]);
+//    printf("l flag: %d\n", flags[L]);
 
     ///////////////////тип преобразования/////////////////
     if (string[i] == 's')
@@ -239,7 +280,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     else if (string[i] == 'd' || string[i] == 'i')
     {
         d = va_arg(arg, int);
-        string = ft_insert_d(string, start, i, d);
+        string = ft_insert_d(string, start, i, d, flags);
         return (string);
     }
     else if (string[i] == 'u')
