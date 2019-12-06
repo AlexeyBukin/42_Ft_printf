@@ -20,9 +20,11 @@ O_DIRS = $(patsubst $(SRC_DIR)%, $(O_DIR)%, $(SRC_DIRS))
 all: $(NAME)
 #	@echo "make: Done building \`$(NAME)'."
 
-$(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
-	@ar rc $(NAME) $(LIB_FT_FILE)
+$(NAME): LIB_RULE $(O_DIRS) $(O_FILES)
 	@ranlib $(NAME)
+
+LIB_RULE: $(LIB_FT_FILE)
+	@libtool -static -o $(NAME) $(LIB_FT_FILE)
 
 $(LIB_FT_FILE):
 	@make -C $(LIB_FT)

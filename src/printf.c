@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/04 18:11:14 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/04 19:33:01 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int		ft_printf(const char *restrict format, ...)
 	return (all_byte);
 }
 
-int main ()
-{
-    ft_printf("% -+#010.10hd", 123);
-    return 0;
-}
+//int main ()
+//{
+//    ft_printf("% -+#010.10hd", 123);
+//    return 0;
+//}
