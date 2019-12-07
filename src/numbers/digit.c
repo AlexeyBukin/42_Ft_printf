@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/06 21:15:24 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/07 15:39:55 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 char	*ft_resolve_arg(char *string, int i, va_list arg)
 {
     int flags[11];
-    char *insert;
     char character[2];
     int d;
     int start;
 
-    start = i ++ ;
+    start = i++ ;
     ///////////////////флаги//////////////////////////////
 	while (string[i] && !(string[i] >= '1' && string[i] <= '9') &&
 	string[i] != '.' && !(string[i] == 'd' || string[i] == 'i' ||
@@ -104,11 +103,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     ///////////////////тип преобразования/////////////////
     if (string[i] == 's')
     {
-        insert = va_arg(arg, char*);
-
-        //printf("\nstart:string: \'%s\'\ninsert: \'%s\'\n", string, insert);
-
-        string = insert_from_to(string, insert, start, i);
+        string = ft_insert_s(string, arg, start, i, flags);
         return (string);
     }
     else if (string[i] == 'c')

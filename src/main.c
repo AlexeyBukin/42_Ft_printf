@@ -1,7 +1,7 @@
 #include "printf.h"
 
-#define STR "%#08x"
-#define ARGS 42
+#define STR "%-.2s is a string"
+#define ARGS "this"
 
 int main()
 {
@@ -9,6 +9,3 @@ int main()
    printf("gg printf: \'"STR"\'", ARGS);
    return 0;
 }
-
-//'0x00002a'
-//'0x000000002a'
