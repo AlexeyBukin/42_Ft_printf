@@ -1,7 +1,7 @@
 #include "printf.h"
 
-#define STR "%-5.10o"
-#define ARGS 2500
+#define STR "% c"
+#define ARGS 0
 
 int main()
 {

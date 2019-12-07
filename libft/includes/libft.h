@@ -31,6 +31,7 @@ int				ft_atoi_base(const char *s, char base);
 
 # define BASE16U ("0123456789ABCDEF")
 # define BASE16L ("0123456789abcdef")
+# define BASE8   ("01234567")
 
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int value, char *base);

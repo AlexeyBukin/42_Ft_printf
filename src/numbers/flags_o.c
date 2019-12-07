@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 17:06:03 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/07 17:06:43 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_insert_o(char *input, int start, int i, int d, int *flags)
 	char	*num;
 	int		len;
 
-	num = ft_itoa_base(d, "01234567");
+	num = ft_itoa_base(d, BASE8);
 	/////////
 	if (flags[PRECISION] == -1 && d == 0)
 	{

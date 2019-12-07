@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 17:11:57 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/07 17:13:02 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ char	    *ft_insert_u(char *input, int start, int i, int d);
 char	    *ft_insert_p(char *input, int start, int i, int d);
 char		*ft_insert_s(char *string, va_list arg, int start, int i, int *flags);
 char		*ft_insert_percentage(char *string, int start, int i, int *flags);
+char		*ft_insert_c(char *string, va_list arg, int start, int i, int *flags);
 
 #endif
