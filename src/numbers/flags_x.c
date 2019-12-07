@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/06 21:14:57 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/07 15:13:38 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_insert_x(char *input, int start, int i, int d, int *flags, int is_x_big
 		len = (int)ft_strlen(num);
 		if (flags[PLUS] == 1 || flags[SPACE] == 1 || d < 0)
 			len ++;
-		len = (flags[SHARP] == 1) ? len - 2 : len;
+		len = (flags[SHARP] == 1) ? len + 2 : len;
 		num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
 	}
 
@@ -43,7 +43,7 @@ char	*ft_insert_x(char *input, int start, int i, int d, int *flags, int is_x_big
 			num = ft_strjoin_free(ft_strdup("0x"), num);
 	}
 
-	if (flags[WIDTH] > 0)
+	if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])
 	{
 		len = (int)ft_strlen(num);
 		if (flags[MINUS] == 1)
@@ -55,6 +55,7 @@ char	*ft_insert_x(char *input, int start, int i, int d, int *flags, int is_x_big
 			num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
 		}
 	}
+
 //		if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])
 //	{
 //		len = (int)ft_strlen(num);
