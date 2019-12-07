@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 15:39:28 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/07 17:11:57 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ char		*insert_from_to(char *inp, char *ins, size_t from, size_t to);
 char		*insert_from_to2(char *res, char *input, size_t to, int i);
 char		*ft_resolve_arg(char *string, int i, va_list arg);
 char		*ft_insert_d(char *input, int start, int i, int d, int *flags);
-char	    *ft_insert_o(char *input, int start, int i, int d);
-char	    *ft_alternative_insert_o(char *input, int start, int i, int d);
+char	    *ft_insert_o(char *input, int start, int i, int d, int *flags);
 char	    *ft_insert_x(char *input, int start, int i, int d, int *flags, int is_x_big);
 char	    *ft_alternative_insert_x(char *input, int start, int i, int d, int *flags, char *num);
 char	    *ft_alternative_insert_upperx(char *input, int start, int i, int d);
@@ -48,5 +47,6 @@ char	    *ft_insert_upperx(char *input, int start, int i, int d);
 char	    *ft_insert_u(char *input, int start, int i, int d);
 char	    *ft_insert_p(char *input, int start, int i, int d);
 char		*ft_insert_s(char *string, va_list arg, int start, int i, int *flags);
+char		*ft_insert_percentage(char *string, int start, int i, int *flags);
 
 #endif

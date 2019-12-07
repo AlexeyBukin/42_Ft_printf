@@ -1,7 +1,7 @@
 #include "printf.h"
 
-#define STR "%-.2s is a string"
-#define ARGS "this"
+#define STR "%-5.10o"
+#define ARGS 2500
 
 int main()
 {

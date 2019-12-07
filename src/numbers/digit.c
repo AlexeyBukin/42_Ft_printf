@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 15:39:55 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/07 17:11:42 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     else if (string[i] == 'o')
     {
         d = va_arg(arg, int);
-        if (flags[SHARP] == 1)
-            string = ft_alternative_insert_o(string, start, i, d);
-        else
-            string = ft_insert_o(string, start, i, d);
+        string = ft_insert_o(string, start, i, d, flags);
         return (string);
     }
     else if (string[i] == 'x' || string [i] == 'X')
@@ -153,36 +150,7 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     }
     else if (string[i] == '%')
     {
-    	char *perc;
-    	int len;
-
-    	if (!(perc = (char*)malloc(sizeof(char) * 2)))
-    		return (NULL);
-    	perc[0] = '%';
-    	perc[1] = '\0';
-		if (flags[WIDTH] > 0 && (int)ft_strlen(perc) < flags[WIDTH])
-		{
-			len = (int)ft_strlen(perc);
-			perc = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), perc);
-		}
-
-		if (flags[MINUS])
-		{
-			int pos = 0;
-			int j = 0;
-			while (perc[j] != '\0')
-			{
-				if (perc[j] != ' ')
-				{
-					perc[pos] = perc[j];
-					perc[j] = ' ';
-					pos++;
-				}
-				j++;
-			}
-		}
-
-		string = insert_from_to(string, perc, start, i);
+		string = ft_insert_percentage(string, start, i, flags);
         return (string);
     }
     //////////////////////////////////////////////////////////////
