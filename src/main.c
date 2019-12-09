@@ -1,7 +1,7 @@
 #include "printf.h"
 
 #define STR "%015u"
-#define ARGS 4294967295
+#define ARGS 42
 
 int main()
 {
