@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/06 19:23:48 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:20:42 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_insert_d(char *input, int start, int i, int d, int *flags)
 {
 	char	*num;
 	int		len;
+	int here = 1;
 
 	//TODO normal ft_ulltoa();
 	num = ft_utoa(ft_abs(d));
@@ -63,5 +64,6 @@ char	*ft_insert_d(char *input, int start, int i, int d, int *flags)
 	}
 
 	input = insert_from_to(input, num, start, i);
+
 	return (input);
 }

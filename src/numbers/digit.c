@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 17:41:48 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:39:18 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     int flags[11];
     int d;
     int start;
+	int fff;
 
-    start = i++ ;
+	fff = -1;
+	while (++fff < 11)
+		flags[fff] = 0;
+
+    start = i++;
     ///////////////////флаги//////////////////////////////
 	while (string[i] && !(string[i] >= '1' && string[i] <= '9') &&
 	string[i] != '.' && !(string[i] == 'd' || string[i] == 'i' ||

@@ -1,7 +1,7 @@
 #include "printf.h"
 
-#define STR "% c"
-#define ARGS 0
+#define STR "%0d"
+#define ARGS -42
 
 int main()
 {
