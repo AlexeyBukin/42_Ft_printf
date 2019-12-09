@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/09 15:39:18 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/09 15:54:02 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,12 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     {
         d = va_arg(arg, int);
         string = ft_insert_d(string, start, i, d, flags);
-        return (string);
+		return (string);
     }
     else if (string[i] == 'u')
     {
         d = va_arg(arg, int);
-        string = ft_insert_u(string, start, i, d);
+        string = ft_insert_u(string, start, i, d, flags);
         return (string);
     }
     else if (string[i] == 'p')
