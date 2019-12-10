@@ -12,7 +12,7 @@
 
 #include "printf.h"
 
-char	*ft_insert_o(char *input, int start, int i, int d, int *flags)
+char	*ft_insert_o(int d, int *flags)
 {
 	char	*num;
 	int		len;

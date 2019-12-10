@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/04 20:49:25 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/10 20:45:45 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,34 @@
 char	*ft_float(char *flags_str, double num);
 char	*ft_long_float(char *flags_str, long double num);
 
-int		parse_flags(char *args, int *flags)
-{
-	int		dot_pass;
-	int 	i;
-
-	i = 0;
-	if (args == NULL || flags == NULL)
-		return (-1);
-	while (args[i] != 0)
-	{
-		if (args[i] == '.' && dot_pass == 0)
-			dot_pass = 1;
-		else if (args[i] == '0'&& dot_pass == 0)
-			flags[zero] = 1;
-		else if (args[i] > '0' && args[i] <= '9')
-		{
-			if (dot_pass == 0)
-				flags[w1] = ft_atoi(&(args[i]));
-			else
-				flags[w2] = ft_atoi(&(args[i]));
-			while (args[i] >= '0' && args[i] <= '9')
-				i++;
-			continue ;
-		}
-		i++;
-	}
-	return (0);
-}
+//int		parse_flags(char *args, int *flags)
+//{
+//	int		dot_pass;
+//	int 	i;
+//
+//	i = 0;
+//	if (args == NULL || flags == NULL)
+//		return (-1);
+//	while (args[i] != 0)
+//	{
+//		if (args[i] == '.' && dot_pass == 0)
+//			dot_pass = 1;
+//		else if (args[i] == '0' && dot_pass == 0)
+//			flags[zero] = 1;
+//		else if (args[i] > '0' && args[i] <= '9')
+//		{
+//			if (dot_pass == 0)
+//				flags[w1] = ft_atoi(&(args[i]));
+//			else
+//				flags[w2] = ft_atoi(&(args[i]));
+//			while (args[i] >= '0' && args[i] <= '9')
+//				i++;
+//			continue ;
+//		}
+//		i++;
+//	}
+//	return (0);
+//}
 
 static char		*try_special(int *flags, double num)
 {
@@ -110,8 +110,8 @@ char	*ft_float(char *flags_str, double num)
 	int i = 0;
 	while (i < flags_num)
 		flags[i++] = 0;
-	if (parse_flags(flags_str, flags) < 0)
-		return (NULL);
+//	if (parse_flags(flags_str, flags) < 0)
+//		return (NULL);
 
 //	printf("alt    = %d\n", flags[alt]);
 //	printf("f_or_F = %d\n", flags[f_or_F]);

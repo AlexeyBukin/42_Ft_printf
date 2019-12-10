@@ -6,13 +6,13 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/09 16:09:49 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/10 17:54:38 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*ft_insert_u(char *input, int start, int i, int d, int *flags)
+char	*ft_insert_u(int d, int *flags)
 {
 	char	*num;
 	int		len;
@@ -52,7 +52,5 @@ char	*ft_insert_u(char *input, int start, int i, int d, int *flags)
 			j++;
 		}
 	}
-
-	input = insert_from_to(input, num, start, i);
-	return (input);
+	return (num);
 }

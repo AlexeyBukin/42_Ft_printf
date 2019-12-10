@@ -6,13 +6,13 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 15:23:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 16:50:29 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/10 20:47:28 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*ft_insert_s(char *string, va_list arg, int start, int i, int *flags)
+char	*ft_insert_s(va_list arg, int *flags)
 {
 	int len = 0;
 	char *insert;
@@ -21,8 +21,7 @@ char	*ft_insert_s(char *string, va_list arg, int start, int i, int *flags)
 	insert = va_arg(arg, char*);
 	if (!insert)
 	{
-		string = insert_from_to(string, "(null)", start, i);
-		return (string);
+		return (ft_strdup("(null)"));
 	}
 	len = (int) ft_strlen(insert);
 	if (!(res = (char *)malloc(sizeof(char) * (len + 1))))
@@ -53,7 +52,5 @@ char	*ft_insert_s(char *string, va_list arg, int start, int i, int *flags)
 			j++;
 		}
 	}
-
-	string = insert_from_to(string, res, start, i);
-	return (string);
+	return (insert);
 }

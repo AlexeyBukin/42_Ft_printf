@@ -6,13 +6,13 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:09:48 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/07 17:11:42 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/10 18:54:33 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char *ft_insert_percentage(char *string, int start, int i, int *flags)
+char *ft_insert_percentage(int *flags)
 {
 	char *perc;
 	int len;
@@ -21,28 +21,17 @@ char *ft_insert_percentage(char *string, int start, int i, int *flags)
 		return (NULL);
 	perc[0] = '%';
 	perc[1] = '\0';
-	if (flags[WIDTH] > 0 && (int)ft_strlen(perc) < flags[WIDTH])
+	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(perc)) < flags[WIDTH])
 	{
 		len = (int)ft_strlen(perc);
-		perc = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), perc);
-	}
-
-	if (flags[MINUS])
-	{
-		int pos = 0;
-		int j = 0;
-		while (perc[j] != '\0')
+		if (flags[MINUS] == 1)
 		{
-			if (perc[j] != ' ')
-			{
-				perc[pos] = perc[j];
-				perc[j] = ' ';
-				pos++;
-			}
-			j++;
+			perc = ft_strjoin_free(perc, ft_str_spam(" ", flags[WIDTH] - len));
+		}
+		else
+		{
+			perc = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), perc);
 		}
 	}
-
-	string = insert_from_to(string, perc, start, i);
-	return (string);
+	return (perc);
 }
