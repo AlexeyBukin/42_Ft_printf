@@ -50,6 +50,6 @@ char	*ft_insert_o(char *input, int start, int i, int d, int *flags)
 		}
 	}
 	/////////
-	input = insert_from_to(input, num, start, i);
-	return (input);
+	//input = insert_from_to(input, num, start, i);
+	return (num);
 }

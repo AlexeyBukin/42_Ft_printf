@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/09 15:54:02 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/09 20:25:37 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*ft_resolve_arg(char *string, int i, va_list arg)
 {
-    int flags[11];
+    int flags[FLAGS_LEN];
     int d;
     int start;
 	int fff;
 
 	fff = -1;
-	while (++fff < 11)
+	while (++fff < FLAGS_LEN)
 		flags[fff] = 0;
 
     start = i++;
@@ -109,11 +109,18 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
     {
         string = ft_insert_s(string, arg, start, i, flags);
         return (string);
+        //return ({string, i - start});
     }
     else if (string[i] == 'c')
     {
-        string = ft_insert_c(string, arg, start, i, flags);
-        return (string);
+    	string = ft_insert_c(string, arg, start, i, flags);
+    	if (string == NULL || flags[WIDTH] <= 0)
+    		return ({NULL, -1});
+    	if (string[0] == '\0' || string[flags[WIDTH] - 1] == '\0')
+		{
+			return ({string, (i - start) * (-1)});
+		}
+		return ({string, i - start});
     }
     else if (string[i] == 'd' || string[i] == 'i')
     {
@@ -155,5 +162,5 @@ char	*ft_resolve_arg(char *string, int i, va_list arg)
         return (string);
     }
     //////////////////////////////////////////////////////////////
-    return (string);
+    return ({string, ft_strlen(string)});
 }

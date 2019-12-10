@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/09 15:37:20 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/09 21:16:07 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@
 #define H 8
 #define LL 9
 #define L 10
+#define FLAGS_LEN 11
+
+extern int add_eol;
+
+typedef struct	s_stg
+{
+	char			*string;
+	int				taken;
+}				t_stg;
 
 int			ft_printf(const char *restrict format, ...);
 char		*insert_from_to(char *inp, char *ins, size_t from, size_t to);

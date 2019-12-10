@@ -1,11 +1,11 @@
 #include "printf.h"
 
-#define STR "%015u"
-#define ARGS 42
+#define STR "%c - %c 123456789"
+#define ARGS 0, 'z'
 
 int main()
 {
-   ft_printf("ft_printf: \'"STR"\'\n\0", ARGS);
+   ft_printf("ft_printf: \'"STR"\'\n", ARGS);
    printf("gg printf: \'"STR"\'", ARGS);
    return 0;
 }
