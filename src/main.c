@@ -1,18 +1,18 @@
 #include "printf.h"
 
-#define STR "@moulitest: %c  "
-#define ARGS 42
+#define STR "%.0%"
+#define ARGS
 
 int main()
 {
-//	int a = ft_printf("ft_printf: \'"STR"\'\n");
-//	int b = printf("gg printf: \'"STR"\'\n");
+	ft_printf("ft_printf: \'"STR"\'\n");
+	printf("gg printf: \'"STR"\'\n");
 
-   int a = ft_printf("ft_printf: \'"STR"\'\n", ARGS);
-   int b = printf("gg printf: \'"STR"\'\n", ARGS);
+//   ft_printf("ft_printf: \'"STR"\'\n", ARGS);
+//   printf("gg printf: \'"STR"\'\n", ARGS);
 
 	//int a = 5;
-	printf("ft: %d\ngg: %d\n", a, b);
+//	printf("ft: %d\ngg: %d\n", a, b);
    //t i = 0;
 //   while (i < 256)
 //	   printf("%c\n", i++);

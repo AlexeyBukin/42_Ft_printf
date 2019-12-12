@@ -52,5 +52,5 @@ char	*ft_insert_s(va_list arg, int *flags)
 			j++;
 		}
 	}
-	return (insert);
+	return (res);
 }

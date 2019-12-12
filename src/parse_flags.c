@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/10 21:52:03 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/12 16:35:34 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,16 @@ int		arg_len(char *string)
 
 int		parse_flags(char *args, int len, int *flags)
 {
-	//int		len;
 	int		dot_passed;
 	int		i;
 
 	if (args == NULL || flags == NULL)
 		return (-1);
-	//len = arg_len(args);
-	//len = is_in_args('c');
-	//printf("\n\n\nstring = \'%s\', len is %d\n\n\n", args, len);
-
 	if (len < 1)
 		return (-1);
+	i = -1;
+	while (++i < FLAGS_LEN)
+		flags[i] = 0;
 	dot_passed = 0;
 	i = 0;
 	flags[FLAG] = args[len - 1];
