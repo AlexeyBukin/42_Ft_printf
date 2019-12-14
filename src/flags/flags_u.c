@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/10 17:54:38 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/14 23:21:01 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ char	*ft_insert_u(int d, int *flags)
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0)
 	{
 		len = (int)ft_strlen(num);
-		if (flags[PLUS] == 1 || flags[SPACE] == 1 || d < 0)
-			len ++;
-		//TODO зачем нужно в этом месте +1 к len, чтобы работал 175 тест
-		num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len + 1), num);
+		if (flags[PLUS] == 1 || flags[SPACE] == 1)
+			len++;
+		num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
 	}
 
 	if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])

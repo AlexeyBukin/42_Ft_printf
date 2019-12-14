@@ -32,9 +32,6 @@ char	*insert_from_to(char *input, char *insertion, size_t from, size_t to)
 	size_t	j;
 	char	*res;
 
-	//TODO delete me
-	//printf("from %zu to %zu\n", from, to);
-
 	len1 = ft_strlen(input) - (to - from + 1);
 	len2 = ft_strlen(insertion);
 	i = 0;

@@ -6,24 +6,11 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 21:37:42 by kcharla           #+#    #+#             */
-/*   Updated: 2019/11/28 18:36:39 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/14 23:50:00 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static long long	power_ten(int power)
-{
-	long long int		i;
-
-	i = 1;
-	while (power > 0)
-	{
-		i *= 10;
-		power--;
-	}
-	return (i);
-}
 
 static char			*do_if_ok(uint8_t len, long long int n)
 {
@@ -50,21 +37,11 @@ static char			*do_if_ok(uint8_t len, long long int n)
 
 char				*ft_lltoa(long long int n)
 {
-	uint8_t	len;
 	char	*res;
 
 	if (n != 0)
-	{
-		len = 0;
-		res = do_if_ok(len, n);
-	}
+		res = do_if_ok(0, n);
 	else
-	{
-		res = (char*)malloc(sizeof(char) * 2);
-		if (res == 0)
-			return (0);
-		res[0] = '0';
-		res[1] = '\0';
-	}
+		res = ft_strdup("0");
 	return (res);
 }

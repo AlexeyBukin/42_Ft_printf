@@ -6,24 +6,11 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 21:37:42 by kcharla           #+#    #+#             */
-/*   Updated: 2019/11/06 19:11:18 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/14 23:38:44 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int		power_ten(int power)
-{
-	int		i;
-
-	i = 1;
-	while (power > 0)
-	{
-		i *= 10;
-		power--;
-	}
-	return (i);
-}
 
 static char		*do_if_ok(uint8_t len, int n)
 {

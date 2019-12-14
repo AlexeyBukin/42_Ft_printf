@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/14 23:10:15 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/14 23:10:24 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ char	*ft_insert_d(int d, int *flags)
 	char	*num;
 	int		len;
 
-	//TODO normal ft_ulltoa();
-	num = ft_utoa(ft_abs(d));
+	num = ft_ulltoa(ft_abs(d));
 
 	if (flags[PRECISION] == -1 && d == 0)
 	{
