@@ -6,13 +6,13 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/12 18:06:47 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/14 22:05:33 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-t_stg	ft_resolve_arg(char *string, int i, va_list arg, int *flags)
+t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
 {
 	int len;
     int d;
@@ -84,11 +84,11 @@ t_stg	ft_resolve_arg(char *string, int i, va_list arg, int *flags)
         d = va_arg(arg, int);
 		string = ft_insert_x(d, flags, flags[FLAG] == 'X');
     }
-    else if (string[i] == 'f')
+    else if (flags[FLAG] == 'f')
     {
 
     }
-    else if (string[i] == '%')
+    else if (flags[FLAG] == '%')
     {
 		string = ft_insert_percentage(flags);
     }

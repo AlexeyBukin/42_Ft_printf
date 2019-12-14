@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/12 17:31:21 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/14 22:05:56 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ int		ft_printf(const char *restrict format, ...)
 	all_byte = 0;
 	while (string[++i] != '\0')
 	{
-	//	printf("1- %c - 1\n", string[i]);
+		//printf("1- %c - 1\n", string[i]);
 		if (string[i] == '%')
 		{
-			resolved = ft_resolve_arg(&(string[i + 1]), i, arg, flags); // {string, how_many_to_skip}
+			//printf()
+			resolved = ft_resolve_arg(&(string[i + 1]), arg, flags); // {string, how_many_to_skip}
 			if (resolved.taken > 0)
 			{
 				if (flags[C_GOT_NULL] == NULL_IN_THE_BEGINNING)

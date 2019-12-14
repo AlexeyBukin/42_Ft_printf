@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/12 16:35:34 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/14 22:40:59 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		parse_flags(char *args, int len, int *flags)
 	dot_passed = 0;
 	i = 0;
 	flags[FLAG] = args[len - 1];
+	flags[PRECISION] = -1;
 	while (i < len - 1)
 	{
 		if (args[i] == '.')
@@ -118,5 +119,24 @@ int		parse_flags(char *args, int len, int *flags)
 			flags[CAST] = CAST_BIG_L;
 		i++;
 	}
+
+	if (flags[PRECISION] == -1)
+		flags[PRECISION] = 0;
+	else if (flags[PRECISION] == 0)
+		flags[PRECISION] = -1;
+
+//	printf("\n\n\n");
+//    printf("Minus flag: %d\n", flags[MINUS]);
+//    printf("Plus flag: %d\n", flags[PLUS]);
+//    printf("Space flag: %d\n", flags[SPACE]);
+//    printf("Sharp flag: %d\n", flags[SHARP]);
+//    printf("Zero flag: %d\n", flags[ZERO]);
+//    printf("Width size: %d\n", flags[WIDTH]);
+//    printf("Precision size: %d\n", flags[PRECISION]);
+//    printf("hh flag: %d\n", flags[CAST] == CAST_HH);
+//    printf("h flag: %d\n", flags[CAST] == CAST_H);
+//    printf("ll flag: %d\n", flags[CAST] == CAST_LL);
+//    printf("l flag: %d\n", flags[CAST] == CAST_L);
+
 	return (0);
 }

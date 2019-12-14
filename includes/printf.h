@@ -63,7 +63,7 @@ typedef struct	s_stg
 int			ft_printf(const char *restrict format, ...);
 char		*insert_from_to(char *inp, char *ins, size_t from, size_t to);
 char		*insert_from_to2(char *res, char *input, size_t to, int i);
-t_stg		ft_resolve_arg(char *string, int i, va_list arg, int * flags);
+t_stg		ft_resolve_arg(char *string, va_list arg, int * flags);
 char		*ft_insert_d(int d, int *flags);
 char	    *ft_insert_o(int d, int *flags);
 char	    *ft_insert_x(int d, int *flags, int is_x_big);
