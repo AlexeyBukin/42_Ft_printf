@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/14 22:05:33 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/16 19:27:41 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
 {
-	int len;
-    int d;
+	int		len;
+    int		d;
+    double	d_d;
 
 	len = arg_len(string);
 	if (parse_flags(string, len, flags) < 0)
 		return ((t_stg) {NULL, -1});
-
-    //////////////////////////////////////////////////////
-
-//	printf("\n\n\n");
+//	  printf("\n\n\n");
 //    printf("Minus flag: %d\n", flags[MINUS]);
 //    printf("Plus flag: %d\n", flags[PLUS]);
 //    printf("Space flag: %d\n", flags[SPACE]);
@@ -36,38 +34,23 @@ t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
 //    printf("ll flag: %d\n", flags[CAST] == CAST_LL);
 //    printf("l flag: %d\n", flags[CAST] == CAST_L);
 
-	//printf("\n\n\nALERT! char is %c\n\n\n", (char) flags[FLAG]);
-	//printf("\n\n\n");
-
-    ///////////////////тип преобразования/////////////////
-
 	if (flags[FLAG] == 's')
     {
         string = ft_insert_s(arg, flags);
-        //return ({string, i - start});
     }
     else if (flags[FLAG] == 'c')
     {
     	string = ft_insert_c(arg, flags);
-//		return ((t_stg) {string, i - start});
-	//	return ((t_stg) {string, len});
-//    	if (string == NULL || flags[WIDTH] <= 0)
-//    		return ({NULL, -1});
-//    	if (string[0] == '\0' || string[flags[WIDTH] - 1] == '\0')
-//		{
-//			return ({string, (i - start) * (-1)});
-//		}
-//		return ({string, i - start});
     }
     else if (flags[FLAG] == 'd' || flags[FLAG] == 'i')
     {
-        d = va_arg(arg, int);
-        string = ft_insert_d(d, flags);
+        //d = va_arg(arg, int);
+        string = ft_insert_d(arg, flags);
     }
     else if (flags[FLAG] == 'u')
     {
-        d = va_arg(arg, int);
-        string = ft_insert_u(d, flags);
+    //    d = va_arg(arg, int);
+        string = ft_insert_u(arg, flags);
     }
     else if (flags[FLAG] == 'p')
     {
@@ -81,18 +64,18 @@ t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
     }
     else if (flags[FLAG] == 'x' || flags[FLAG] == 'X')
     {
-        d = va_arg(arg, int);
-		string = ft_insert_x(d, flags, flags[FLAG] == 'X');
+     //   d = va_arg(arg, int);
+		string = ft_insert_x(arg, flags, flags[FLAG] == 'X');
     }
     else if (flags[FLAG] == 'f')
     {
-
+    	d_d = va_arg(arg, double);
+    	string = ft_float(string, d_d);
     }
     else if (flags[FLAG] == '%')
     {
 		string = ft_insert_percentage(flags);
     }
 
-	//////////////////////////////////////////////////////////////
-    return ((t_stg) {string, len});
+	return ((t_stg) {string, len});
 }

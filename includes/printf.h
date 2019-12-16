@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/10 21:52:34 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/16 19:27:18 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdarg.h>
 # include "libft.h"
 
+#define CAST_NO    0
 #define CAST_HH    1
 #define CAST_H     2
 #define CAST_L     3
@@ -64,10 +65,10 @@ int			ft_printf(const char *restrict format, ...);
 char		*insert_from_to(char *inp, char *ins, size_t from, size_t to);
 char		*insert_from_to2(char *res, char *input, size_t to, int i);
 t_stg		ft_resolve_arg(char *string, va_list arg, int * flags);
-char		*ft_insert_d(int d, int *flags);
+char		*ft_insert_d(va_list arg, int *flags);
 char	    *ft_insert_o(int d, int *flags);
-char	    *ft_insert_x(int d, int *flags, int is_x_big);
-char	    *ft_insert_u(int d, int *flags);
+char		*ft_insert_x(va_list arg, int *flags, int is_x_big);
+char	    *ft_insert_u(va_list arg, int *flags);
 char	    *ft_insert_p(int d);
 char		*ft_insert_s(va_list arg, int *flags);
 char		*ft_insert_percentage(int *flags);
@@ -77,5 +78,13 @@ void		*ft_insert_mem(void *string, void *insertion, size_t index, size_t ilen, s
 
 int			parse_flags(char *args, int len, int *flags);
 int			arg_len(char *string);
+
+char		*ft_float(char *flags_str, double num);
+char		*ft_long_float(char *flags_str, long double num);
+int			f_parse_flags(char *args, int *flags);
+char		*bad_afterdot(double num);
+char		*bad_way(int *flags, double num);
+int 		get_exponent(double d);
+void		print_double_as_binary(double d);
 
 #endif

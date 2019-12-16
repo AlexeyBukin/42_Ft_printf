@@ -6,18 +6,47 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/14 23:21:01 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/16 20:18:07 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*ft_insert_u(int d, int *flags)
+char	*ft_insert_u(va_list arg, int *flags)
 {
-	char	*num;
-	int		len;
+	unsigned long long	d;
+	char				*num;
+	int					len;
 
-	num = ft_utoa(d);
+	if (flags[CAST] == CAST_NO)
+	{
+		d = (unsigned int) va_arg(arg, int);
+	}
+	else if (flags[CAST] == CAST_HH)
+	{
+		d = (unsigned char) va_arg(arg, int);
+		//printf("\nd:\'%hhd\'\n", (char)d);
+	}
+	else if (flags[CAST] == CAST_H)
+	{
+		d = (unsigned short) va_arg(arg, int);
+	}
+	else if (flags[CAST] == CAST_L)
+	{
+		d = (unsigned long) va_arg(arg, long int);
+	}
+	else if (flags[CAST] == CAST_LL)
+	{
+		d = (unsigned long long) va_arg(arg, long long int);
+	}
+	else
+	{
+		return (NULL);
+	}
+
+
+	num = ft_ulltoa(d);
+
 
 	if (flags[PRECISION] > 0)
 		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - ft_strlen(num)), num);

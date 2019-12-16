@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 15:23:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/13 15:33:42 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/15 19:17:25 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ char	*ft_insert_s(va_list arg, int *flags)
 		res = ft_strncpy(res, insert, flags[PRECISION]);
 	else
 		res = ft_strcpy(res, insert);
+
+	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
+	{
+		len = (int)ft_strlen(res);
+		if (flags[PLUS] == 1 || flags[SPACE] == 1)
+			len ++;
+		res = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), res);
+	}
 
 	if (flags[WIDTH] > 0 && (int)ft_strlen(res) < flags[WIDTH])
 	{

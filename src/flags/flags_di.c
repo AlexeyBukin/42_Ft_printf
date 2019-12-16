@@ -6,25 +6,50 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/14 23:10:24 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/15 23:15:31 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*ft_insert_d(int d, int *flags)
+char	*ft_insert_d(va_list arg, int *flags)
 {
-	char	*num;
-	int		len;
+	long long int	d;
+	char			*num;
+	int				len;
 
-	num = ft_ulltoa(ft_abs(d));
+	if (flags[CAST] == CAST_NO)
+	{
+		d = va_arg(arg, int);
+	}
+	else if (flags[CAST] == CAST_HH)
+	{
+		d = (char) va_arg(arg, int);
+		//printf("\nd:\'%hhd\'\n", (char)d);
+	}
+	else if (flags[CAST] == CAST_H)
+	{
+		d = (short) va_arg(arg, int);
+	}
+	else if (flags[CAST] == CAST_L)
+	{
+		d = va_arg(arg, long int);
+	}
+	else if (flags[CAST] == CAST_LL)
+	{
+		d = va_arg(arg, long long int);
+	}
+	else
+	{
+		return (NULL);
+	}
 
 	if (flags[PRECISION] == -1 && d == 0)
 	{
 		num = ft_strdup("");
 	}
 	else
-		num = ft_utoa(ft_abs(d));
+		num = ft_ulltoa(ft_absl(d));
 
 //	printf("\n%d:\'%s\'\n", 345674567, num);
 

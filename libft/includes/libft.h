@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/14 23:37:02 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/16 20:21:18 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				ft_atoi_base(const char *s, char base);
 
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int value, char *base);
+char			*ft_ulltoa_base(unsigned long long int value, char *base);
 
 char			*ft_lltoa(long long int n);
 
@@ -157,6 +158,7 @@ char			*ft_strtrim(char const *s);
 */
 
 int				ft_abs(int a);
+long long int	ft_absl(long long int a);
 
 void			*ft_bzero(void *buf, size_t len);
 
