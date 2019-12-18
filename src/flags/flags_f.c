@@ -22,9 +22,6 @@
 
 #include "printf.h"
 
-//c00har	*ft_float(char *flags_str, double num);
-//char	*ft_long_float(char *flags_str, long double num);
-
 int		f_parse_flags(char *args, int *flags)
 {
 	int		dot_pass;
@@ -75,7 +72,7 @@ char	*bad_afterdot(long double num)
 
 	ft_bzero(a, 360);
 	i = 0;
-	printf("num is %Lf\n\n", num);
+	//printf("num is %Lf\n\n", num);
 
 	if (num == 0)
 		return (ft_strdup(""));
@@ -114,7 +111,7 @@ char	*bad_way(int *flags, long double num)
 		after_dot = ft_strjoin_free(after_dot, ft_str_spam("0", flags[PRECISION] - len));
 
 	if (after_dot == NULL)
-		return ("");
+		return (NULL);
 	int b = flags[PRECISION];
 	while (b > 1)
 	{
