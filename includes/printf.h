@@ -89,8 +89,8 @@ int			arg_len(char *string);
 char		*ft_float(va_list arg, int *flags);
 char		*ft_long_float(char *flags_str, long double num);
 int			f_parse_flags(char *args, int *flags);
-char		*bad_afterdot(double num);
-char		*bad_way(int *flags, double num);
+char		*bad_afterdot(long double num);
+char		*bad_way(int *flags, long double num);
 int 		get_exponent(double d);
 void		print_double_as_binary(double d);
 

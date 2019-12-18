@@ -67,7 +67,7 @@ char *get_special(int *flags, double num)
 	return (NULL);
 }
 
-char	*bad_afterdot(double num)
+char	*bad_afterdot(long double num)
 {
 	int		i;
 	char	b;
@@ -75,6 +75,8 @@ char	*bad_afterdot(double num)
 
 	ft_bzero(a, 360);
 	i = 0;
+	printf("num is %Lf\n\n", num);
+
 	if (num == 0)
 		return (ft_strdup(""));
 	while (num > 0)
@@ -88,7 +90,7 @@ char	*bad_afterdot(double num)
 	return (ft_strdup(a));
 }
 
-char	*bad_way(int *flags, double num)
+char	*bad_way(int *flags, long double num)
 {
 	int len;
 	long long		bdot;
@@ -105,21 +107,14 @@ char	*bad_way(int *flags, double num)
 
 	if (flags[sign] == 1 && num >= 0)
 		bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
-	//bdot_a = ft_strjoin_free(bdot_a, bad_afterdot(num));
-
 
 	char *after_dot = bad_afterdot(num);
 	len = (int) ft_strlen(after_dot);
 	if (flags[PRECISION] > len)
 		after_dot = ft_strjoin_free(after_dot, ft_str_spam("0", flags[PRECISION] - len));
 
-	//TODO delete
-	//printf("afterdot is \'%s\'\n and prec is \'%d\'\n", after_dot, flags[PRECISION]);
-
 	if (after_dot == NULL)
 		return ("");
-
-	//len = (int) ft_strlen(after_dot);
 	int b = flags[PRECISION];
 	while (b > 1)
 	{
@@ -141,13 +136,10 @@ char	*bad_way(int *flags, double num)
 	}
 
 	after_dot[flags[PRECISION]] = '\0';
-	//char *res_afterdot = ft_memdup(after_dot, flags[PRECISION] + 1);
-	//res_afterdot[flags[PRECISION]] = '\0';
 
 	bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
 	bdot_a = ft_strjoin_free(bdot_a, after_dot);
 
-	//printf("afterdot is \'%s\'\n", after_dot);
 	return (bdot_a);
 }
 
@@ -171,6 +163,7 @@ char	*ft_float(va_list arg, int *flags)
 		flags[PRECISION] = 0;
 
 	res = bad_way(flags, num);
+
 	len = ft_strlen(res);
 	if ((int) len < flags[WIDTH])
 	{
@@ -181,17 +174,3 @@ char	*ft_float(va_list arg, int *flags)
 	}
 	return (res);
 }
-
-//int get_exponent(double d)
-//{
-//	(void) d;
-//	return (1);
-//}
-//
-//void	print_double_as_binary(double d)
-//{
-//	char * stb1 = ft_mtob(&d, sizeof(double));
-//	char * st1 = ft_str_div_by_ins(stb1, 4, " ");
-//	char * st21 = ft_str_div_by_ins(st1, 10, "   ");
-//	ft_putendl(st21);
-//}
