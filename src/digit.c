@@ -44,33 +44,32 @@ t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
     }
     else if (flags[FLAG] == 'd' || flags[FLAG] == 'i')
     {
-        //d = va_arg(arg, int);
         string = ft_insert_d(arg, flags);
     }
     else if (flags[FLAG] == 'u')
     {
-    //    d = va_arg(arg, int);
         string = ft_insert_u(arg, flags);
     }
     else if (flags[FLAG] == 'p')
     {
+    	//TODO delete this
         d = va_arg(arg, int);
         string = ft_insert_p(d);
     }
     else if (flags[FLAG] == 'o')
     {
+    	//TODO delete this
         d = va_arg(arg, int);
         string = ft_insert_o(d, flags);
     }
     else if (flags[FLAG] == 'x' || flags[FLAG] == 'X')
     {
-     //   d = va_arg(arg, int);
 		string = ft_insert_x(arg, flags, flags[FLAG] == 'X');
     }
     else if (flags[FLAG] == 'f')
     {
     	d_d = va_arg(arg, double);
-    	string = ft_float(string, d_d);
+    	string = ft_float(flags, d_d);
     }
     else if (flags[FLAG] == '%')
     {

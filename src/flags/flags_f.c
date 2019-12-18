@@ -1,14 +1,14 @@
-///* ************************************************************************** */
-///*                                                                            */
-///*                                                        :::      ::::::::   */
-///*   floats.c                                           :+:      :+:    :+:   */
-///*                                                    +:+ +:+         +:+     */
-///*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
-///*                                                +#+#+#+#+#+   +#+           */
-///*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-///*   Updated: 2019/12/10 21:53:12 by lmelina          ###   ########.fr       */
-///*                                                                            */
-///* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   floats.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
+/*   Updated: 2019/12/04 20:49:25 by lmelina          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #define alt         0 // dot always exist
 #define f_or_F      1
@@ -22,8 +22,8 @@
 
 #include "printf.h"
 
-char	*ft_float(char *flags_str, double num);
-char	*ft_long_float(char *flags_str, long double num);
+//c00har	*ft_float(char *flags_str, double num);
+//char	*ft_long_float(char *flags_str, long double num);
 
 int		f_parse_flags(char *args, int *flags)
 {
@@ -54,10 +54,17 @@ int		f_parse_flags(char *args, int *flags)
 	return (0);
 }
 
-static char		*try_special(int *flags, double num)
+int		is_special(double num)
+{
+	(void)num;
+	return (0);
+}
+
+char *get_special(int *flags, int spec_type, double num)
 {
 	(void)num;
 	(void)flags;
+	(void)spec_type;
 	return (NULL);
 }
 
@@ -101,50 +108,36 @@ char	*bad_way(int *flags, double num)
 	return (bdot_a);
 }
 
-char	*ft_float(char *flags_str, double num)
+
+char	*ft_float(int *flags, double num)
 {
+	int		special_type;
 	size_t	len;
 	char	*res;
-	int		flags[flags_num];
 
-	int i = 0;
-	while (i < flags_num)
-		flags[i++] = 0;
-	if (f_parse_flags(flags_str, flags) < 0)
-		return (NULL);
-
-//	printf("alt    = %d\n", flags[alt]);
-//	printf("f_or_F = %d\n", flags[f_or_F]);
-//	printf("shift  = %d\n", flags[shift]);
-//	printf("sign   = %d\n", flags[sign]);
-//	printf("zero   = %d\n", flags[zero]);
-//	printf("sign   = %d\n", flags[sign]);
-//	printf("w1     = %d\n", flags[w1]);
-//	printf("w2     = %d\n", flags[w2]);
-
-	res = try_special(flags, num);
-	if (flags[error] < 0)
-		return (NULL);
-	if (res == NULL)
-		res = bad_way(flags, num);
-	len = ft_strlen(res);
-	if ((int) len < flags[w1])
+	if ((special_type = is_special(num)) > 0)
+		return (get_special(flags, special_type, num));
+	res = bad_way(flags, num);
+	if ((int) len < flags[WIDTH])
 	{
-		res = ft_strjoin_free(ft_str_spam(" ", flags[w1] - len), res);
+		if (flags[shift] == 0)
+			res = ft_strjoin_free(ft_str_spam((flags[zero] ? "0" : " "), flags[w1] - len), res);
+		else
+			res = ft_strjoin_free(res, ft_str_spam(" ", flags[w1] - len));
 	}
 	return (res);
 }
 
-int get_exponent(double d)
-{
-	(void) d;
-	return (1);
-}
-
-void	print_double_as_binary(double d)
-{
-	char * stb1 = ft_mtob(&d, sizeof(double));
-	char * st1 = ft_str_div_by_ins(stb1, 4, " ");
-	char * st21 = ft_str_div_by_ins(st1, 10, "   ");
-	ft_putendl(st21);
-}
+//int get_exponent(double d)
+//{
+//	(void) d;
+//	return (1);
+//}
+//
+//void	print_double_as_binary(double d)
+//{
+//	char * stb1 = ft_mtob(&d, sizeof(double));
+//	char * st1 = ft_str_div_by_ins(stb1, 4, " ");
+//	char * st21 = ft_str_div_by_ins(st1, 10, "   ");
+//	ft_putendl(st21);
+//}
