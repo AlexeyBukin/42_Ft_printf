@@ -4,8 +4,8 @@
 //#define ARGS 42
 
 // TODO fails precision with like
-#define STR "this %f float"
-#define ARGS 1.5
+#define STR "|%f|"
+#define ARGS -3.85
 
 int		main() {
 	//ft_printf("ft_printf: \'"STR"\'\n", ARGS);

@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define alt         0 // dot always exist
-#define f_or_F      1
-#define shift       2 //which side shift, 0 is right
-#define sign        3 //0 : not enter +
-#define zero        4 //to fill with 0
-#define w1          5 //width before dot
-#define w2          6 //width after dot
-#define error       7
-#define flags_num   8
+//#define alt         0 // dot always exist
+//#define f_or_F      1
+//#define shift       2 //which side shift, 0 is right
+//#define sign        3 //0 : not enter +
+//#define zero        4 //to fill with 0
+//#define w1          5 //width before dot
+//#define w2          6 //width after dot
+//#define error       7
+//#define flags_num   8
 
 #include "printf.h"
 
@@ -35,13 +35,13 @@ int		f_parse_flags(char *args, int *flags)
 		if (args[i] == '.' && dot_pass == 0)
 			dot_pass = 1;
 		else if (args[i] == '0' && dot_pass == 0)
-			flags[zero] = 1;
+			flags[ZERO] = 1;
 		else if (args[i] > '0' && args[i] <= '9')
 		{
 			if (dot_pass == 0)
-				flags[w1] = ft_atoi(&(args[i]));
+				flags[WIDTH] = ft_atoi(&(args[i]));
 			else
-				flags[w2] = ft_atoi(&(args[i]));
+				flags[PRECISION] = ft_atoi(&(args[i]));
 			while (args[i] >= '0' && args[i] <= '9')
 				i++;
 			continue ;
@@ -89,21 +89,34 @@ char	*bad_afterdot(long double num)
 
 char	*bad_way(int *flags, long double num)
 {
-	int len;
+	char			sign;
+	int				len;
 	long long		bdot;
 	char			*bdot_a;
 
+	sign = 1;
+	if (num < 0)
+	{
+		num *= -1;
+		sign = -1;
+	}
 	bdot = (long long int) num;
 	bdot_a = ft_lltoa(bdot);
 	if (bdot_a == NULL || flags == NULL)
 		return (NULL);
 
 	num -= bdot;
-	if (num < 0)
-		num *= -1;
 
-	if (flags[sign] == 1 && num >= 0)
-		bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
+	if (sign < 0)
+		bdot_a = ft_strjoin_free(ft_strdup("-"), bdot_a);
+	else
+		if (flags[PLUS] == 1)
+			bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
+
+	//	if (flags[PLUS] && sign == ' ')
+	//	bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
+	//else
+	//	bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
 
 	char *after_dot = bad_afterdot(num);
 	len = (int) ft_strlen(after_dot);
@@ -112,18 +125,36 @@ char	*bad_way(int *flags, long double num)
 
 	if (after_dot == NULL)
 		return (NULL);
+
 	int b = flags[PRECISION];
-	while (b > 1)
+
+	//printf("b is %d [%c], adot is \'%s\'\n", b, after_dot[b], after_dot);
+
+	if (after_dot[b] >= '5')
 	{
-		if (after_dot[b] >= '5' && after_dot[b - 1] >= '9')
-			after_dot[b - 1] ++;
-		b--;
+		after_dot[b - 1]++;
 	}
-	if (after_dot[0] > '9')
-	{
-		flags[SPECIAL] = SPECIAL_ROUND_BIGGER;
-		after_dot[0] = '0';
-	}
+
+//	b--;
+//	int was_rounded = 1;
+//	while (b > 1 && was_rounded)
+//	{
+//		was_rounded = 0;
+//		if (after_dot[b] >= '5' && after_dot[b - 1] >= '9')
+//		{
+//			was_rounded = 1;
+//			after_dot[b - 1]++;
+//		}
+//		b--;
+//	}
+//	if (after_dot[0] > '9')
+//	{
+//		flags[SPECIAL] = SPECIAL_ROUND_BIGGER;
+//		after_dot[0] = '0';
+//	}
+
+	//printf("b is %d [%c], adot is \'%s\'\n", b, after_dot[b], after_dot);
+
 	b = 1;
 	while (b < flags[PRECISION])
 	{
@@ -164,10 +195,10 @@ char	*ft_float(va_list arg, int *flags)
 	len = ft_strlen(res);
 	if ((int) len < flags[WIDTH])
 	{
-		if (flags[shift] == 0)
-			res = ft_strjoin_free(ft_str_spam((flags[zero] ? "0" : " "), flags[w1] - len), res);
+		if (flags[MINUS] == 0)
+			res = ft_strjoin_free(ft_str_spam((flags[ZERO] ? "0" : " "), flags[WIDTH] - len), res);
 		else
-			res = ft_strjoin_free(res, ft_str_spam(" ", flags[w1] - len));
+			res = ft_strjoin_free(res, ft_str_spam(" ", flags[WIDTH] - len));
 	}
 	return (res);
 }
