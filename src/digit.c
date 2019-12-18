@@ -16,7 +16,7 @@ t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
 {
 	int		len;
     int		d;
-    double	d_d;
+   // double	d_d;
 
 	len = arg_len(string);
 	if (parse_flags(string, len, flags) < 0)
@@ -68,8 +68,8 @@ t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
     }
     else if (flags[FLAG] == 'f')
     {
-    	d_d = va_arg(arg, double);
-    	string = ft_float(flags, d_d);
+    	//d_d = va_arg(arg, double);
+    	string = ft_float(arg, flags);
     }
     else if (flags[FLAG] == '%')
     {

@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/06 14:27:03 by kcharla           #+#    #+#             */
+/*   Created: 2019/09/07 17:57:56 by kcharla           #+#    #+#             */
 /*   Updated: 2019/11/06 19:16:31 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *source, size_t count)
+void	*ft_memdup(const void *source, size_t count)
 {
-	size_t		i;
-	uint8_t		*tp;
-	uint8_t		*tps;
+	uint8_t		*res;
 
-	i = 0;
-	tp = (uint8_t*)dest;
-	tps = (uint8_t*)source;
-	if (tp == NULL && tps == NULL)
-	{
-		return (NULL);
-	}
-	while (i < count)
-	{
-		tp[i] = tps[i];
-		i++;
-	}
-	return (dest);
+	res = (uint8_t*)malloc(sizeof(char) * count);
+	ft_memcpy(res, source, count);
+	return (res);
 }

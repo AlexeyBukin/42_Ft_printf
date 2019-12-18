@@ -40,6 +40,12 @@
 //#define FLAG_X_BIG 9
 //#define FLAG_DI    10
 
+//#define SPECIAL_NO           0
+#define SPECIAL_NAN          1
+#define SPECIAL_INF_POS      2
+#define SPECIAL_INF_NEG      3
+#define SPECIAL_ROUND_BIGGER 4
+
 #define NULL_IN_THE_BEGINNING 1
 #define NULL_IN_THE_END       2
 
@@ -53,7 +59,8 @@
 #define CAST       7
 #define C_GOT_NULL 8
 #define FLAG       9
-#define FLAGS_LEN  10
+#define SPECIAL    10
+#define FLAGS_LEN  11
 
 typedef struct	s_stg
 {
@@ -79,7 +86,7 @@ void		*ft_insert_mem(void *string, void *insertion, size_t index, size_t ilen, s
 int			parse_flags(char *args, int len, int *flags);
 int			arg_len(char *string);
 
-char		*ft_float(int *flags, double num);
+char		*ft_float(va_list arg, int *flags);
 char		*ft_long_float(char *flags_str, long double num);
 int			f_parse_flags(char *args, int *flags);
 char		*bad_afterdot(double num);

@@ -25,7 +25,6 @@ char	*ft_insert_d(va_list arg, int *flags)
 	else if (flags[CAST] == CAST_HH)
 	{
 		d = (char) va_arg(arg, int);
-		//printf("\nd:\'%hhd\'\n", (char)d);
 	}
 	else if (flags[CAST] == CAST_H)
 	{
@@ -55,7 +54,7 @@ char	*ft_insert_d(va_list arg, int *flags)
 
 	len = (int)ft_strlen(num);
 	if (flags[PRECISION] > len)
-		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - ft_strlen(num)), num);
+		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - len), num);
 
 //	printf("\n%d:\'%s\'\n", 2, num);
 

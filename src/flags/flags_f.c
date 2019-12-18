@@ -60,11 +60,10 @@ int		is_special(double num)
 	return (0);
 }
 
-char *get_special(int *flags, int spec_type, double num)
+char *get_special(int *flags, double num)
 {
 	(void)num;
 	(void)flags;
-	(void)spec_type;
 	return (NULL);
 }
 
@@ -75,21 +74,23 @@ char	*bad_afterdot(double num)
 	char	a[360];
 
 	ft_bzero(a, 360);
-	a[0] = '.';
 	i = 0;
+	if (num == 0)
+		return (ft_strdup(""));
 	while (num > 0)
 	{
-		i++;
 		num = num * 10;
 		b = (char) num;
 		num -= b;
 		a[i] = b + '0';
+		i++;
 	}
 	return (ft_strdup(a));
 }
 
 char	*bad_way(int *flags, double num)
 {
+	int len;
 	long long		bdot;
 	char			*bdot_a;
 
@@ -104,20 +105,73 @@ char	*bad_way(int *flags, double num)
 
 	if (flags[sign] == 1 && num >= 0)
 		bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
-	bdot_a = ft_strjoin_free(bdot_a, bad_afterdot(num));
+	//bdot_a = ft_strjoin_free(bdot_a, bad_afterdot(num));
+
+
+	char *after_dot = bad_afterdot(num);
+	len = (int) ft_strlen(after_dot);
+	if (flags[PRECISION] > len)
+		after_dot = ft_strjoin_free(after_dot, ft_str_spam("0", flags[PRECISION] - len));
+
+	//TODO delete
+	//printf("afterdot is \'%s\'\n and prec is \'%d\'\n", after_dot, flags[PRECISION]);
+
+	if (after_dot == NULL)
+		return ("");
+
+	//len = (int) ft_strlen(after_dot);
+	int b = flags[PRECISION];
+	while (b > 1)
+	{
+		if (after_dot[b] >= '5' && after_dot[b - 1] >= '9')
+			after_dot[b - 1] ++;
+		b--;
+	}
+	if (after_dot[0] > '9')
+	{
+		flags[SPECIAL] = SPECIAL_ROUND_BIGGER;
+		after_dot[0] = '0';
+	}
+	b = 1;
+	while (b < flags[PRECISION])
+	{
+		if (after_dot[b] > '9')
+			after_dot[b] = '0';
+		b++;
+	}
+
+	after_dot[flags[PRECISION]] = '\0';
+	//char *res_afterdot = ft_memdup(after_dot, flags[PRECISION] + 1);
+	//res_afterdot[flags[PRECISION]] = '\0';
+
+	bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
+	bdot_a = ft_strjoin_free(bdot_a, after_dot);
+
+	//printf("afterdot is \'%s\'\n", after_dot);
 	return (bdot_a);
 }
 
 
-char	*ft_float(int *flags, double num)
+char	*ft_float(va_list arg, int *flags)
 {
-	int		special_type;
+	long double	num;
 	size_t	len;
 	char	*res;
 
-	if ((special_type = is_special(num)) > 0)
-		return (get_special(flags, special_type, num));
+	if (flags[CAST] == CAST_BIG_L)
+		num = va_arg(arg, long double);
+	else
+		num = (long double) va_arg(arg, double);
+	if ((flags[SPECIAL] = is_special(num)) > 0)
+		return (get_special(flags, num));
+
+	if (flags[PRECISION] == 0)
+		flags[PRECISION] = 6;
+	if (flags[PRECISION] == -1)
+		flags[PRECISION] = 0;
+
 	res = bad_way(flags, num);
+	len = ft_strlen(res);
 	if ((int) len < flags[WIDTH])
 	{
 		if (flags[shift] == 0)
