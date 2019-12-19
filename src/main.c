@@ -4,8 +4,8 @@
 //#define ARGS 42
 
 // TODO fails precision with like
-#define STR "%.0u"
-#define ARGS 0
+#define STR "%-32p"
+#define ARGS &("3ergrtgtrgherg")
 
 int		main() {
 //	ft_printf("ft_printf: \'"STR"\'\n");
