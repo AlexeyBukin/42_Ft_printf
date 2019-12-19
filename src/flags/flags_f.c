@@ -51,16 +51,70 @@ int		f_parse_flags(char *args, int *flags)
 	return (0);
 }
 
-int		is_special(double num)
+int		is_special(long double num)
 {
-	(void)num;
+	unsigned char			sign;
+	unsigned char			bytes[10];
+	unsigned long long int	bits;
+	unsigned int			expo;
+
+	num *= -1;
+	printf("\nmtob_1\n\'%s\'\n", ft_mtob(&num, 10));
+
+	ft_memcpy(&(bytes[0]), &num, 10);
+
+	unsigned char a = 0x3f;
+	printf("\nmtob_a\n\'%s\'\n", ft_mtob(&a, 1));
+	//all ones
+	if ((bytes[9] | 0x80) == 0xff && bytes[8] == 0xff)
+	{
+		if ((bytes[7] | 0x3f) == 0xff) // 11xxxxxx
+		{
+			printf("\nNAN - 1\n");
+			return (1);
+		}
+		else if ((bytes[7] | 0x3f) == 0x7f) // 01xxxxxx
+		{
+			printf("\nNAN - 3\n");
+		}
+		else if((bytes[7] & 0xc0) == 0x00) // 00xxxxxx
+		{
+			unsigned char res = 0;
+			res += (bytes[7] & 0x3f) + bytes[6] + bytes[5] +bytes[4];
+			res += bytes[3] + bytes[2] +bytes[1] + bytes[0];
+			if (res == 0x00)
+			{
+				printf("\nINFINITY - 1\n");
+			}
+			else
+			{
+				printf("\nNAN - 2\n");
+			}
+		}
+		else    // 10xxxxxx
+		{
+			unsigned char res = 0;
+			res += (bytes[7] & 0x3f) + bytes[6] + bytes[5] +bytes[4];
+			res += bytes[3] + bytes[2] +bytes[1] + bytes[0];
+			if (res == 0x00)
+			{
+				printf("\nINFINITY - 2\n");
+			}
+			else
+			{
+				printf("\nNAN - 4\n");
+			}
+		}
+	}
 	return (0);
 }
 
-char *get_special(int *flags, double num)
+char *get_special(int *flags)
 {
-	(void)num;
-	(void)flags;
+	if (flags == NULL)
+		return (NULL);
+	int special = flags[SPECIAL];
+	//char f = (flags[FLAG] == 'F') ? ;
 	return (NULL);
 }
 
@@ -156,15 +210,9 @@ char	*bad_way(int *flags, long double num)
 	bdot = (long long int) num;
 	num -= bdot;
 
-	//ft_putstr("12345\n");
-
 	char *after_dot = bad_afterdot(num);
 
-	//ft_putstr("54321\n");
-
 	after_dot = bad_afterdot_prec(flags, after_dot, sign);
-
-	//ft_putstr("54321\n");
 
 	if (after_dot == NULL)
 		return (NULL);
@@ -223,22 +271,22 @@ char	*bad_way(int *flags, long double num)
 char	*ft_float(va_list arg, int *flags)
 {
 	long double	num;
-	//size_t	len;
-	char	*res;
+	int			special;
 
+	if (flags == NULL)
+		return (NULL);
 	if (flags[CAST] == CAST_BIG_L)
 		num = va_arg(arg, long double);
 	else
 		num = (long double) va_arg(arg, double);
+
 	if ((flags[SPECIAL] = is_special(num)) > 0)
-		return (get_special(flags, num));
+		return (get_special(flags));
 
 	if (flags[PRECISION] == 0)
 		flags[PRECISION] = 6;
 	if (flags[PRECISION] == -1)
 		flags[PRECISION] = 0;
 
-	res = bad_way(flags, num);
-
-	return (res);
+	return (bad_way(flags, num));
 }

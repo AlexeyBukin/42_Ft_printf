@@ -40,11 +40,9 @@
 //#define FLAG_X_BIG 9
 //#define FLAG_DI    10
 
-//#define SPECIAL_NO           0
 #define SPECIAL_NAN          1
 #define SPECIAL_INF_POS      2
 #define SPECIAL_INF_NEG      3
-#define SPECIAL_ROUND_BIGGER 4
 
 #define NULL_IN_THE_BEGINNING 1
 #define NULL_IN_THE_END       2
