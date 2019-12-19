@@ -87,10 +87,56 @@ char	*bad_afterdot(long double num)
 	return (ft_strdup(a));
 }
 
+char *bad_afterdot_prec(int *flags, char *after_dot, char sign)
+{
+	//int len = (int) ft_strlen(after_dot);
+	int len = (int) ft_strlen(after_dot);
+	if (flags[PRECISION] > len)
+		after_dot = ft_strjoin_free(after_dot, ft_str_spam("0", flags[PRECISION] - len));
+	int b = flags[PRECISION];
+
+//	printf("\n\n\nb is %d [%c%c%c], adot is \'%.13s\'\n", b, after_dot[b-1], after_dot[b], after_dot[b+1], after_dot);
+
+	if (after_dot[b] > '5' || (after_dot[b] == '5' && sign == 1))
+	{
+		after_dot[--b]++;
+	}
+
+	while (after_dot[b] > '9')
+	{
+		after_dot[b] = '0';
+		if(b > 0)
+			after_dot[--b]++;
+		else
+		{
+			flags[SPECIAL] = SPECIAL_ROUND_BIGGER;
+			//printf("special!\n");
+		}
+
+	}
+
+	b = 1;
+	while (b < flags[PRECISION])
+	{
+		if (after_dot[b] > '9')
+			after_dot[b] = '0';
+		b++;
+	}
+
+	b = flags[PRECISION];
+	if (b == 0)
+		b++;
+	after_dot[b] = '\0';
+
+	return (after_dot);
+//	printf("\nb is %d [%c%c%c], adot is \'%.13s\'\n", b, after_dot[b-1], after_dot[b], after_dot[b+1], after_dot);
+
+}
+
 char	*bad_way(int *flags, long double num)
 {
 	char			sign;
-	int				len;
+	//int				len;
 	long long		bdot;
 	char			*bdot_a;
 
@@ -101,11 +147,28 @@ char	*bad_way(int *flags, long double num)
 		sign = -1;
 	}
 	bdot = (long long int) num;
+	num -= bdot;
+
+	char *after_dot = bad_afterdot(num);
+	after_dot = bad_afterdot_prec(flags, after_dot, sign);
+
+	if (after_dot == NULL)
+		return (NULL);
+
+	if (flags[SPECIAL] == SPECIAL_ROUND_BIGGER)
+		bdot++;
+
+	//printf("\n\n\'%s\'\n", after_dot);
+	if (flags[PRECISION] == 0)
+	{
+		bdot += (after_dot[0] > '5' || (after_dot[0] == '5' && sign == 1));
+		//return (ft_lltoa(bdot));
+	}
+
+
 	bdot_a = ft_lltoa(bdot);
 	if (bdot_a == NULL || flags == NULL)
 		return (NULL);
-
-	num -= bdot;
 
 	if (sign < 0)
 		bdot_a = ft_strjoin_free(ft_strdup("-"), bdot_a);
@@ -113,60 +176,11 @@ char	*bad_way(int *flags, long double num)
 		if (flags[PLUS] == 1)
 			bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
 
-	//	if (flags[PLUS] && sign == ' ')
-	//	bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
-	//else
-	//	bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
-
-	char *after_dot = bad_afterdot(num);
-	len = (int) ft_strlen(after_dot);
-	if (flags[PRECISION] > len)
-		after_dot = ft_strjoin_free(after_dot, ft_str_spam("0", flags[PRECISION] - len));
-
-	if (after_dot == NULL)
-		return (NULL);
-
-	int b = flags[PRECISION];
-
-	//printf("b is %d [%c], adot is \'%s\'\n", b, after_dot[b], after_dot);
-
-	if (after_dot[b] >= '5')
+	if (flags[PRECISION] != 0)
 	{
-		after_dot[b - 1]++;
+		bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
+		bdot_a = ft_strjoin_free(bdot_a, after_dot);
 	}
-
-//	b--;
-//	int was_rounded = 1;
-//	while (b > 1 && was_rounded)
-//	{
-//		was_rounded = 0;
-//		if (after_dot[b] >= '5' && after_dot[b - 1] >= '9')
-//		{
-//			was_rounded = 1;
-//			after_dot[b - 1]++;
-//		}
-//		b--;
-//	}
-//	if (after_dot[0] > '9')
-//	{
-//		flags[SPECIAL] = SPECIAL_ROUND_BIGGER;
-//		after_dot[0] = '0';
-//	}
-
-	//printf("b is %d [%c], adot is \'%s\'\n", b, after_dot[b], after_dot);
-
-	b = 1;
-	while (b < flags[PRECISION])
-	{
-		if (after_dot[b] > '9')
-			after_dot[b] = '0';
-		b++;
-	}
-
-	after_dot[flags[PRECISION]] = '\0';
-
-	bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
-	bdot_a = ft_strjoin_free(bdot_a, after_dot);
 
 	return (bdot_a);
 }
