@@ -4,14 +4,15 @@
 //#define ARGS 42
 
 // TODO fails precision with like
-#define STR "%#.5o || %#.5o"
-#define ARGS 21, 5263
+#define STR "%p"
+#define ARGS NULL
 
 int		main() {
-	//ft_printf("ft_printf: \'"STR"\'\n", ARGS);
+//	ft_printf("ft_printf: \'"STR"\'\n");
+//	printf("gg_printf: \'"STR"\'");
+
 	ft_printf("ft_printf: \'"STR"\'\n", ARGS);
 	printf("gg_printf: \'"STR"\'", ARGS);
-	//printf("gg_printf: \'"STR"\'", b);
 
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/10 18:53:40 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/19 23:37:39 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*ft_insert_p(va_list arg, int *flags)
 	char				*num;
 	char				*zero;
 	char				*ffff;
+	int 				len;
 
 	if (flags[CAST] == CAST_NO)
 	{
@@ -47,7 +48,13 @@ char	*ft_insert_p(va_list arg, int *flags)
 	zero = "0x";
 	ffff = "7fff";
 	num = ft_ulltoa_base(d, BASE16L); //"0123456789abcdef"
-	num = ft_strjoin(ffff, num);
+	if (d)
+		num = ft_strjoin(ffff, num);
 	num = ft_strjoin(zero, num);
+	if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])
+	{
+		len = (int)ft_strlen(num);
+		num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
+	}
 	return (num);
 }
