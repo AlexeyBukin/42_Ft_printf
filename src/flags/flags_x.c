@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/19 22:13:24 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/19 22:30:18 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 
 		len = (int)ft_strlen(num);
 		if (flags[PLUS] == 1 || flags[SPACE] == 1)
-			len ++;
+			len++;
 		len = (flags[SHARP] == 1 && d != 0) ? len + 2 : len;
 		//printf("str = \'%s\', len = %d, w = %d\n", num, len, flags[WIDTH]);
 
@@ -88,7 +88,7 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 
 //	printf("\'\'\'4 - %s\'\'\'\n", num);
 
-	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(num))  < flags[WIDTH])
+	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(num)) < flags[WIDTH])
 	{
 		if (flags[MINUS] == 1)
 		{
