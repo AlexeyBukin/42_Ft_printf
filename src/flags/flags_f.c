@@ -68,12 +68,13 @@ char	*bad_afterdot(long double num)
 {
 	int		i;
 	char	b;
-	char	a[360];
+	char	a[5000];
 
-	ft_bzero(a, 360);
+	ft_bzero(a, 5000);
 	i = 0;
 	//printf("num is %Lf\n\n", num);
 
+	//ft_putstr("bad_afterdot 1\n");
 	if (num == 0)
 		return (ft_strdup(""));
 	while (num > 0)
@@ -84,11 +85,14 @@ char	*bad_afterdot(long double num)
 		a[i] = b + '0';
 		i++;
 	}
+	//ft_putstr("bad_afterdot 2\n");
 	return (ft_strdup(a));
 }
 
 char *bad_afterdot_prec(int *flags, char *after_dot, char sign)
 {
+	sign ++;
+
 	//int len = (int) ft_strlen(after_dot);
 	int len = (int) ft_strlen(after_dot);
 	if (flags[PRECISION] > len)
@@ -97,7 +101,7 @@ char *bad_afterdot_prec(int *flags, char *after_dot, char sign)
 
 //	printf("\n\n\nb is %d [%c%c%c], adot is \'%.13s\'\n", b, after_dot[b-1], after_dot[b], after_dot[b+1], after_dot);
 
-	if (after_dot[b] > '5' || (after_dot[b] == '5' && sign == 1))
+	if (after_dot[b] >= '5')// || (after_dot[b] == '5' && sign == 1))
 	{
 		after_dot[--b]++;
 	}
@@ -126,6 +130,10 @@ char *bad_afterdot_prec(int *flags, char *after_dot, char sign)
 	b = flags[PRECISION];
 	if (b == 0)
 		b++;
+
+
+	//printf("\nb is %d [%c%c%c], adot is \'%.13s\'\n", b, after_dot[b-1], after_dot[b], after_dot[b+1], after_dot);
+
 	after_dot[b] = '\0';
 
 	return (after_dot);
@@ -136,7 +144,6 @@ char *bad_afterdot_prec(int *flags, char *after_dot, char sign)
 char	*bad_way(int *flags, long double num)
 {
 	char			sign;
-	//int				len;
 	long long		bdot;
 	char			*bdot_a;
 
@@ -149,8 +156,15 @@ char	*bad_way(int *flags, long double num)
 	bdot = (long long int) num;
 	num -= bdot;
 
+	//ft_putstr("12345\n");
+
 	char *after_dot = bad_afterdot(num);
+
+	//ft_putstr("54321\n");
+
 	after_dot = bad_afterdot_prec(flags, after_dot, sign);
+
+	//ft_putstr("54321\n");
 
 	if (after_dot == NULL)
 		return (NULL);
@@ -158,38 +172,58 @@ char	*bad_way(int *flags, long double num)
 	if (flags[SPECIAL] == SPECIAL_ROUND_BIGGER)
 		bdot++;
 
-	//printf("\n\n\'%s\'\n", after_dot);
 	if (flags[PRECISION] == 0)
-	{
-		bdot += (after_dot[0] > '5' || (after_dot[0] == '5' && sign == 1));
-		//return (ft_lltoa(bdot));
-	}
-
+		bdot += (after_dot[0] >= '5');// || (after_dot[0] == '5' && sign == 1));
 
 	bdot_a = ft_lltoa(bdot);
 	if (bdot_a == NULL || flags == NULL)
 		return (NULL);
 
-	if (sign < 0)
-		bdot_a = ft_strjoin_free(ft_strdup("-"), bdot_a);
-	else
-		if (flags[PLUS] == 1)
-			bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
+	if (flags[PRECISION] != 0 || flags[SHARP] == 1)
+	{
+		bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
+	}
 
 	if (flags[PRECISION] != 0)
 	{
-		bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
 		bdot_a = ft_strjoin_free(bdot_a, after_dot);
 	}
+
+	//ft_putstr("1111\n");
+	////  FUN PART !!
+
+	int len = (int)ft_strlen(bdot_a);
+	int w = flags[WIDTH] - (sign < 0 || flags[PLUS] == 1 || flags[SPACE] == 1);
+
+	//printf ("w = %d, len = %d, str = \'%s\'\n", w, len, bdot_a);
+	if (len < w)
+	{
+		if (flags[MINUS] == 0)
+		{
+			if (flags[ZERO] == 1)
+				bdot_a = ft_strjoin_free(ft_str_spam("0", w - len), bdot_a);
+		}
+		else
+			bdot_a = ft_strjoin_free(bdot_a, ft_str_spam(" ", w - len));
+	}
+	if (flags[SPACE] == 1 && sign > 0 && flags[PLUS] == 0)
+		bdot_a = ft_strjoin_free(ft_strdup(" "), bdot_a);
+
+	if (sign < 0)
+		bdot_a = ft_strjoin_free(ft_strdup("-"), bdot_a);
+	else if (flags[PLUS] == 1)
+		bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
+
+	if (len < w && flags[MINUS] == 0 && flags[ZERO] == 0)
+		bdot_a = ft_strjoin_free(ft_str_spam(" ", w - len), bdot_a);
 
 	return (bdot_a);
 }
 
-
 char	*ft_float(va_list arg, int *flags)
 {
 	long double	num;
-	size_t	len;
+	//size_t	len;
 	char	*res;
 
 	if (flags[CAST] == CAST_BIG_L)
@@ -206,13 +240,5 @@ char	*ft_float(va_list arg, int *flags)
 
 	res = bad_way(flags, num);
 
-	len = ft_strlen(res);
-	if ((int) len < flags[WIDTH])
-	{
-		if (flags[MINUS] == 0)
-			res = ft_strjoin_free(ft_str_spam((flags[ZERO] ? "0" : " "), flags[WIDTH] - len), res);
-		else
-			res = ft_strjoin_free(res, ft_str_spam(" ", flags[WIDTH] - len));
-	}
 	return (res);
 }
