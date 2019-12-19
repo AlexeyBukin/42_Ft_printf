@@ -4,16 +4,15 @@
 //#define ARGS 42
 
 // TODO fails precision with like
-#define STR "|%.0Lf|%.3Lf|%Lf|%.8Lf|"
-#define ARGS LDBL_MIN, LDBL_MIN, LDBL_MIN, LDBL_MIN
+#define STR "|%#03x|%#05x|%#037lx|"
+#define ARGS 0, 43, 22337203685477ul
 
-//int		main() {
-//	//ft_printf("ft_printf: \'"STR"\'\n", ARGS);
-//
-//	printf("gg_printf: \'"STR"\'", ARGS);
-//	ft_printf("ft_printf: \'"STR"\'\n", ARGS);
-//	//printf("gg_printf: \'"STR"\'", b);
-//
-//	return 0;
-//}
+int		main() {
+	//ft_printf("ft_printf: \'"STR"\'\n", ARGS);
+	ft_printf("ft_printf: \'"STR"\'\n", ARGS);
+	printf("gg_printf: \'"STR"\'", ARGS);
+	//printf("gg_printf: \'"STR"\'", b);
+
+	return 0;
+}
 
