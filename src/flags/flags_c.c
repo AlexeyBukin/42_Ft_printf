@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:39:52 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/10 18:36:21 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/21 00:40:59 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ char	*ft_insert_c(va_list arg, int *flags)
 		flags[C_GOT_NULL] = (flags[MINUS] == 1) ? 1 : 2;
 	}
 	if (flags[MINUS] == 1)
-		return (ft_strjoin_free(character, spammed));
+		character = ft_strjoin_free(character, spammed);
 	else
-		return (ft_strjoin_free(spammed, character));
+		character = ft_strjoin_free(spammed, character);
+	free(character);
+	return (character);
 }
