@@ -12,6 +12,42 @@
 
 #include "printf.h"
 
+char		*width_format(int *flags, char *str, char sign)
+{
+	int len;
+	int w;
+
+	if (str == NULL)
+		return (NULL);
+
+	len = (int)ft_strlen(str);
+	w = flags[WIDTH] - (sign < 0 || flags[PLUS] == 1 || flags[SPACE] == 1);
+
+	//printf ("w = %d, len = %d, str = \'%s\'\n", w, len, bdot_a);
+	if (len < w)
+	{
+		if (flags[MINUS] == 0)
+		{
+			if (flags[ZERO] == 1)
+				str = ft_strjoin_free(ft_str_spam("0", w - len), str);
+		}
+		else
+			str = ft_strjoin_free(str, ft_str_spam(" ", w - len));
+	}
+	if (flags[SPACE] == 1 && sign > 0 && flags[PLUS] == 0)
+		str = ft_strjoin_free(ft_strdup(" "), str);
+
+	if (sign < 0)
+		str = ft_strjoin_free(ft_strdup("-"), str);
+	else if (flags[PLUS] == 1)
+		str = ft_strjoin_free(ft_strdup("+"), str);
+
+	if (len < w && flags[MINUS] == 0 && flags[ZERO] == 0)
+		str = ft_strjoin_free(ft_str_spam(" ", w - len), str);
+
+	return (str);
+}
+
 int		is_special(long double num)
 {
 	unsigned char			bytes[10];
@@ -59,19 +95,25 @@ char	*get_special(int *flags)
 	if (flags == NULL)
 		return (NULL);
 	int special = flags[SPECIAL];
+	flags[ZERO] = 0;
 	if (special == F_NAN)
-		res = ft_strdup("nan");
-	else if (special == F_INF_POS)
 	{
-		if (flags[PLUS] == 1)
-			res = ft_strdup("+inf");
-		else if (flags[SPACE] == 1)
-			res = ft_strdup(" inf");
-		else
-			res = ft_strdup("inf");
+		flags[PLUS] = 0;
+		flags[SPACE] = 0;
+		res = ft_strdup("nan");
 	}
-	else if (special == F_INF_NEG)
-		res = ft_strdup("-inf");
+	else if (special == F_INF_POS || special == F_INF_NEG)
+	{
+		if (special == F_INF_POS)
+		{
+			flags[SPECIAL] = 1;
+		}
+		else
+		{
+			flags[SPECIAL] = -1;
+		}
+		res = ft_strdup("inf");
+	}
 	else
 		return (NULL);
 
@@ -140,14 +182,9 @@ char *bad_afterdot_prec(int *flags, char *after_dot)
 	if (b == 0)
 		b++;
 
-
-	//printf("\nb is %d [%c%c%c], adot is \'%.13s\'\n", b, after_dot[b-1], after_dot[b], after_dot[b+1], after_dot);
-
 	after_dot[b] = '\0';
 
 	return (after_dot);
-//	printf("\nb is %d [%c%c%c], adot is \'%.13s\'\n", b, after_dot[b-1], after_dot[b], after_dot[b+1], after_dot);
-
 }
 
 char	*bad_way(int *flags, long double num)
@@ -189,40 +226,14 @@ char	*bad_way(int *flags, long double num)
 		bdot_a = ft_strjoin_free(bdot_a, after_dot);
 	}
 
-	//ft_putstr("1111\n");
-	////  FUN PART !!
-
-	int len = (int)ft_strlen(bdot_a);
-	int w = flags[WIDTH] - (sign < 0 || flags[PLUS] == 1 || flags[SPACE] == 1);
-
-	//printf ("w = %d, len = %d, str = \'%s\'\n", w, len, bdot_a);
-	if (len < w)
-	{
-		if (flags[MINUS] == 0)
-		{
-			if (flags[ZERO] == 1)
-				bdot_a = ft_strjoin_free(ft_str_spam("0", w - len), bdot_a);
-		}
-		else
-			bdot_a = ft_strjoin_free(bdot_a, ft_str_spam(" ", w - len));
-	}
-	if (flags[SPACE] == 1 && sign > 0 && flags[PLUS] == 0)
-		bdot_a = ft_strjoin_free(ft_strdup(" "), bdot_a);
-
-	if (sign < 0)
-		bdot_a = ft_strjoin_free(ft_strdup("-"), bdot_a);
-	else if (flags[PLUS] == 1)
-		bdot_a = ft_strjoin_free(ft_strdup("+"), bdot_a);
-
-	if (len < w && flags[MINUS] == 0 && flags[ZERO] == 0)
-		bdot_a = ft_strjoin_free(ft_str_spam(" ", w - len), bdot_a);
-
 	return (bdot_a);
 }
 
 char	*ft_float(va_list arg, int *flags)
 {
-	long double	num;
+	char			sign;
+	char			*res;
+	long double		num;
 
 	if (flags == NULL)
 		return (NULL);
@@ -231,18 +242,21 @@ char	*ft_float(va_list arg, int *flags)
 	else
 		num = (long double) va_arg(arg, double);
 
-	if ((flags[SPECIAL] = is_special(num)) > 0)
-	{
-		char * s = get_special(flags);
-		//printf("\n\ns is \'%s\'\n\n", s);
-		return (s);
-	}
-
-
 	if (flags[PRECISION] == 0)
 		flags[PRECISION] = 6;
 	if (flags[PRECISION] == -1)
 		flags[PRECISION] = 0;
 
-	return (bad_way(flags, num));
+	if ((flags[SPECIAL] = is_special(num)) > 0)
+	{
+		res = get_special(flags);
+		sign = flags[SPECIAL];
+	}
+	else
+	{
+		res = bad_way(flags, num);
+		sign = (char)num;
+	}
+
+	return (width_format(flags, res, sign));
 }
