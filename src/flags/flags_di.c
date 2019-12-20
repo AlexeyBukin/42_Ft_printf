@@ -50,13 +50,10 @@ char	*ft_insert_d(va_list arg, int *flags)
 	else
 		num = ft_ulltoa(ft_absl(d));
 
-//	printf("\n%d:\'%s\'\n", 345674567, num);
 
 	len = (int)ft_strlen(num);
 	if (flags[PRECISION] > len)
 		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - len), num);
-
-//	printf("\n%d:\'%s\'\n", 2, num);
 
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
 	{
@@ -67,8 +64,6 @@ char	*ft_insert_d(va_list arg, int *flags)
 			num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
 	}
 
-//	printf("\n%d:\'%s\'\n", 3, num);
-
 	if (d < 0)
 		num = ft_strjoin_free(ft_strdup("-"), num);
 
@@ -77,8 +72,6 @@ char	*ft_insert_d(va_list arg, int *flags)
 
 	if (flags[SPACE] == 1 && flags[PLUS] == 0 && d >= 0)
 		num = ft_strjoin_free(ft_strdup(" "), num);
-
-//	printf("\n%d:\'%s\'\n", 4, num);
 
 	if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])
 	{
@@ -92,6 +85,5 @@ char	*ft_insert_d(va_list arg, int *flags)
 			num = ft_strjoin_free(num, ft_str_spam(" ", flags[WIDTH] - len));
 		}
 	}
-//	printf("\n%d:\'%s\'\n", 5, num);
 	return (num);
 }

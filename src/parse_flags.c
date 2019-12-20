@@ -55,7 +55,6 @@ int		parse_flags(char *args, int len, int *flags)
 
 	if (args == NULL || flags == NULL)
 		return (-1);
-	//TODO ОШИБКА 2 ПРЕКРАЩАЕТСЯ НА ЭТОМ ИФ
 	if (len < 1)
 		return (-1);
 	i = -1;
@@ -116,24 +115,9 @@ int		parse_flags(char *args, int len, int *flags)
 			flags[CAST] = CAST_BIG_L;
 		i++;
 	}
-
 	if (flags[PRECISION] == -1)
 		flags[PRECISION] = 0;
 	else if (flags[PRECISION] == 0)
 		flags[PRECISION] = -1;
-
-//	printf("\n\n\n");
-//    printf("Minus flag: %d\n", flags[MINUS]);
-//    printf("Plus flag: %d\n", flags[PLUS]);
-//    printf("Space flag: %d\n", flags[SPACE]);
-//    printf("Sharp flag: %d\n", flags[SHARP]);
-//    printf("Zero flag: %d\n", flags[ZERO]);
-//    printf("Width size: %d\n", flags[WIDTH]);
-//    printf("Precision size: %d\n", flags[PRECISION]);
-//    printf("hh flag: %d\n", flags[CAST] == CAST_HH);
-//    printf("h flag: %d\n", flags[CAST] == CAST_H);
-//    printf("ll flag: %d\n", flags[CAST] == CAST_LL);
-//    printf("l flag: %d\n", flags[CAST] == CAST_L);
-
 	return (0);
 }

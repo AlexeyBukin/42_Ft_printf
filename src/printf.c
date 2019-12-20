@@ -27,14 +27,11 @@ int		ft_printf(const char *restrict format, ...)
 	all_byte = 0;
 	while (string[++i] != '\0')
 	{
-		//printf("1- %c - 1\n", string[i]);
 		if (string[i] == '%')
 		{
-			//printf()
-			resolved = ft_resolve_arg(&(string[i + 1]), arg, flags); // {string, how_many_to_skip}
+			resolved = ft_resolve_arg(&(string[i + 1]), arg, flags);
 			if (resolved.taken > 0)
 			{
-				//ft_putstr(resolved.string);
 				if (flags[C_GOT_NULL] == NULL_IN_THE_BEGINNING)
 				{
 					write(1, "", 1);
@@ -58,25 +55,6 @@ int		ft_printf(const char *restrict format, ...)
 			write(1, &(string[i]), 1);
 		}
 	}
-	// '%z' -> '\0'
-	//  0x55 0x78 0x33 '%zb'
-	//  0x55 0x78 0x10 '%z\b'
-	//  0x55
-	//  0x00
-
-//	i = -1;
-//	int lv = 0;
-//	while (string[++i] != '\0')
-//	{
-//		if (string[i] == '%')
-//			if (string[i + 1] == 'z')
-//			{
-//				write(1, string[lv + 2], i - lv);
-//			}
-//	}
-
-	//write(1, string, i);
-	//write(1, "", 1);
 	va_end(arg);
 	return (all_byte);
 }

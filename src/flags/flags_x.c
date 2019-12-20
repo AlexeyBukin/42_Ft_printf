@@ -19,7 +19,6 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 	int					len;
 	unsigned long long	d;
 
-	/////////
 	if (flags[CAST] == CAST_NO)
 	{
 		d = (unsigned int) va_arg(arg, int);
@@ -27,7 +26,6 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 	else if (flags[CAST] == CAST_HH)
 	{
 		d = (unsigned char) va_arg(arg, int);
-		//printf("\nd:\'%hhd\'\n", (char)d);
 	}
 	else if (flags[CAST] == CAST_H)
 	{
@@ -45,24 +43,15 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 	{
 		return (NULL);
 	}
-
-	//printf("\nnumber is: %llx\n",  d);
-
 	if (flags[PRECISION] == -1 && d == 0)
 	{
 		num = ft_strdup("");
 	}
 	else
 		num = is_x_big ? ft_ulltoa_base(d, BASE16U) : ft_ulltoa_base(d, BASE16L);
-
-	//printf("\'\'\'1 - %s\'\'\'\n", num);
-
 	len = (int)ft_strlen(num);
 	if (flags[PRECISION] > len)
 		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - ft_strlen(num)), num);
-
-	//printf("\'\'\'2 - %s\'\'\'\n", num);
-
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
 	{
 
@@ -70,14 +59,9 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 		if (flags[PLUS] == 1 || flags[SPACE] == 1)
 			len++;
 		len = (flags[SHARP] == 1 && d != 0) ? len + 2 : len;
-		//printf("str = \'%s\', len = %d, w = %d\n", num, len, flags[WIDTH]);
-
 		if (len < flags[WIDTH])
 			num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
 	}
-
-//	printf("\'\'\'3 - %s\'\'\'\n", num);
-
 	if (flags[SHARP] == 1 && d != 0)
 	{
 		if (is_x_big == 1)
@@ -85,9 +69,6 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 		else
 			num = ft_strjoin_free(ft_strdup("0x"), num);
 	}
-
-//	printf("\'\'\'4 - %s\'\'\'\n", num);
-
 	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(num)) < flags[WIDTH])
 	{
 		if (flags[MINUS] == 1)
@@ -99,8 +80,5 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 			num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
 		}
 	}
-
-//	printf("\'\'\'5 - %s\'\'\'\n", num);
-
 	return (num);
 }

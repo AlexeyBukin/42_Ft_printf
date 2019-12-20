@@ -25,7 +25,6 @@ char	*ft_insert_u(va_list arg, int *flags)
 	else if (flags[CAST] == CAST_HH)
 	{
 		d = (unsigned char) va_arg(arg, int);
-		//printf("\nd:\'%hhd\'\n", (char)d);
 	}
 	else if (flags[CAST] == CAST_H)
 	{
@@ -44,23 +43,15 @@ char	*ft_insert_u(va_list arg, int *flags)
 		return (NULL);
 	}
 
-//	printf("num is %llu\n", d);
-
 	if (flags[PRECISION] == -1 && d == 0)
 	{
 		num = ft_strdup("");
 	}
 	else
 		num = ft_ulltoa(d);
-
-//	printf("string 1 is %s\n", num);
-
 	len = (int)ft_strlen(num);
 	if (flags[PRECISION] > len)
 		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - ft_strlen(num)), num);
-
-//	printf("string 2 is %s\n", num);
-
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0)
 	{
 		len = (int)ft_strlen(num);
@@ -69,17 +60,6 @@ char	*ft_insert_u(va_list arg, int *flags)
 		if (len < flags[WIDTH])
 			num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
 	}
-
-//	printf("string 3 is \'%s\'\n", num);
-
-//	if (flags[WIDTH] > 0 && (int)ft_strlen(num) < flags[WIDTH])
-//	{
-//		len = (int)ft_strlen(num);
-//		num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
-//	}
-
-//	printf("string 4 is \'%s\'\n", num);
-
 	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(num)) < flags[WIDTH])
 	{
 		if (flags[MINUS] == 1)
@@ -91,8 +71,5 @@ char	*ft_insert_u(va_list arg, int *flags)
 			num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
 		}
 	}
-
-//	printf("string 5 is %s\n", num);
-
 	return (num);
 }
