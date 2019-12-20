@@ -14,13 +14,7 @@
 
 int		is_special(long double num)
 {
-	unsigned char			sign;
 	unsigned char			bytes[10];
-	unsigned long long int	bits;
-	unsigned int			expo;
-
-	//num *= -1;
-	//printf("\nmtob_1\n\'%s\'\n", ft_mtob(&num, 10));
 
 	ft_memcpy(&(bytes[0]), &num, 10);
 	//all ones
@@ -229,7 +223,6 @@ char	*bad_way(int *flags, long double num)
 char	*ft_float(va_list arg, int *flags)
 {
 	long double	num;
-	int			special;
 
 	if (flags == NULL)
 		return (NULL);
