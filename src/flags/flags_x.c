@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/16 20:33:52 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/19 22:30:18 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 		return (NULL);
 	}
 
-	//////////TODO тесты с 23 по 35 ломаются тут из-за того что в функцию подает unsigned int
-
-	//printf("%llx\n",  d);
+	//printf("\nnumber is: %llx\n",  d);
 
 	if (flags[PRECISION] == -1 && d == 0)
 	{
@@ -57,20 +55,28 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 	else
 		num = is_x_big ? ft_ulltoa_base(d, BASE16U) : ft_ulltoa_base(d, BASE16L);
 
-	//printf("\'\'\'%s\'\'\'\n", num);
+	//printf("\'\'\'1 - %s\'\'\'\n", num);
 
 	len = (int)ft_strlen(num);
 	if (flags[PRECISION] > len)
 		num = ft_strjoin_free(ft_str_spam("0", flags[PRECISION] - ft_strlen(num)), num);
 
+	//printf("\'\'\'2 - %s\'\'\'\n", num);
+
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
 	{
+
 		len = (int)ft_strlen(num);
 		if (flags[PLUS] == 1 || flags[SPACE] == 1)
-			len ++;
-		len = (flags[SHARP] == 1) ? len + 2 : len;
-		num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
+			len++;
+		len = (flags[SHARP] == 1 && d != 0) ? len + 2 : len;
+		//printf("str = \'%s\', len = %d, w = %d\n", num, len, flags[WIDTH]);
+
+		if (len < flags[WIDTH])
+			num = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), num);
 	}
+
+//	printf("\'\'\'3 - %s\'\'\'\n", num);
 
 	if (flags[SHARP] == 1 && d != 0)
 	{
@@ -80,7 +86,9 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 			num = ft_strjoin_free(ft_strdup("0x"), num);
 	}
 
-	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(num))  < flags[WIDTH])
+//	printf("\'\'\'4 - %s\'\'\'\n", num);
+
+	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(num)) < flags[WIDTH])
 	{
 		if (flags[MINUS] == 1)
 		{
@@ -91,6 +99,8 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 			num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
 		}
 	}
+
+//	printf("\'\'\'5 - %s\'\'\'\n", num);
 
 	return (num);
 }

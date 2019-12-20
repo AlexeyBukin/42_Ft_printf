@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/09 21:16:07 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/19 22:37:29 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ char		*insert_from_to(char *inp, char *ins, size_t from, size_t to);
 char		*insert_from_to2(char *res, char *input, size_t to, int i);
 t_stg		ft_resolve_arg(char *string, va_list arg, int * flags);
 char		*ft_insert_d(va_list arg, int *flags);
-char	    *ft_insert_o(int d, int *flags);
+char	    *ft_insert_o(va_list arg, int *flags);
 char		*ft_insert_x(va_list arg, int *flags, int is_x_big);
 char	    *ft_insert_u(va_list arg, int *flags);
-char	    *ft_insert_p(int d);
+char	    *ft_insert_p(va_list arg, int *flags);
 char		*ft_insert_s(va_list arg, int *flags);
 char		*ft_insert_percentage(int *flags);
 char		*ft_insert_c(va_list arg, int *flags);

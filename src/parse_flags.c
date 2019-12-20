@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/15 23:17:59 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/19 23:19:21 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int		parse_flags(char *args, int len, int *flags)
 	else if (flags[PRECISION] == 0)
 		flags[PRECISION] = -1;
 
-//	  printf("\n\n\n");
+//	printf("\n\n\n");
 //    printf("Minus flag: %d\n", flags[MINUS]);
 //    printf("Plus flag: %d\n", flags[PLUS]);
 //    printf("Space flag: %d\n", flags[SPACE]);

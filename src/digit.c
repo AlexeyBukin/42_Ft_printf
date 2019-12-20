@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/16 19:27:41 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/19 22:45:58 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
 {
 	int		len;
-    int		d;
+ //   int		d;
    // double	d_d;
 
 	len = arg_len(string);
@@ -53,14 +53,12 @@ t_stg	ft_resolve_arg(char *string, va_list arg, int *flags)
     else if (flags[FLAG] == 'p')
     {
     	//TODO delete this
-        d = va_arg(arg, int);
-        string = ft_insert_p(d);
+       // d = va_arg(arg, int);
+        string = ft_insert_p(arg, flags);
     }
     else if (flags[FLAG] == 'o')
     {
-    	//TODO delete this
-        d = va_arg(arg, int);
-        string = ft_insert_o(d, flags);
+        string = ft_insert_o(arg, flags);
     }
     else if (flags[FLAG] == 'x' || flags[FLAG] == 'X')
     {
