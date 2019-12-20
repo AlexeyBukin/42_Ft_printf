@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/20 00:18:40 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/20 22:16:27 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,39 @@ char	*ft_insert_p(va_list arg, int *flags)
 	unsigned long long d;
 	char				*num;
 	char				*zero;
-	char				*ffff;
 	int 				len;
 
-	if (flags[CAST] == CAST_NO)
-	{
-		d = (unsigned int) va_arg(arg, int);
-	}
-	else if (flags[CAST] == CAST_HH)
-	{
-		d = (unsigned char) va_arg(arg, int);
-		//printf("\nd:\'%hhd\'\n", (char)d);
-	}
-	else if (flags[CAST] == CAST_H)
-	{
-		d = (unsigned short) va_arg(arg, int);
-	}
-	else if (flags[CAST] == CAST_L)
-	{
-		d = (unsigned long) va_arg(arg, long int);
-	}
-	else if (flags[CAST] == CAST_LL)
-	{
-		d = (unsigned long long) va_arg(arg, long long int);
-	}
-	else
-	{
-		return (NULL);
-	}
+	d = (unsigned long long) va_arg(arg, long long int);
 	zero = "0x";
-	ffff = "10";
+
+	//	int *a;
+//	ft_memcpy(&a, &d, 8);
+//	printf("\nd = %s, size = %d\n", ft_mtob(&d, 8), sizeof(a));
+//	printf("\na = %s\n", ft_mtob(&a, 8));
+//
+//	if (*a == 0)
+//	{
+//		printf("\nptr points no 0\n");
+//	}
+	//int *a = (int*) d;
+//	if ((*a) == 0)
+//	{
+//		ffff = "7fff";
+//	}
+
+//	if (&d == 0)
+//		ffff = "7fff";
+//	else
+
+	//printf("\nd = %s\n");
+	//printf("\nd =    %s\n", ft_mtob(&d, 8));
+
 	if (flags[PRECISION] == -1 && d == 0)
 	{
 		num = ft_strdup("");
 	}
 	else
 		num = ft_ulltoa_base(d, BASE16L); //"0123456789abcdef"
-	if (d)
-		num = ft_strjoin(ffff, num);
 	num = ft_strjoin(zero, num);
 
 	len = (int)ft_strlen(num);
