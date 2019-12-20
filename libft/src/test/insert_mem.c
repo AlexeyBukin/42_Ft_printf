@@ -6,11 +6,13 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 16:30:58 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/10 16:30:58 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/20 23:15:48 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
+
+//todo эти функции
 
 void		*ft_insert_mem(void *memory, void *insertion, size_t index, size_t inslen, size_t memlen)
 {

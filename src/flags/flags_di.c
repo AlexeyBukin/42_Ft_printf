@@ -85,5 +85,6 @@ char	*ft_insert_d(va_list arg, int *flags)
 			num = ft_strjoin_free(num, ft_str_spam(" ", flags[WIDTH] - len));
 		}
 	}
+	free(num);
 	return (num);
 }

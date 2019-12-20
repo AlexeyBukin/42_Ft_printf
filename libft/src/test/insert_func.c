@@ -6,11 +6,13 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 17:21:46 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/16 17:45:05 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/20 23:15:48 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
+
+//todo я ебал
 
 char	*insert_from_to2(char *res, char *input, size_t to, int i)
 {

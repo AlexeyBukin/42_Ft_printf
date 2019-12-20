@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 15:23:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/20 22:26:19 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/21 00:28:57 by lmelina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ char	*ft_insert_s(va_list arg, int *flags)
 		}
 	}
 
+	free(insert);
+	free(res);
 	return (res);
 }

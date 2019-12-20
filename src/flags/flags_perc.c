@@ -37,5 +37,6 @@ char *ft_insert_percentage(int *flags)
 		}
 	}
 
+	free(perc);
 	return (perc);
 }
