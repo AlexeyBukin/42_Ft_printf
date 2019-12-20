@@ -15,3 +15,8 @@ int f_L_limits_ndblmin_prec8(void){return ft_printf("%.8Lf", -LDBL_MIN);}
 int f_L_stress_limits_ndblmin_prec12(void){return ft_printf("%.12Lf", -LDBL_MIN);}
 int f_L_stress_limits_ndblmin_prec16(void){return ft_printf("%.16Lf", -LDBL_MIN);}
 int f_L_stress_limits_ndblmin_prec18(void){return ft_printf("%.18Lf", -LDBL_MIN);}
+
+
+double NAN = 0.0/0.0;
+double POS_INF = 1.0 /0.0;
+double NEG_INF = -1.0/0.0;

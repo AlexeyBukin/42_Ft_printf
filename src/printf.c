@@ -34,6 +34,7 @@ int		ft_printf(const char *restrict format, ...)
 			resolved = ft_resolve_arg(&(string[i + 1]), arg, flags); // {string, how_many_to_skip}
 			if (resolved.taken > 0)
 			{
+				//ft_putstr(resolved.string);
 				if (flags[C_GOT_NULL] == NULL_IN_THE_BEGINNING)
 				{
 					write(1, "", 1);

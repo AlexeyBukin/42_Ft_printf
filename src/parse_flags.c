@@ -26,7 +26,7 @@ int		is_in_args(int ch)
 		return (2);
 	if (ch == 'o' || ch == 'u' || ch == '%' || ch == 'd')
 		return (2);
-	if (ch == 'i' || ch == 'f')
+	if (ch == 'i' || ch == 'f' || ch == 'F')
 		return (2);
 	return (0);
 }
@@ -37,16 +37,12 @@ int		arg_len(char *string)
 	int		i;
 
 	i = 0;
-	//printf("\n\n\'%s\'\n\n", string);
-
 	while ((c = is_in_args(string[i])) > 0)
 	{
-		//printf("\n\n\'c as %c is %d\'\n\n", string[i], c);
 		if (c == 2)
 			break ;
 		i++;
 	}
-	//printf("\n\n\'c as %c is %d after all\'\n\n", string[i], c);
 	if (c != 2)
 		return (-1);
 	return (i + 1);

@@ -29,20 +29,9 @@
 #define CAST_LL    4
 #define CAST_BIG_L 5
 
-//#define FLAG_S     1
-//#define FLAG_C     2
-//#define FLAG_F     3
-//#define FLAG_P     4
-//#define FLAG_O     5
-//#define FLAG_PERC  6
-//#define FLAG_U     7
-//#define FLAG_X     8
-//#define FLAG_X_BIG 9
-//#define FLAG_DI    10
-
-#define SPECIAL_NAN          1
-#define SPECIAL_INF_POS      2
-#define SPECIAL_INF_NEG      3
+#define F_NAN          1
+#define F_INF_POS      2
+#define F_INF_NEG      3
 
 #define NULL_IN_THE_BEGINNING 1
 #define NULL_IN_THE_END       2
