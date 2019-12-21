@@ -118,6 +118,12 @@ int		parse_flags(char *args, int len, int *flags)
 	if (flags[PRECISION] == -1)
 		flags[PRECISION] = 0;
 	else if (flags[PRECISION] == 0)
-		flags[PRECISION] = -1;
+		flags[PRECISION] = PREC_INTENDED_ZERO;
+
+	if (flags[WIDTH] < 0)
+		flags[WIDTH] = 0;
+	if (flags[PRECISION] < -1)
+		flags[PRECISION] = 0;
+
 	return (0);
 }

@@ -29,12 +29,16 @@
 #define CAST_LL    4
 #define CAST_BIG_L 5
 
-#define F_NAN          1
-#define F_INF_POS      2
-#define F_INF_NEG      3
+#define F_N0_SPECIAL   1
+#define F_NAN          2
+#define F_INF          3
+#define F_ROUND_NO     4
+#define F_ROUND_YES    5
 
 #define NULL_IN_THE_BEGINNING 1
 #define NULL_IN_THE_END       2
+
+#define PREC_INTENDED_ZERO -1
 
 #define PRECISION  0
 #define PLUS       1

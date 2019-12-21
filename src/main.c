@@ -4,13 +4,13 @@
 //#define ARGS 42
 
 // TODO fails precision with like
-#define STR "%c"
-#define ARGS 42
+#define STR "|%.2147483649f|%2147483649f|"
+#define ARGS 1.0, 1.0
 
 int		main() {
 
-	printf("gg_printf: \'"STR"\'", ARGS);
 	ft_printf("ft_printf: \'"STR"\'\n", ARGS);
+	printf("gg_printf: \'"STR"\'", ARGS);
 
-	return 0;
+	return (0);
 }
