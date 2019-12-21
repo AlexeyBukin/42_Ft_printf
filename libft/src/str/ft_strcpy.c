@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 17:15:39 by kcharla           #+#    #+#             */
-/*   Updated: 2019/11/06 19:16:31 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/21 20:14:47 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_strcpy(char *dest, const char *source)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
-	while (source[i] != 0)
+	while (source[i] != '\0')
 	{
 		dest[i] = source[i];
 		i++;

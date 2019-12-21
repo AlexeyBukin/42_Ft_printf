@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_char_to_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/07 17:57:56 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/21 20:28:29 by kcharla          ###   ########.fr       */
+/*   Created: 2019/12/21 15:18:30 by kcharla           #+#    #+#             */
+/*   Updated: 2019/12/21 15:18:30 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_char_to_str(char c)
 {
 	char	*res;
 
-	res = (char*)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (res == NULL)
-		return (NULL);
-	return (ft_strcpy(res, s));
+	res = ft_strnew(1);
+	res[0] = c;
+	return (res);
 }

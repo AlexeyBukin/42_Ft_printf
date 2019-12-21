@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/04 20:49:25 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/21 21:25:39 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ char	*width_format(int *flags, char *str, char sign)
 	int len;
 	int w;
 
-	if (str == NULL)
+	if (str == NULL || flags == NULL)
 		return (NULL);
 
+	//printf("str = \'%s\', sign = %hhd\n", str, sign);
 	len = (int)ft_strlen(str);
 	w = flags[WIDTH] - (sign < 0 || flags[PLUS] == 1 || flags[SPACE] == 1);
-
-	//printf ("w = %d, len = %d, str = \'%s\'\n", w, len, bdot_a);
 	if (len < w)
 	{
 		if (flags[MINUS] == 0)
@@ -38,13 +37,14 @@ char	*width_format(int *flags, char *str, char sign)
 		str = ft_strjoin_free(ft_strdup(" "), str);
 
 	if (sign < 0)
+	{
 		str = ft_strjoin_free(ft_strdup("-"), str);
+	}
 	else if (flags[PLUS] == 1)
 		str = ft_strjoin_free(ft_strdup("+"), str);
 
 	if (len < w && flags[MINUS] == 0 && flags[ZERO] == 0)
 		str = ft_strjoin_free(ft_str_spam(" ", w - len), str);
-
 	return (str);
 }
 
@@ -132,8 +132,6 @@ char	*bad_afterdot(long double num)
 		return (ft_strdup(""));
 	while (num > 0 && i < 5000)
 	{
-		//ft_putnbr(i);
-		//ft_putendl("");
 		num = num * 10;
 		b = (char) num;
 		num -= b;
@@ -146,27 +144,58 @@ char	*bad_afterdot(long double num)
 char	*bad_afterdot_prec(int *flags, char *after_dot)
 {
 	int len = (int) ft_strlen(after_dot);
-	if (flags[PRECISION] > len)
+	if (flags[PRECISION] >= len)
 		after_dot = ft_strjoin_free(after_dot,
-				ft_str_spam("0", flags[PRECISION] - len));
+				ft_str_spam("0", flags[PRECISION] - len + 3));
 	//ft_putendl("lmao not prec");
 
 	int b = flags[PRECISION];
-	//ft_putnbr(b);
-	if (after_dot[b] >= '5')
+	//printf("\n\na  \"%s\"\n", after_dot);
+	if (after_dot[b] == '4' && len > flags[PRECISION])
 	{
-		after_dot[--b]++;
+		int i = 1;
+		while (b + i < len && after_dot[b + i] == '9')
+			i++;
+		if (after_dot[b + i] >= '5' && after_dot[b + i] <= '9' && i > 8)
+			after_dot[b - 1]++;
 	}
+	//printf("a\"%s\"\n", after_dot);
+	//ft_putnbr(b);
+	//printf("b is \"%c%c[%c]%c\"\n", after_dot[b - 2], after_dot[b - 1], after_dot[b], after_dot[b + 1]);
+	//b++;
+	//printf("b is %d", (int) b);
+	//printf("\n\nspam is \"%s\"\n", ft_str_spam("0.", 10));
+	//printf("adot is \"%s\"\n", after_dot);
+	if (after_dot[b] >= '5' && len > flags[PRECISION])
+	{
+		//b--;
+		after_dot[b - 1]++;
+	}
+	b = b - (b >= 1);
+	//printf("adot is \"%s\"\n\n", after_dot);
+	//printf("b is \"%c%c[%c]%c\"\n", after_dot[b - 2], after_dot[b - 1], after_dot[b], after_dot[b + 1]);
 
+//	if (after_dot[b] >= '5')
+//	{
+//		after_dot[b - 1]++;
+//	}
+//	b--;
+	//printf("b is \"%c%c[%c]%c\"\n", after_dot[b - 2], after_dot[b - 1], after_dot[b], after_dot[b + 1]);
 	flags[SPECIAL] = F_ROUND_NO;
+
 	while (after_dot[b] > '9')
 	{
+//		ft_putnbr(b);
+//		ft_putendl("");
 		after_dot[b] = '0';
 		if(b > 0)
+		{
 			after_dot[--b]++;
+		}
 		else
 		{
 			flags[SPECIAL] = F_ROUND_YES;
+			break ;
 		}
 	}
 
@@ -180,7 +209,7 @@ char	*bad_afterdot_prec(int *flags, char *after_dot)
 
 	b = flags[PRECISION];
 	if (b == 0)
-		b++;
+		b = 3;
 
 	after_dot[b] = '\0';
 
@@ -202,17 +231,34 @@ char	*bad_way(int *flags, long double num)
 	bdot = (long long int) num;
 	num -= bdot;
 
-	//ft_putendl("lmao not epic bruh");
-	char *after_dot = bad_afterdot(num);
+	//ft_putendl("before bad afterdot");
+	char *after_dot_num = bad_afterdot(num);
 	//ft_putendl("lmao not epic");
-	after_dot = bad_afterdot_prec(flags, after_dot);
+	char * after_dot = bad_afterdot_prec(flags, after_dot_num);
 
+	//free(after_dot_num);
+	//printf("adot is \'%s\'\n", after_dot);
 	if (after_dot == NULL)
 		return (NULL);
 
 
 	if (flags[PRECISION] == 0)
-		bdot += (after_dot[0] >= '5');
+	{
+		//printf("here 1\n");
+		if (after_dot[0] == '5')
+		{
+			//printf("here 2\n");
+			if ((bdot % 2) == 1 || ft_strlen(after_dot) > 1)
+			{
+				//printf("here 3\n");
+				bdot++;
+			}
+		}
+//		if ((bdot % 2) == 1 && (after_dot[0] == '5') && ft_strlen(after_dot) > 1)
+//			bdot++;
+		if (after_dot[0] > '5' && after_dot[0] <= '9')
+			bdot++;
+	}
 	else if (flags[SPECIAL] == F_ROUND_YES)
 		bdot ++;
 
@@ -251,23 +297,25 @@ char	*ft_float(va_list arg, int *flags)
 	if (flags[PRECISION] == -1)
 		flags[PRECISION] = 0;
 
-	//ft_putendl("lmao");
 	sign = 1;
 	if ((flags[SPECIAL] = is_special(num)) < 0)
 	{
 		sign = -1;
 		flags[SPECIAL] *= -1;
 	}
-	//ft_putendl("lmao");
+
 	if (flags[SPECIAL] == F_N0_SPECIAL)
 	{
-		//ft_putendl("lmao here");
 		res = bad_way(flags, num);
 	}
 	else
 	{
 		res = get_special(flags);
 	}
-	//ft_putendl("lmao not epic");
-	return (width_format(flags, res, sign));
+
+	//printf("res = \'%s\'\n", res);
+	char * resres = width_format(flags, res, sign);
+	//printf("resres = \'%s\'\n", resres);
+	return (resres);
+	//return (width_format(flags, res, sign));
 }

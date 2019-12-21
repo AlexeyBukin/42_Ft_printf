@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:26:49 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/19 23:19:21 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/21 15:34:24 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,15 +102,14 @@ int		parse_flags(char *args, int len, int *flags)
 			flags[CAST] = CAST_L;
 		}
 		else if (args[i] == 'h')
-		{
 			if (args[i + 1] == 'h')
 			{
 				flags[CAST] = CAST_HH;
 				i = i + 2;
-				continue ;
+				//continue ;
 			}
-			flags[CAST] = CAST_H;
-		}
+			else
+				flags[CAST] = CAST_H;
 		else if (args[i] == 'L')
 			flags[CAST] = CAST_BIG_L;
 		i++;

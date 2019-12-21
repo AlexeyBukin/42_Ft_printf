@@ -43,7 +43,7 @@ char	*ft_insert_d(va_list arg, int *flags)
 		return (NULL);
 	}
 
-	if (flags[PRECISION] == -1 && d == 0)
+	if (flags[PRECISION] == PREC_INTENDED_ZERO && d == 0)
 	{
 		num = ft_strdup("");
 	}
