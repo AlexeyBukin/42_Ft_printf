@@ -8,8 +8,9 @@ INCLUDES = -I includes/ -I libft/includes
 
 O_DIR = objects/
 SRC_DIR = src/
+MAIN_DIR = src/main
 
-SRC_FILES = $(shell find $(SRC_DIR) -type f -name '*.c')
+SRC_FILES = $(shell find $(SRC_DIR) -not \( -path $(MAIN_DIR) -prune \) -type f -name "*.c")
 O_FILES = $(patsubst $(SRC_DIR)%.c, $(O_DIR)%.o, $(SRC_FILES))
 
 SRC_DIRS = $(shell find $(SRC_DIR) -type d)
@@ -19,19 +20,37 @@ O_DIRS = $(patsubst $(SRC_DIR)%, $(O_DIR)%, $(SRC_DIRS))
 
 all: $(NAME)
 
-$(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
+$(NAME): connect $(O_DIRS) $(O_FILES)
 	@ranlib $(NAME)
+	@echo $(SRC_FILES)
+
+connect: $(LIB_FT_FILE)
+	@libtool -static -o $(NAME) $(LIB_FT_FILE)
 
 $(LIB_FT_FILE):
 	@make -C $(LIB_FT)
-	@libtool -static -o $(NAME) $(LIB_FT_FILE)
 
 $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
 
 $(O_DIR)%.o: $(SRC_DIR)%.c
-	@clang -c $(FLAGS) $(INCLUDES) -o $@ $<
+	clang -c $(FLAGS) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
+
+exe: lre
+	@clang $(MAIN_DIR)/*.c $(INCLUDES) $(NAME) -g -o grind_me.exe
+
+run: exe
+	@echo ".................................................."
+	@echo ".....       starting     grind.exe           ....."
+	@echo "..................................................\n"
+	@./grind_me.exe
+
+grind: exe
+	@echo ".................................................."
+	@echo ".....       grinding     grind.exe           ....."
+	@echo "..................................................\n"
+	@valgrind --track-origins=yes --show-leak-kinds=all --leak-check=full ./grind_me.exe
 
 clean:
 	@make clean -C $(LIB_FT)
@@ -45,7 +64,6 @@ fclean: lclean
 
 re: fclean all
 	@echo "make: Done recompile of \`$(NAME)'."
-
 
 lclean:
 	@rm -rf $(O_DIR)

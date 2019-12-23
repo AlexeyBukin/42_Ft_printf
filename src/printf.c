@@ -50,7 +50,7 @@ int		ft_printf(const char *restrict format, ...)
 					write(1, "", 1);
 					all_byte ++;
 				}
-				printf("resolved = \'%s\'\n", resolved.string);
+				//printf("resolved = \'%s\'\n", resolved.string);
 				int len = (int) ft_strlen(resolved.string);
 				all_byte += len;
 				write(1, resolved.string, len);

@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/19 22:37:29 by lmelina          ###   ########.fr       */
+/*   Updated: 2019/12/23 17:54:52 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,19 @@ void		*ft_insert_mem(void *string, void *insertion, size_t index, size_t ilen, s
 int			parse_flags(char *args, int len, int *flags);
 int			arg_len(char *string);
 
+/*
+** flag 'f'
+*/
+
 char		*ft_float(va_list arg, int *flags);
-char		*ft_long_float(char *flags_str, long double num);
-int			f_parse_flags(char *args, int *flags);
-char		*bad_afterdot(long double num);
 char		*bad_way(int *flags, long double num);
-int 		get_exponent(double d);
-void		print_double_as_binary(double d);
+
+char		*f_after_dot(long double num);
+char		*f_after_dot_prec(int *flags, char *after_dot);
+
+char		*f_get_special(int *flags);
+int			f_is_special(long double num);
+
+char		*width_format(int *flags, char *str, char sign);
 
 #endif
