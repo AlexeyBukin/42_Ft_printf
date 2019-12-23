@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:53:01 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/23 17:53:01 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/23 20:24:50 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,21 @@ char	*width_format(int *flags, char *str, char sign)
 
 	if (str == NULL || flags == NULL)
 		return (NULL);
-
-	//printf("str = \'%s\', sign = %hhd\n", str, sign);
 	len = (int)ft_strlen(str);
 	w = flags[WIDTH] - (sign < 0 || flags[PLUS] == 1 || flags[SPACE] == 1);
 	if (len < w)
 	{
-		if (flags[MINUS] == 0)
-		{
-			if (flags[ZERO] == 1)
-				str = ft_strjoin_free(ft_str_spam("0", w - len), str);
-		}
-		else
+		if (flags[MINUS] == 0 && flags[ZERO] == 1)
+			str = ft_strjoin_free(ft_str_spam("0", w - len), str);
+		else if (flags[MINUS] != 0)
 			str = ft_strjoin_free(str, ft_str_spam(" ", w - len));
 	}
 	if (flags[SPACE] == 1 && sign > 0 && flags[PLUS] == 0)
 		str = ft_strjoin_free(ft_strdup(" "), str);
-
 	if (sign < 0)
-	{
 		str = ft_strjoin_free(ft_strdup("-"), str);
-	}
 	else if (flags[PLUS] == 1)
 		str = ft_strjoin_free(ft_strdup("+"), str);
-
 	if (len < w && flags[MINUS] == 0 && flags[ZERO] == 0)
 		str = ft_strjoin_free(ft_str_spam(" ", w - len), str);
 	return (str);

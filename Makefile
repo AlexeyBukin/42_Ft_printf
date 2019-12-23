@@ -20,15 +20,13 @@ O_DIRS = $(patsubst $(SRC_DIR)%, $(O_DIR)%, $(SRC_DIRS))
 
 all: $(NAME)
 
-$(NAME): connect $(O_DIRS) $(O_FILES)
+$(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
 	@ranlib $(NAME)
 	@echo $(SRC_FILES)
 
-connect: $(LIB_FT_FILE)
-	@libtool -static -o $(NAME) $(LIB_FT_FILE)
-
 $(LIB_FT_FILE):
 	@make -C $(LIB_FT)
+	@libtool -static -o $(NAME) $(LIB_FT_FILE)
 
 $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
@@ -37,8 +35,8 @@ $(O_DIR)%.o: $(SRC_DIR)%.c
 	clang -c $(FLAGS) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
 
-exe: lre
-	@clang $(MAIN_DIR)/*.c $(INCLUDES) $(NAME) -g -o grind_me.exe
+exe: lclean all
+	clang $(MAIN_DIR)/*.c $(INCLUDES) $(NAME) -g -o grind_me.exe
 
 run: exe
 	@echo ".................................................."

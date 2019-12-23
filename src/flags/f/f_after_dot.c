@@ -6,88 +6,69 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:50:27 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/23 17:50:29 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/23 23:33:35 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-char	*f_after_dot_prec(int *flags, char *after_dot)
+static char		*after_prec_2(int *flags, char *a_dot, int b)
 {
-	int len = (int) ft_strlen(after_dot);
-	if (flags[PRECISION] >= len)
-		after_dot = ft_strjoin_free(after_dot,
-									ft_str_spam("0", flags[PRECISION] - len + 3));
-	//ft_putendl("lmao not prec");
-
-	int b = flags[PRECISION];
-	//printf("\n\na  \"%s\"\n", after_dot);
-	if (after_dot[b] == '4' && len > flags[PRECISION])
+	if (flags == NULL || a_dot == NULL)
+		return (NULL);
+	while (a_dot[b] > '9')
 	{
-		int i = 1;
-		while (b + i < len && after_dot[b + i] == '9')
-			i++;
-		if (after_dot[b + i] >= '5' && after_dot[b + i] <= '9' && i > 8)
-			after_dot[b - 1]++;
-	}
-	//printf("a\"%s\"\n", after_dot);
-	//ft_putnbr(b);
-	//printf("b is \"%c%c[%c]%c\"\n", after_dot[b - 2], after_dot[b - 1], after_dot[b], after_dot[b + 1]);
-	//b++;
-	//printf("b is %d", (int) b);
-	//printf("\n\nspam is \"%s\"\n", ft_str_spam("0.", 10));
-	//printf("adot is \"%s\"\n", after_dot);
-	if (after_dot[b] >= '5' && len > flags[PRECISION])
-	{
-		//b--;
-		after_dot[b - 1]++;
-	}
-	b = b - (b >= 1);
-	//printf("adot is \"%s\"\n\n", after_dot);
-	//printf("b is \"%c%c[%c]%c\"\n", after_dot[b - 2], after_dot[b - 1], after_dot[b], after_dot[b + 1]);
-
-//	if (after_dot[b] >= '5')
-//	{
-//		after_dot[b - 1]++;
-//	}
-//	b--;
-	//printf("b is \"%c%c[%c]%c\"\n", after_dot[b - 2], after_dot[b - 1], after_dot[b], after_dot[b + 1]);
-	flags[SPECIAL] = F_ROUND_NO;
-
-	while (after_dot[b] > '9')
-	{
-//		ft_putnbr(b);
-//		ft_putendl("");
-		after_dot[b] = '0';
-		if(b > 0)
-		{
-			after_dot[--b]++;
-		}
+		a_dot[b] = '0';
+		if (b > 0)
+			a_dot[--b]++;
 		else
 		{
 			flags[SPECIAL] = F_ROUND_YES;
 			break ;
 		}
 	}
-
-	b = 1;
-	while (b < flags[PRECISION])
-	{
-		if (after_dot[b] > '9')
-			after_dot[b] = '0';
-		b++;
-	}
-
+	b = 0;
+	while (++b < flags[PRECISION])
+		if (a_dot[b] > '9')
+			a_dot[b] = '0';
 	b = flags[PRECISION];
 	if (b == 0)
 		b = 3;
-
-	after_dot[b] = '\0';
-
-	return (after_dot);
+	a_dot[b] = '\0';
+	return (a_dot);
 }
 
-char	*f_after_dot(long double num)
+char			*f_after_dot_prec(int *flags, char *a_dot)
+{
+	int		len;
+	int		b;
+	int		i;
+
+	len = (int)ft_strlen(a_dot);
+
+	if (flags[PRECISION] >= len)
+	{
+		a_dot = ft_strdup(a_dot);
+		a_dot = ft_strjoin_free(a_dot,
+								ft_str_spam("0", flags[PRECISION] - len + 3));
+	}
+	b = flags[PRECISION];
+	if (a_dot[b] == '4' && len > flags[PRECISION])
+	{
+		i = 1;
+		while (b + i < len && a_dot[b + i] == '9')
+			i++;
+		if (a_dot[b + i] >= '5' && a_dot[b + i] <= '9' && i > 8)
+			a_dot[b - 1]++;
+	}
+	if (a_dot[b] >= '5' && len > flags[PRECISION])
+		a_dot[b - 1]++;
+	b = b - (b >= 1);
+	flags[SPECIAL] = F_ROUND_NO;
+	return (after_prec_2(flags, a_dot, b));
+}
+
+char			*f_after_dot(long double num)
 {
 	int		i;
 	char	b;
@@ -100,7 +81,7 @@ char	*f_after_dot(long double num)
 	while (num > 0 && i < 5000)
 	{
 		num = num * 10;
-		b = (char) num;
+		b = (char)num;
 		num -= b;
 		a[i] = b + '0';
 		i++;
