@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/21 19:11:39 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/21 23:36:32 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		ft_printf(const char *restrict format, ...)
 					write(1, "", 1);
 					all_byte ++;
 				}
+				printf("resolved = \'%s\'\n", resolved.string);
 				int len = (int) ft_strlen(resolved.string);
 				all_byte += len;
 				write(1, resolved.string, len);
@@ -63,6 +64,7 @@ int		ft_printf(const char *restrict format, ...)
 				}
 				i += resolved.taken;
 			}
+			//free(resolved.string);
 
 
 		}

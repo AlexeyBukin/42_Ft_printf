@@ -10,8 +10,14 @@
 //#define STR "this %.10Lf float"
 //#define ARGS (0.87650894255l - 0.0000000000000000001l)
 
-#define STR "|%15.8f|%-15.8f|%+15.8f|% 15.8f|%#15.8f|%015.8f|"
-#define ARGS 42., 42., 42., 42., 42., 42.
+int a1 = 9;
+int a2 = 0;
+
+//#define STR "|%#-+p|%10.20p|%30.10p|%p|%-3p|% %|% %"
+//#define ARGS 0x1111, 0x00, &a1, &a2, a4
+
+#define STR "|% %|% 10%|"
+#define ARGS
 
 //#define STR "|%.19f|%.19f|"
 //#define ARGS 1.025978542436587568678, -1.025978542436587568678
@@ -24,8 +30,9 @@
 
 int		main() {
 
-	ft_printf("ft_printf: \'"STR"\'\n", ARGS);
-	printf("gg_printf: \'"STR"\'\n", ARGS);
-
+	int *a4 = (int*)malloc(sizeof(int));
+	ft_printf("ft_printf: \'"STR"\'\n" ARGS);
+	//printf("gg_printf: \'"STR"\'\n", ARGS);
+	free(a4);
 	return (0);
 }

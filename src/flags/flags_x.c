@@ -80,6 +80,5 @@ char	*ft_insert_x(va_list arg, int *flags, int is_x_big)
 			num = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), num);
 		}
 	}
-	free(num);
 	return (num);
 }

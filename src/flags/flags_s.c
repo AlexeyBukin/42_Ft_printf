@@ -42,6 +42,7 @@ char	*ft_insert_s(va_list arg, int *flags)
 			res = ft_strdup("");
 		} else
 			res = ft_strdup(insert);
+		free(insert);
 	}
 
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
@@ -62,8 +63,5 @@ char	*ft_insert_s(va_list arg, int *flags)
 			res = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), res);
 		}
 	}
-
-	free(insert);
-	free(res);
 	return (res);
 }

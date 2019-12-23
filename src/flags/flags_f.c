@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/21 21:25:39 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/21 21:26:04 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,9 +313,5 @@ char	*ft_float(va_list arg, int *flags)
 		res = get_special(flags);
 	}
 
-	//printf("res = \'%s\'\n", res);
-	char * resres = width_format(flags, res, sign);
-	//printf("resres = \'%s\'\n", resres);
-	return (resres);
-	//return (width_format(flags, res, sign));
+	return (width_format(flags, res, sign));
 }

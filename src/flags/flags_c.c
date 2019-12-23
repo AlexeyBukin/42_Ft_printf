@@ -37,6 +37,5 @@ char	*ft_insert_c(va_list arg, int *flags)
 		character = ft_strjoin_free(character, spammed);
 	else
 		character = ft_strjoin_free(spammed, character);
-	free(character);
 	return (character);
 }

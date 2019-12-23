@@ -36,7 +36,5 @@ char *ft_insert_percentage(int *flags)
 			perc = ft_strjoin_free(ft_str_spam(" ", flags[WIDTH] - len), perc);
 		}
 	}
-
-	free(perc);
 	return (perc);
 }
