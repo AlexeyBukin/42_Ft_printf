@@ -1,6 +1,7 @@
 NAME = libft.a
 
 FLAGS = -Wall -Wextra -Werror
+DEBUG = ""
 
 INCLUDES = -I includes/
 
@@ -25,7 +26,7 @@ $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
 
 $(O_DIR)%.o: $(SRC_DIR)%.c
-	@clang -c $(FLAGS) $(INCLUDES) -o $@ $<
+	clang -c $(FLAGS) $(DEBUG) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
 
 clean:

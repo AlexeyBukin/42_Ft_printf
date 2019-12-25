@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/21 23:36:32 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/25 21:53:47 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int		ft_printf(const char *restrict format, ...)
 	char	*string;
 	t_stg	resolved;
 	int		flags[FLAGS_LEN];
-
-
 
 	i = -1;
 	va_start(arg, format);
@@ -43,6 +41,7 @@ int		ft_printf(const char *restrict format, ...)
 			// NEW ends
 
 			resolved = ft_resolve_arg(&(string[i + 1]), arg, flags);
+
 			if (resolved.taken > 0)
 			{
 				if (flags[C_GOT_NULL] == NULL_IN_THE_BEGINNING)

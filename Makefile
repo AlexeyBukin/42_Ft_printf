@@ -1,6 +1,28 @@
+# Makefile for ft_printf project in school 21 (ecole 42)
+# written by kcharla, 2019
+#
+# Usage:
+#
+# 1) `make all' OR `make libftprintf.a' to compile libftprintf.a
+#
+# 2.1) `make clean' to delete objects locally and in libft
+# 2.2) `make lclean' to delete objects locally only (don't touch libft)
+#
+# 3.1) `make fclean' to delete libftprintf.a, libft.a and objects locally and in libft
+# 3.2) `make lfclean' to delete libftprintf.a and objects locally (don't touch libft)
+#
+# 4.1) `make re' to run `make fclean' and `make all'
+# 4.2) `make lre' to run `make lfclean' and `make all'
+#
+# TO USE DEBUG
+#              add `DEBUG=-g' before rule like this: `make DEBUG=-g re'
+# OR USE RULE
+#              run `make debug' which runs `make DEBUG=-g re'
+
 NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
+DEBUG = ""
 
 LIB_FT = libft/
 LIB_FT_FILE = $(LIB_FT)/libft.a
@@ -25,18 +47,18 @@ $(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
 	@echo $(SRC_FILES)
 
 $(LIB_FT_FILE):
-	@make -C $(LIB_FT)
+	@make DEBUG=$(DEBUG) -C $(LIB_FT)
 	@libtool -static -o $(NAME) $(LIB_FT_FILE)
 
 $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
 
 $(O_DIR)%.o: $(SRC_DIR)%.c
-	clang -c $(FLAGS) $(INCLUDES) -o $@ $<
+	clang -c $(FLAGS) $(DEBUG) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
 
-exe: lclean all
-	clang $(MAIN_DIR)/*.c $(INCLUDES) $(NAME) -g -o grind_me.exe
+exe:
+	@clang $(FLAGS) $(DEBUG) $(MAIN_DIR)/main.c $(INCLUDES) $(NAME) -o grind_me.exe
 
 run: exe
 	@echo ".................................................."

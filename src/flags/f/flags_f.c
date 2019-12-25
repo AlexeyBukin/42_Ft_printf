@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/23 23:32:31 by kcharla          ###   ########.fr       */
+/*   Updated: 2019/12/24 22:08:39 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char		*bad_way(int *flags, long double num)
 		num *= -1;
 		sign = -1;
 	}
+	bdot = 0;
 	bdot = (long long int)num;
 	num -= bdot;
 	char *after_dot_num = f_after_dot(num);
@@ -69,7 +70,7 @@ char		*ft_float(va_list arg, int *flags)
 	if (flags == NULL)
 		return (NULL);
 	if (flags[CAST] == CAST_BIG_L)
-		num = va_arg(arg, long double);
+		num = (long double)va_arg(arg, long double);
 	else
 		num = (long double)va_arg(arg, double);
 	if (flags[PRECISION] == 0)
