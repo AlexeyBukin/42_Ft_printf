@@ -6,11 +6,13 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/24 22:08:39 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/14 18:01:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+
 
 char		*bad_way(int *flags, long double num)
 {
@@ -25,12 +27,14 @@ char		*bad_way(int *flags, long double num)
 		num *= -1;
 		sign = -1;
 	}
+	//TODO ok for long nums
 	bdot = 0;
 	bdot = (long long int)num;
 	num -= bdot;
-	char *after_dot_num = f_after_dot(num);
-	after_dot = f_after_dot_prec(flags, after_dot_num);
-	free(after_dot_num);
+
+	if ((after_dot = f_after_dot_prec(flags, num)) == NULL)
+		return (NULL);
+
 	if (after_dot == NULL)
 		return (NULL);
 	if (flags[PRECISION] == 0)
@@ -57,6 +61,10 @@ char		*bad_way(int *flags, long double num)
 	if (flags[PRECISION] != 0)
 	{
 		bdot_a = ft_strjoin_free(bdot_a, after_dot);
+	}
+	else
+	{
+		free(after_dot);
 	}
 	return (bdot_a);
 }

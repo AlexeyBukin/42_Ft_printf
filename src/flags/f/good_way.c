@@ -1,0 +1,387 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   good_way.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/23 01:02:14 by kcharla           #+#    #+#             */
+/*   Updated: 2020/01/23 17:04:21 by kcharla          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+//clang src/flags/f/good_way.c -I libft/includes -I includes libft/libft.a
+
+#include "printf.h"
+
+char			*f_after_dot_old(long double num);
+
+typedef struct ldouble_10_s
+{
+	unsigned long long mantissa;
+	unsigned int       exponent : 15;
+	unsigned int       sign     : 1;
+}              ldouble_10_t;
+
+typedef struct mantissa_s
+{
+	unsigned char byte0;
+	unsigned char byte1;
+	unsigned char byte2;
+	unsigned char byte3;
+	unsigned char byte4;
+	unsigned char byte5;
+	unsigned char byte6;
+	unsigned char byte7;
+}              mantissa_t;
+
+union ldouble_10_u
+{
+	long double 	num;
+	ldouble_10_t	parts;
+	mantissa_t		bytes;
+};
+
+unsigned char		bits_rev(unsigned char input)
+{
+	unsigned char res = 0;
+	int j = 0;
+	while (j < 8)
+	{
+		res = res | ( ((input >> j) & 00000001) << (7 - j) );
+		j++;
+	}
+	//printf ("rev_before = %d(%s), after = %d(%s)\n", input, ft_mtob(&input, 1), res, ft_mtob(&res, 1));
+	return (res);
+}
+
+void		*mem_rev(void *pointer_v, size_t count)
+{
+	unsigned char * pointer = (unsigned char *)pointer_v;
+	size_t i = 0;
+	count--;
+	while (i < count / 2 + (count % 2 == 1))
+	{
+		//printf ("swapping %lu with %lu\n", i, count - i);
+		unsigned char tmp = pointer[i];
+		pointer[i] = bits_rev(pointer[count - i]);
+		pointer[count - i] = bits_rev(tmp);
+		i++;
+	}
+	if (count % 2 == 0)
+	{
+		//printf ("changing %lu\n", count / 2);
+		pointer[count / 2] = bits_rev(pointer[count / 2]);
+	}
+	return (pointer);
+}
+
+char * multiply_by_two(char * res)
+{
+	if (res == NULL)
+		return (NULL);
+	int tmp = 0;
+	int i = 0;
+	while (res[i] != 0)
+	{
+		tmp = tmp + (res[i] - '0') * 2;
+		res[i] = (tmp % 10) + '0';
+		tmp /= 10;
+		i++;
+	}
+	if (tmp != 0)
+		res[i] = (tmp % 10) + '0';
+	return (res);
+}
+
+char * add_to(char * res, char * additive)
+{
+	int i = 0;
+	int tmp = 0;
+	while (additive[i] != 0) // res[i] != 0 &&
+	{
+		tmp =  '0' * (res[i] == 0) + (res[i] - '0') + (additive[i] - '0') + tmp;
+		res[i] = (tmp % 10) + '0';
+		tmp /= 10;
+		i++;
+	}
+	if (tmp != 0)
+		res[i] = (tmp % 10) + '0';
+	return (res);
+}
+
+char * ft_before_dot(void *pointer_v, size_t count)
+{
+	if (pointer_v == NULL)
+		return (NULL);
+
+
+	unsigned char * pointer = (unsigned char *)pointer_v;
+
+	char * res = ft_strnew(count * 3);
+	ft_bzero(res, count * 3);
+	res[0] = '0';
+	char * add =  ft_strnew(count * 3);
+	ft_bzero(add, count * 3);
+	add[0] = '1';
+
+	int exp = 0;
+	int i = 0;
+	while (i < count)
+	{
+		int j = 0;
+		while (j < 8)
+		{
+			if (((pointer[i] >> j) & 00000001) == 00000001)
+			{
+				add_to(res, add);
+			}
+			multiply_by_two(add);
+			exp++;
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
+char * add_to_div(char * res, char * additive)
+{
+	int i = 0;
+	int tmp = 0;
+	while (additive[i] != 0) // res[i] != 0 &&
+	{
+		tmp =  '0' * (res[i] == 0) + (res[i] - '0') + (additive[i] - '0');
+		res[i] = (tmp % 10) + '0';
+		if (tmp / 10 != 0 && i > 0)
+			res[i - 1] += tmp / 10;
+		//tmp /= 10;
+		i++;
+	}
+//	if (tmp != 0)
+//		res[i] = (tmp % 10) + '0';
+	return (res);
+}
+
+char * divide_by_two(char * res)
+{
+	if (res == NULL)
+		return (NULL);
+	int tmp = 0;
+	int i = 0;
+	while (res[i] != 0)
+	{
+		tmp = tmp + (res[i] - '0');
+		res[i] = (tmp / 2) + '0';
+		tmp = (tmp % 2) * 10;
+		i++;
+	}
+	if (tmp != 0)
+		res[i] = (tmp / 2) + '0';
+	return (res);
+}
+
+#define COUNT 128
+
+char * ft_after_dot(void *pointer_v)
+{
+	if (pointer_v == NULL)
+		return (NULL);
+
+
+	unsigned char * pointer = (unsigned char *)pointer_v;
+
+	char * res = ft_str_spam("0", COUNT);//ft_strnew(count * 3);
+	//ft_bzero(res, count * 3);
+	res[0] = '0';
+	char * add = ft_strnew(COUNT);
+	ft_bzero(add, COUNT);
+	add[0] = '5';
+
+	int exp = 0;
+	int i = 0;
+	printf ("-- res is : %s, add is : %s\n", res, add);
+	while (i < COUNT / 8)
+	{
+
+		int j = 0;
+		while (j < 8)
+		{
+			//printf ("res is : %s, add is : %s\n", res, add);
+			if (((pointer[i] >> j) & 00000001) == 00000001)
+			{
+				add_to_div(res, add);
+//				printf ("-- res is : %s, add is : %s\n", res, add);
+				//printf ("gotcha\n");
+			}
+			//printf ("-- res is : %s, add is : %s\n", res, add);
+			divide_by_two(add);
+			exp++;
+			j++;
+		}
+		i++;
+	}
+	return (res);
+}
+
+char		*to_plain_bits(long double num)
+{
+
+	union ldouble_10_u parser;
+	parser.num = num;
+
+	int exp = 1 + parser.parts.exponent - 16383;
+	//printf ("mantissa parser: %u %u\n", parser.parts.mantissa_0, parser.parts.mantissa_1);
+	//printf ("exponent parser: %u\n", parser.parts.exponent);
+	printf ("exponent real  : %d\n", exp);
+	//printf ("real exponent is: %u\n", parser.parts.exponent - 16383);
+	//printf ("sign parser: %u\n", parser.parts.sign);
+	//16383
+	//printf("mtob      : %s\n", "seeeeeeeeeeeeeee");
+	//printf("mtob      : %s\n", ft_mtob(&num, 10));
+
+	//char	*plain_bits = (char*)malloc(sizeof(char) * (4096));
+	//ft_memset(plain_bits, 0, 4096);
+
+
+	//char	*mantissa = (char*)malloc(sizeof(char) * (8));
+	//ft_memcpy(mantissa, &(num), 8);
+
+	//char * before_dot_bits = ft_memdup(mantissa, 8);
+
+	//printf("mtob_bdb  : seeeeeeeeeeeeeee%s\n", ft_mtob_raw(before_dot_bits, 8));
+
+	//mem_rev(before_dot_bits, 8);
+
+	//unsigned char last_bit = (parser.parts.mantissa & 0x000000ff);
+
+	unsigned long long mcopy = 0;
+
+	// before dot
+	char * bd_toa;
+
+	if (exp > 0)
+	{
+		if (exp < 64)
+		{
+			mcopy = (parser.parts.mantissa >> (64 - exp));
+			bd_toa = ft_strrev(ft_before_dot(&mcopy, exp / 8 + 1));
+		}
+		else
+		{
+			//printf("got here!\n");
+			//unsigned char last_bit = (parser.parts.mantissa & 0x000000ff);
+
+			unsigned char last_bit = (parser.bytes.byte0);
+			last_bit = last_bit << (exp % 8);
+			//unsigned char last_bit_moved = last_bit << (exp % 8);
+			//printf("%s\n", ft_mtob(&parser.parts.mantissa, 8));
+			//printf("   |   |   |   |   |   |   |   |   |   |   |   |   |   |%s|%s\n", ft_mtob(&last_bit, 1), ft_mtob(&last_bit, 1));
+			mcopy = (parser.parts.mantissa >> (8 - (exp % 8)));
+			//printf("%s\n", ft_mtob(&parser.parts.mantissa, 8));
+			//printf("mant shift = %d, bit shift = %d\n", (8 - (exp % 8)), (exp % 8));
+			char * before_dot_bits = ft_strnew(exp / 8 + 1);
+			ft_memset(before_dot_bits, 0, exp / 8 + 1);
+			ft_memcpy(&(before_dot_bits[(exp - 64) / 8 + 1]), &mcopy, 8);
+			ft_memcpy(&(before_dot_bits[(exp - 64) / 8]), &last_bit, 1);
+			//printf("%s\nlen: %d", ft_mtob(before_dot_bits, exp / 8 + 1), exp / 8 + 1);
+			bd_toa = ft_strrev(ft_before_dot(before_dot_bits, exp / 8 + 1));
+		}
+	}
+	else
+	{
+		bd_toa = ft_strdup("0");
+	}
+
+	char * ad_toa;
+
+	if (exp > 64)
+	{
+		ad_toa = ft_strdup("000000");
+	}
+	else if (exp >= 0)
+	{
+		printf("%s\n", ft_mtob(&parser.parts.mantissa, 8));
+		mcopy = (parser.parts.mantissa << exp);
+		mem_rev(&mcopy, 8);
+		printf("%s\n", ft_mtob(&mcopy, 8));
+		ad_toa = ft_after_dot(&mcopy);
+		printf("%s\n", ad_toa);
+	}
+	else
+	{
+		unsigned char first_bit = (parser.bytes.byte7);
+		first_bit = first_bit >> ((-exp) % 8);
+		mcopy = (parser.parts.mantissa);
+		mcopy = mcopy << (8 - (-exp) % 8);
+
+		printf("%s\n", ft_mtob(&parser.parts.mantissa, 8));
+		printf("      %s\n", ft_mtob(&mcopy, 8));
+		printf("   |   |   |   |   |   |   |   |   |   |   |   |   |   |%s\n\n", ft_mtob(&first_bit, 1));
+
+		char * after_dot_bits = ft_strnew((-exp) / 8 + 9);  // (-exp) / 8 + 9 - 8
+		//ft_memset(before_dot_bits, 0, (-exp) / 8 + 9);
+		ft_memcpy(&(after_dot_bits[0]), &mcopy, 8);
+		printf("%s\n\n", ft_mtob_raw(after_dot_bits, (-exp) / 8 + 9));
+		ft_memcpy(&(after_dot_bits[8]), &first_bit, 1);
+
+		printf("%s\n", ft_mtob_raw(after_dot_bits, (-exp) / 8 + 9));
+
+		mem_rev(after_dot_bits, (-exp) / 8 + 9);
+		printf("\n");
+		ad_toa = ft_after_dot(after_dot_bits);
+		printf("%s\n\n\n", ad_toa);
+	}
+
+	long long num_int = (long long) num;
+	char * bad_adot_old = f_after_dot_old(num - num_int);
+
+
+	//printf("-----------------------\n");
+	printf("                                 %Lf\n", num);
+
+	printf("bd_toa: \'%s\'\n", bd_toa);
+	printf("fad_old: \'%s\'\n", bad_adot_old);
+	printf("ad_toa : \'%s\'\n", ad_toa);
+	printf("-----------------------\n");
+	return (NULL);
+}
+
+int main()
+{
+	//to_plain_bits(1.333L * 1000000000L * 10000000000L * 10000000000L * 1000000L);
+	to_plain_bits(0.000000000000000007);
+
+	//to_plain_bits(LDBL_MAX);
+	//to_plain_bits(1.33333333333333333333333L * 100000L * 1000000L * 10000L);
+	//to_plain_bits(0.00001L);
+//	to_plain_bits(-1.3245562537265L);
+
+//	int a = 1767468123;
+//	printf("btoa: \'%s\'\n", ft_btoa(&a, 4));
+//	printf("btoa: \'%s\'\n", ft_strrev(ft_btoa(&a, 4)));
+	//printf("sizeof long long: %lu\n", sizeof(unsigned long long));
+	//printf("sizeof long double: %lu\n", sizeof(long double));
+}
+
+
+char			*f_after_dot_old(long double num)
+{
+	int		i;
+	char	b;
+	char	a[5000];
+
+	ft_bzero(a, 5000);
+	i = 0;
+	if (num == 0)
+		return (ft_strdup(""));
+	while (num > 0 && i < 5000)
+	{
+		num = num * 10;
+		b = (char)num;
+		num -= b;
+		a[i] = b + '0';
+		i++;
+	}
+	return (ft_strdup(a));
+}

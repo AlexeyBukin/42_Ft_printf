@@ -1,5 +1,5 @@
 #include "printf.h"
-#include <float.h>
+
 //#define STR "%015-d"
 //#define ARGS 42
 
@@ -13,8 +13,12 @@
 int a1 = 9;
 int a2 = 0;
 
-#define STR "|%#-+f|%-10.20f|%-30.2f|%f|%-3f|"
-#define ARGS 123., 34., 1234345., 3., 88.
+//#define STR "|%#-+f|%-10.20f|%-30.2f|%f|%-3f|"
+//#define ARGS 123., 34., 1234345., 3., 88.
+
+#define STR "%15.f|%15.1f|%15.2f|%15.5f|%15.12f"
+#define ARGS 999.99999, 999.99999, 999.99999, 999.99999, 999.99999
+
 //
 //#define STR "|% %|% 10%|"
 //#define ARGS
@@ -28,7 +32,13 @@ int a2 = 0;
 //#define STR "|%.f|%.f|"
 //#define ARGS 44.50001, 44.5
 
+#include <math.h>
 int		main() {
+
+	float b = 111.3;
+	int a = fmod(b, 10.0);
+	printf("a is %d\n\n", a);
+
 
 	int *a4 = (int*)malloc(sizeof(int));
 	ft_printf("ft_printf: \'"STR"\'\n", ARGS);

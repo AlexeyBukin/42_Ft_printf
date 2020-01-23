@@ -6,11 +6,15 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:50:22 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/23 22:10:22 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/23 01:57:11 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+
+/*
+** double treated as 10-bytes
+*/
 
 int			f_is_special(long double num)
 {

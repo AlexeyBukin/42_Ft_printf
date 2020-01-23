@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/23 17:54:52 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/23 01:56:22 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # include <stdio.h>
 
+# include <math.h>
+# include <float.h>
 # include <stdarg.h>
 # include "libft.h"
 
@@ -86,7 +88,7 @@ char		*ft_float(va_list arg, int *flags);
 char		*bad_way(int *flags, long double num);
 
 char		*f_after_dot(long double num);
-char		*f_after_dot_prec(int *flags, char *after_dot);
+char		*f_after_dot_prec(int *flags, long double num);
 
 char		*f_get_special(int *flags);
 int			f_is_special(long double num);

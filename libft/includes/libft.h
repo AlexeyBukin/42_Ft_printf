@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2019/12/16 20:21:18 by lmelina          ###   ########.fr       */
+/*   Updated: 2020/01/23 04:16:56 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char			*ft_ulltoa_base(unsigned long long int value, char *base);
 char			*ft_lltoa(long long int n);
 
 char			*ft_mtob(void const *ptr, size_t byte_size);
+char			*ft_mtob_raw(void const *ptr, size_t byte_size);
 
 char			*ft_ulltoa(unsigned long long int num);
 char			*ft_utoa(unsigned int num);
@@ -148,7 +149,9 @@ char			*ft_strncpy(char *dest, const char *source, size_t n);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strnew(size_t size);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
+
 char			*ft_strrchr(const char *s, int c);
+char 			*ft_strrev(const char *s);
 
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strstr(const char *s1, const char *s2);
