@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 14:37:32 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 15:13:41 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 17:44:46 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_after_dot_raw(char *pointer, size_t count)
 	return (res);
 }
 
-char	*ft_after_dot_big(int exp, union ldouble_10_u parser)
+char	*ft_after_dot_big(int exp, t_ldouble_10_u parser)
 {
 	char				*result;
 	char				*after_dot_bits;
@@ -105,7 +105,7 @@ char	*ft_after_dot_big(int exp, union ldouble_10_u parser)
 
 char	*ft_after_dot(long double num)
 {
-	union ldouble_10_u		parser;
+	t_ldouble_10_u			parser;
 	int						exp;
 	unsigned long long		mcopy;
 	char					*ad_toa;

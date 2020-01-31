@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 17:50:27 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/14 17:59:01 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 16:58:55 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char			*f_after_dot_prec(int *flags, long double num)
 	flags[SPECIAL] = F_ROUND_NO;
 	return (after_prec_2(flags, a_dot, b));
 }
-//
+
 //char			*f_after_dot(long double num)
 //{
 //	int		i;
