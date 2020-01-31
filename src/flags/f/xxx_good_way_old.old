@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 01:02:14 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/23 17:39:00 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 10:06:31 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ unsigned char		bits_rev(unsigned char input)
 		res = res | ( ((input >> j) & 00000001) << (7 - j) );
 		j++;
 	}
-	//printf ("rev_before = %d(%s), after = %d(%s)\n", input, ft_mtob(&input, 1), res, ft_mtob(&res, 1));
 	return (res);
 }
 
@@ -62,7 +61,6 @@ void		*mem_rev(void *pointer_v, size_t count)
 	count--;
 	while (i < count / 2 + (count % 2 == 1))
 	{
-		//printf ("swapping %lu with %lu\n", i, count - i);
 		unsigned char tmp = pointer[i];
 		pointer[i] = bits_rev(pointer[count - i]);
 		pointer[count - i] = bits_rev(tmp);
@@ -149,18 +147,19 @@ char * add_to_div(char * res, char * additive)
 {
 	int i = 0;
 	int tmp = 0;
-	while (additive[i] != 0) // res[i] != 0 &&
-	{
-		tmp =  '0' * (res[i] == 0) + (res[i] - '0') + (additive[i] - '0');
-		res[i] = (tmp % 10) + '0';
-		tmp /= 10;
-		if (tmp != 0 && i > 0)
-			res[i - 1] += tmp;
-		tmp /= 10;
+
+	while (additive[i] != 0)
 		i++;
-	}
-	if (tmp != 0)
+	i--;
+	//write(1, "lol", 3);
+	while (i >= 0)
+	{
+		//write(1, "kek\n", 4);
+		tmp =  tmp + '0' * (res[i] < '0' || res[i] > '9') + (res[i] - '0') + (additive[i] - '0');
 		res[i] = (tmp % 10) + '0';
+		tmp /= 10;
+		i--;
+	}
 	return (res);
 }
 
@@ -190,9 +189,9 @@ char * ft_after_dot(void *pointer_v, size_t count)
 
 	unsigned char * pointer = (unsigned char *)pointer_v;
 
-	char * res = ft_str_spam("0", count * 8);//ft_strnew(count * 3);
+	char * res = ft_str_spam("0", count * 8);
 	res[0] = '0';
-	char * add = ft_str_spam("0", count * 8);//ft_strnew(count * 8);
+	char * add = ft_str_spam("0", count * 8);
 	add[0] = '5';
 
 	int exp = 0;
@@ -204,7 +203,7 @@ char * ft_after_dot(void *pointer_v, size_t count)
 		int j = 0;
 		while (j < 8)
 		{
-			//printf ("res is : %s, add is : %s\n", res, add);
+			printf ("res is : %s, add is : %s\n", res, add);
 			if (((pointer[i] >> j) & 00000001) == 00000001)
 			{
 				add_to_div(res, add);
@@ -212,11 +211,11 @@ char * ft_after_dot(void *pointer_v, size_t count)
 				//printf ("gotcha\n");
 			}
 
-			if ((i == count - 1) && j > 4)
-			{
-				printf("-- res is : %s, add is : %s\n\n", res, add);
-				//printf("-- add is : %s\n", add);
-			}
+//			if ((i == count - 1) && j > 4)
+//			{
+//				printf("-- res is : %s, add is : %s\n\n", res, add);
+//				//printf("-- add is : %s\n", add);
+//			}
 			divide_by_two(add);
 			exp++;
 			j++;
@@ -321,7 +320,7 @@ char		*to_plain_bits(long double num)
 int main()
 {
 	//to_plain_bits(1.333L * 1000000000L * 10000000000L * 10000000000L * 1000000L);
-	to_plain_bits(0.00342);
+	to_plain_bits(0.000032434);
 
 	//to_plain_bits(LDBL_MAX);
 	//to_plain_bits(LDBL_MIN);

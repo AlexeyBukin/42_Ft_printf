@@ -42,7 +42,7 @@ int		main() {
 
 	int *a4 = (int*)malloc(sizeof(int));
 	ft_printf("ft_printf: \'"STR"\'\n", ARGS);
-	//printf("gg_printf: \'"STR"\'\n", ARGS);
+	printf("gg_printf: \'"STR"\'\n", ARGS);
 	free(a4);
 	return (0);
 }

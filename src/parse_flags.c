@@ -106,7 +106,6 @@ int		parse_flags(char *args, int len, int *flags)
 			{
 				flags[CAST] = CAST_HH;
 				i = i + 2;
-				//continue ;
 			}
 			else
 				flags[CAST] = CAST_H;

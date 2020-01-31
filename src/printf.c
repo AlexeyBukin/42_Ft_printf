@@ -33,13 +33,8 @@ int		ft_printf(const char *restrict format, ...)
 	{
 		if (string[i] == '%')
 		{
-			//NEW starts
-			//printf("writing \'%.*s\'", (int) buf_len, buf);
-			//printf("writing \'%.*s\', len = %d\n\n", (int) buf_len, buf, (int) buf_len);
 			write(1, buf, buf_len);
 			buf_len = 0;
-			// NEW ends
-
 			resolved = ft_resolve_arg(&(string[i + 1]), arg, flags);
 
 			if (resolved.taken > 0)
@@ -49,7 +44,6 @@ int		ft_printf(const char *restrict format, ...)
 					write(1, "", 1);
 					all_byte ++;
 				}
-				//printf("resolved = \'%s\'\n", resolved.string);
 				int len = (int) ft_strlen(resolved.string);
 				all_byte += len;
 				write(1, resolved.string, len);
@@ -64,8 +58,6 @@ int		ft_printf(const char *restrict format, ...)
 				i += resolved.taken;
 			}
 			//free(resolved.string);
-
-
 		}
 		else
 		{
@@ -83,10 +75,7 @@ int		ft_printf(const char *restrict format, ...)
 			all_byte++;
 		}
 	}
-
-	//printf("writing \'%.*s\'", (int) buf_len, buf);
 	write(1, buf, buf_len);
-
 	va_end(arg);
 	return (all_byte);
 }

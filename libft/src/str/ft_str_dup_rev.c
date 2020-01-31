@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_str_dup_rev.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 06:24:35 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 11:19:45 by kcharla          ###   ########.fr       */
+/*   Created: 2020/01/31 11:15:04 by kcharla           #+#    #+#             */
+/*   Updated: 2020/01/31 11:15:04 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrev(char *res)
+char	*ft_str_dup_rev(const char *s)
 {
 	size_t  i;
 	size_t  len;
-	char	tmp;
+	char	*res;
 
-	len = ft_strlen(res);
+	len = ft_strlen(s);
+	res = (char*)malloc(sizeof(char) * (len + 1));
+	if (res == NULL)
+		return (NULL);
+	res[len] = '\0';
 	i = 0;
-	while (i < len / 2)
+	while (i < len)
 	{
-		tmp = res[i];
-		res[i] = res[len - 1 - i];
-		res[len -1 - i] = tmp;
+		res[i] = s[len - i - 1];
 		i++;
 	}
 	return (res);

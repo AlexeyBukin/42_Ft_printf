@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2020/01/23 01:56:22 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 11:34:43 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,41 @@ int			arg_len(char *string);
 ** flag 'f'
 */
 
+typedef struct ldouble_10_s
+{
+	unsigned long long mantissa;
+	unsigned int       exponent : 15;
+	unsigned int       sign     : 1;
+}              ldouble_10_t;
+
+typedef struct mantissa_s
+{
+	unsigned char byte0;
+	unsigned char byte1;
+	unsigned char byte2;
+	unsigned char byte3;
+	unsigned char byte4;
+	unsigned char byte5;
+	unsigned char byte6;
+	unsigned char byte7;
+}              mantissa_t;
+
+union ldouble_10_u
+{
+	long double 	num;
+	ldouble_10_t	parts;
+	mantissa_t		bytes;
+};
+
 char		*ft_float(va_list arg, int *flags);
 char		*bad_way(int *flags, long double num);
+
+char			*ldouble_from_bits(long double num);
+char			*ft_before_dot(int *flags, long double num);
+
+unsigned char	bits_rev(unsigned char input);
+void			*mem_rev(void *pointer_v, size_t count);
+char			*ft_str_dup_rev(const char *s);
 
 char		*f_after_dot(long double num);
 char		*f_after_dot_prec(int *flags, long double num);
@@ -94,5 +127,7 @@ char		*f_get_special(int *flags);
 int			f_is_special(long double num);
 
 char		*width_format(int *flags, char *str, char sign);
+
+
 
 #endif

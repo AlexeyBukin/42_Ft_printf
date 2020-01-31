@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2019/12/15 23:15:31 by lmelina          ###   ########.fr       */
+/*   Updated: 2020/01/31 13:08:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ char	*ft_insert_d(va_list arg, int *flags)
 		d = va_arg(arg, long long int);
 	}
 	else
-	{
 		return (NULL);
-	}
 
 	if (flags[PRECISION] == PREC_INTENDED_ZERO && d == 0)
 	{

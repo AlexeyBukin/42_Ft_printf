@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/14 18:01:20 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 12:47:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char		*bad_way(int *flags, long double num)
 	char				*after_dot;
 	char				sign;
 	unsigned long long	bdot;
+	unsigned char 		bdot_adding;
 	char				*bdot_a;
 
 	sign = 1;
@@ -27,12 +28,14 @@ char		*bad_way(int *flags, long double num)
 		num *= -1;
 		sign = -1;
 	}
+
 	//TODO ok for long nums
 	bdot = 0;
+	bdot_adding = 0;
 	bdot = (long long int)num;
-	num -= bdot;
+	//num -= bdot;
 
-	if ((after_dot = f_after_dot_prec(flags, num)) == NULL)
+	if ((after_dot = f_after_dot_prec(flags, num - bdot)) == NULL)
 		return (NULL);
 
 	if (after_dot == NULL)
@@ -43,15 +46,32 @@ char		*bad_way(int *flags, long double num)
 		{
 			if ((bdot % 2) == 1 || ft_strlen(after_dot) > 1)
 			{
-				bdot++;
+				bdot_adding++;
 			}
 		}
-		if (after_dot[0] > '5' && after_dot[0] <= '9')
-			bdot++;
+		else if (after_dot[0] > '5' && after_dot[0] <= '9')
+			bdot_adding++;
 	}
 	else if (flags[SPECIAL] == F_ROUND_YES)
-		bdot++;
-	bdot_a = ft_ulltoa(bdot);
+		bdot_adding++;
+
+	if (num > (long double)1000 * 1000 * 1000 * 1000 * 1000 * 1000)
+	{
+		bdot_a = ft_before_dot(flags, num);
+		free(after_dot);
+		if ((after_dot = f_after_dot_prec(flags, 0)) == NULL)
+			return (NULL);
+	}
+	else
+	{
+		bdot+= bdot_adding;
+		bdot_a = ft_ulltoa(bdot);
+	}
+//	bdot_a = ft_before_dot(flags, num);
+//	bdot+= bdot_adding;
+	//bdot_a[ft_strlen(bdot_a) - 1] += bdot_adding;
+	//bdot_a = ft_ulltoa(bdot);
+
 	if (bdot_a == NULL || flags == NULL)
 		return (NULL);
 	if (flags[PRECISION] != 0 || flags[SHARP] == 1)

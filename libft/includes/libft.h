@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/23 04:16:56 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 12:15:25 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_list			*ft_lstnew(void const *content, size_t content_size);
 /*
 ** mem
 */
-
+void			*ft_mem_rev(void *pointer_v, size_t count);
 void			*ft_memalloc(size_t size);
 void			*ft_memccpy(void *d, const void *s, int c, size_t count);
 void			*ft_memchr(const void *p, int c, size_t n);
@@ -151,7 +151,8 @@ char			*ft_strnew(size_t size);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
 
 char			*ft_strrchr(const char *s, int c);
-char 			*ft_strrev(const char *s);
+char 			*ft_strrev(char *s);
+char			*ft_str_dup_rev(const char *s);
 
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strstr(const char *s1, const char *s2);
