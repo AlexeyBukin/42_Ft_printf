@@ -65,6 +65,14 @@ typedef struct	s_stg
 	int			taken;
 }				t_stg;
 
+typedef struct		s_data
+{
+	int		all_byte;
+	char	*buf;
+	char	*string;
+	size_t	buf_len;
+}					t_data;
+
 int				ft_printf(const char *restrict format, ...);
 
 char			*insert_from_to(char *inp, char *ins, size_t from, size_t to);
