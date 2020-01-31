@@ -12,7 +12,9 @@
 
 #include "libft.h"
 
-//todo я ебал
+/*
+** TODO view this
+*/
 
 char	*insert_from_to2(char *res, char *input, size_t to, int i)
 {
