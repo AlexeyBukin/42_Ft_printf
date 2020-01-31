@@ -6,87 +6,74 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:40:37 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 12:47:20 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 19:26:11 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-
-
-char		*bad_way(int *flags, long double num)
+char		*worst_way(int *flags, long double num)
 {
-	char				*after_dot;
-	char				sign;
-	unsigned long long	bdot;
-	unsigned char 		bdot_adding;
 	char				*bdot_a;
+	char				*after_dot;
 
-	sign = 1;
-	if (num < 0)
+	if ((bdot_a = ft_before_dot(flags, num)) == NULL)
+		return (NULL);
+	if (flags[PRECISION] != 0 || flags[SHARP] == 1)
 	{
-		num *= -1;
-		sign = -1;
+		if ((bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."))) == NULL)
+			return (NULL);
 	}
+	if (flags[PRECISION] != 0)
+	{
+		if ((after_dot = f_after_dot_prec(flags, 0)) == NULL)
+			return (NULL);
+		bdot_a = ft_strjoin_free(bdot_a, after_dot);
+	}
+	return (bdot_a);
+}
 
-	//TODO ok for long nums
-	bdot = 0;
-	bdot_adding = 0;
-	bdot = (long long int)num;
-	//num -= bdot;
+char		*no_way(int *flags, unsigned long long bdot, char *after_dot)
+{
+	char *bdot_a;
 
-	if ((after_dot = f_after_dot_prec(flags, num - bdot)) == NULL)
-		return (NULL);
-
-	if (after_dot == NULL)
-		return (NULL);
 	if (flags[PRECISION] == 0)
 	{
 		if (after_dot[0] == '5')
 		{
 			if ((bdot % 2) == 1 || ft_strlen(after_dot) > 1)
-			{
-				bdot_adding++;
-			}
+				bdot++;
 		}
 		else if (after_dot[0] > '5' && after_dot[0] <= '9')
-			bdot_adding++;
+			bdot++;
 	}
 	else if (flags[SPECIAL] == F_ROUND_YES)
-		bdot_adding++;
-
-	if (num > (long double)1000 * 1000 * 1000 * 1000 * 1000 * 1000)
-	{
-		bdot_a = ft_before_dot(flags, num);
-		free(after_dot);
-		if ((after_dot = f_after_dot_prec(flags, 0)) == NULL)
-			return (NULL);
-	}
-	else
-	{
-		bdot+= bdot_adding;
-		bdot_a = ft_ulltoa(bdot);
-	}
-//	bdot_a = ft_before_dot(flags, num);
-//	bdot+= bdot_adding;
-	//bdot_a[ft_strlen(bdot_a) - 1] += bdot_adding;
-	//bdot_a = ft_ulltoa(bdot);
-
-	if (bdot_a == NULL || flags == NULL)
+		bdot++;
+	if ((bdot_a = ft_ulltoa(bdot)) == NULL)
 		return (NULL);
 	if (flags[PRECISION] != 0 || flags[SHARP] == 1)
-	{
 		bdot_a = ft_strjoin_free(bdot_a, ft_strdup("."));
-	}
 	if (flags[PRECISION] != 0)
-	{
 		bdot_a = ft_strjoin_free(bdot_a, after_dot);
-	}
 	else
-	{
 		free(after_dot);
-	}
 	return (bdot_a);
+}
+
+char		*bad_way(int *flags, long double num)
+{
+	char				*after_dot;
+	unsigned long long	bdot;
+
+	if (flags == NULL)
+		return (NULL);
+	num *= (num < 0) ? -1 : 1;
+	if (num > (long double)1000000L * 1000000L * 1000000L)
+		return (worst_way(flags, num));
+	bdot = (long long int)num;
+	if ((after_dot = f_after_dot_prec(flags, num - bdot)) == NULL)
+		return (NULL);
+	return (no_way(flags, bdot, after_dot));
 }
 
 char		*ft_float(va_list arg, int *flags)

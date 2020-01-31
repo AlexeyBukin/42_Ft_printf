@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 18:24:24 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 19:26:48 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 #include <math.h>
 #include <limits.h>
 
-#define STR "|%-023u|"
-#define ARGS UINT_MAX
+#define STR "|%-.8f|"
+#define ARGS -1245.02 * 10000000000L * 1000000000000L * 200000000000000L
 
 int		main(void)
 {
 	{
 		ft_printf("ft_printf: \'"STR"\'\n", ARGS);
-
+		printf("gg_printf: \'"STR"\'\n", ARGS);
 	}
 	return (0);
 }
