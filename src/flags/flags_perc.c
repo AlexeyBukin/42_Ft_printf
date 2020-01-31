@@ -12,17 +12,17 @@
 
 #include "printf.h"
 
-char *ft_insert_percentage(int *flags)
+char	*ft_insert_percentage(int *flags)
 {
-	char *perc;
-	int len;
+	char	*perc;
+	int		len;
 
 	perc = ft_strdup("%");
 	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
 	{
 		len = (int)ft_strlen(perc);
 		if (flags[PLUS] == 1 || flags[SPACE] == 1)
-			len ++;
+			len++;
 		perc = ft_strjoin_free(ft_str_spam("0", flags[WIDTH] - len), perc);
 	}
 	if (flags[WIDTH] > 0 && (len = (int)ft_strlen(perc)) < flags[WIDTH])

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   good_way.c                                         :+:      :+:    :+:   */
+/*   good_way_before.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 01:02:14 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 12:21:36 by kcharla          ###   ########.fr       */
+/*   Created: 2020/01/31 14:37:36 by kcharla           #+#    #+#             */
+/*   Updated: 2020/01/31 15:07:06 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char				*add_to(char *res, char *additive)
 	tmp = 0;
 	while (additive[i] != 0)
 	{
-		tmp = '0' * (res[i] == 0) + (res[i] - '0') + (additive[i] - '0') + tmp;
+		tmp = tmp + '0' * (res[i] < '0' || res[i] > '9') +
+				(res[i] - '0') + (additive[i] - '0') ;
 		res[i] = (tmp % 10) + '0';
 		tmp /= 10;
 		i++;
@@ -108,14 +109,18 @@ char				*ft_before_dot(int *flags, long double num)
 
 	parser.num = num;
 	exp = 1 + parser.parts.exponent - 16383;
-	mcopy = (parser.parts.mantissa >> (64 - exp));
 	(void)flags;
 	if (exp > 0)
 	{
 		if (exp < 64)
-			result = ft_strrev(ft_before_dot_raw((char*)&mcopy, exp / 8 + 1));
+		{
+			mcopy = (parser.parts.mantissa >> (64 - exp));
+			result = ft_strrev(ft_before_dot_raw((char *) &mcopy, exp / 8 + 1));
+		}
 		else
+		{
 			result = ft_before_dot_big(exp, parser);
+		}
 	}
 	else
 		result = ft_strdup("0");
