@@ -44,7 +44,7 @@ char			*f_after_dot_prec(int *flags, long double num)
 	int		b;
 	int		i;
 
-	char * a_dot = f_after_dot(num);
+	char * a_dot = ft_after_dot(num);
 	len = (int)ft_strlen(a_dot);
 
 	if (flags[PRECISION] >= len)
@@ -67,24 +67,24 @@ char			*f_after_dot_prec(int *flags, long double num)
 	flags[SPECIAL] = F_ROUND_NO;
 	return (after_prec_2(flags, a_dot, b));
 }
-
-char			*f_after_dot(long double num)
-{
-	int		i;
-	char	b;
-	char	a[5000];
-
-	ft_bzero(a, 5000);
-	i = 0;
-	if (num == 0)
-		return (ft_strdup(""));
-	while (num > 0 && i < 5000)
-	{
-		num = num * 10;
-		b = (char)num;
-		num -= b;
-		a[i] = b + '0';
-		i++;
-	}
-	return (ft_strdup(a));
-}
+//
+//char			*f_after_dot(long double num)
+//{
+//	int		i;
+//	char	b;
+//	char	a[5000];
+//
+//	ft_bzero(a, 5000);
+//	i = 0;
+//	if (num == 0)
+//		return (ft_strdup(""));
+//	while (num > 0 && i < 5000)
+//	{
+//		num = num * 10;
+//		b = (char)num;
+//		num -= b;
+//		a[i] = b + '0';
+//		i++;
+//	}
+//	return (ft_strdup(a));
+//}

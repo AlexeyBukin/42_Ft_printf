@@ -14,9 +14,9 @@
 
 char	*ft_ulltoa_base(unsigned long long value, char *base)
 {
-	int					count;
+	int						count;
 	unsigned long long		tmp;
-	char				*res;
+	char					*res;
 	unsigned long long		base_length;
 
 	base_length = ft_strlen(base);

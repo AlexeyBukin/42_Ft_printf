@@ -23,7 +23,7 @@ char	*ft_str_spam(const char *s, int repetitions)
 	if (res != NULL)
 	{
 		i = 0;
-		while (i < (int) len * repetitions)
+		while (i < (int)(len * repetitions))
 		{
 			res[i] = s[i % len];
 			i++;

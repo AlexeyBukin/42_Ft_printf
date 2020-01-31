@@ -14,8 +14,8 @@
 
 char	*ft_str_dup_rev(const char *s)
 {
-	size_t  i;
-	size_t  len;
+	size_t	i;
+	size_t	len;
 	char	*res;
 
 	len = ft_strlen(s);

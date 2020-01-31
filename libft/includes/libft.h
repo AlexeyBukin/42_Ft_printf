@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 12:15:25 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 15:39:39 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef char			t_bool;
 int				ft_atoi(const char *s);
 int				ft_atoi_base(const char *s, char base);
 
-# define BASE16U ("0123456789ABCDEF")
-# define BASE16L ("0123456789abcdef")
-# define BASE8   ("01234567")
+# define BASE16U "0123456789ABCDEF"
+# define BASE16L "0123456789abcdef"
+# define BASE8   "01234567"
 
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int value, char *base);
@@ -151,7 +151,7 @@ char			*ft_strnew(size_t size);
 char			*ft_strnstr(const char *s1, const char *s2, size_t len);
 
 char			*ft_strrchr(const char *s, int c);
-char 			*ft_strrev(char *s);
+char			*ft_strrev(char *s);
 char			*ft_str_dup_rev(const char *s);
 
 char			**ft_strsplit(char const *s, char c);

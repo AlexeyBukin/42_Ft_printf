@@ -14,8 +14,8 @@
 
 char	*ft_strrev(char *res)
 {
-	size_t  i;
-	size_t  len;
+	size_t	i;
+	size_t	len;
 	char	tmp;
 
 	len = ft_strlen(res);
@@ -24,7 +24,7 @@ char	*ft_strrev(char *res)
 	{
 		tmp = res[i];
 		res[i] = res[len - 1 - i];
-		res[len -1 - i] = tmp;
+		res[len - 1 - i] = tmp;
 		i++;
 	}
 	return (res);

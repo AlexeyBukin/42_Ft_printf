@@ -31,14 +31,10 @@ char	*ft_mtob_raw(void const *ptr, size_t bits)
 	i = 0;
 	while (i < bytes)
 	{
-		j = 0;
-		while (j < 8)
-		{
+		j = -1;
+		while (++j < 8)
 			if (((b[i] >> j) & 00000001) == 00000001)
 				res[i * 8 + j] = '1';
-			j++;
-		}
-
 		i++;
 	}
 	return (res);
