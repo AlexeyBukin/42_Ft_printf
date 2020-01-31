@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 14:37:32 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 17:44:46 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 18:00:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ char	*ft_after_dot_raw(char *pointer, size_t count)
 		while (++j < 8)
 		{
 			if (((pointer[i] >> j) & 00000001) == 00000001)
-			{
 				add_to_div(res, add);
-			}
 			divide_by_two(add);
 		}
 	}
+	free(add);
 	return (res);
 }
 

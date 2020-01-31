@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 14:37:36 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 17:46:32 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 17:46:43 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char				*add_to(char *res, char *additive)
 	while (additive[i] != 0)
 	{
 		tmp = tmp + '0' * (res[i] < '0' || res[i] > '9') +
-				(res[i] - '0') + (additive[i] - '0') ;
+				(res[i] - '0') + (additive[i] - '0');
 		res[i] = (tmp % 10) + '0';
 		tmp /= 10;
 		i++;
@@ -67,7 +67,7 @@ char				*ft_before_dot_raw(char *pointer, size_t count)
 	add = ft_strnew(count * 3);
 	add[0] = '1';
 	i = -1;
-	while (++i < (int) count)
+	while (++i < (int)count)
 	{
 		j = -1;
 		while (++j < 8)
@@ -102,7 +102,7 @@ char				*ft_before_dot_big(int exp, t_ldouble_10_u parser)
 
 char				*ft_before_dot(int *flags, long double num)
 {
-	t_ldouble_10_u		parser;
+	t_ldouble_10_u			parser;
 	unsigned long long		mcopy;
 	int						exp;
 	char					*result;
@@ -115,7 +115,7 @@ char				*ft_before_dot(int *flags, long double num)
 		if (exp < 64)
 		{
 			mcopy = (parser.parts.mantissa >> (64 - exp));
-			result = ft_strrev(ft_before_dot_raw((char *) &mcopy, exp / 8 + 1));
+			result = ft_strrev(ft_before_dot_raw((char *)&mcopy, exp / 8 + 1));
 		}
 		else
 		{

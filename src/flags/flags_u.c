@@ -6,7 +6,7 @@
 /*   By: lmelina <lmelina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 19:23:35 by lmelina           #+#    #+#             */
-/*   Updated: 2020/01/31 14:49:24 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/01/31 17:26:28 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_insert_u2(char *num, int *flags)
 	if (flags[PRECISION] > len)
 		num = ft_strjoin_free(ft_str_spam("0",
 				flags[PRECISION] - ft_strlen(num)), num);
-	if (flags[ZERO] == 1 && flags[PRECISION] == 0)
+	if (flags[ZERO] == 1 && flags[PRECISION] == 0 && flags[MINUS] == 0)
 	{
 		len = (int)ft_strlen(num);
 		if (flags[PLUS] == 1 || flags[SPACE] == 1)
