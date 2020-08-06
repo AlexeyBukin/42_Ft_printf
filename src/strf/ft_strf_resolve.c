@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 15:21:51 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 16:22:23 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 	if (flags->type == 's')
 		*insertion = ft_strf_flag_s(arg, flags);
 //	else if (flags->type == 'c')
-//		string = ft_insert_c(arg, flags);
+//		string = flags->flag_c_func (arg, flags);
 //	else if (flags->type == '%')
 //		string = ft_insert_percentage(flags);
 //	t for tint: colorful output
@@ -96,6 +96,8 @@ int			ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg
 	ft_strf_adjust(flags);
 //	if ((res = ft_strf_resolve_nums(&(source[pos]), &insertion, flags, args)))
 //		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
+//	if ((res = ft_strf_resolve_float(&insertion, flags, arg)))
+//		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
 	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
 		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
 	return (-1);

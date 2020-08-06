@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_strf.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/23 15:00:26 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 15:10:50 by kcharla          ###   ########.fr       */
+/*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
+/*   Updated: 2020/08/06 16:49:48 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,15 @@ typedef struct	s_strflags
 	char		dot;
 	int			width;
 	char		num_zero;
+	char		cast;
+	char 		*(*flag_c_func)(char*, struct s_strflags *);
 }				t_strflags;
 
 
 #define FT_PRECISION_DEFAULT -1
+
+int				ft_strf_is_in_args(int ch);
+void			ft_strflags_init(t_strflags *flags);
 
 char			*ft_strf(const char *restrict format, ...);
 

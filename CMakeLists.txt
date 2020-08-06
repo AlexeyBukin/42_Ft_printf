@@ -12,37 +12,28 @@ project(ft_printf)
 
 # find src -type f -name '*.c' | sed "s/^/        /"
 set(SOURCES
-        src/flags/f/f_after_dot.c
-        src/flags/f/f_special.c
-        src/flags/f/flags_f.c
-        src/flags/f/good_way_after.c
-        src/flags/f/good_way_before.c
-        src/flags/f/width_format.c
-        src/flags/flags_c.c
-        src/flags/flags_di.c
-        src/flags/flags_o.c
-        src/flags/flags_p.c
-        src/flags/flags_perc.c
-        src/flags/flags_s.c
-        src/flags/flags_u.c
-        src/flags/flags_x.c
-        src/ft_printf.c
         src/strf/ft_strf.c
-        src/main/main.c
-        src/parse_flags.c
-        src/resolve_arg.c
+        src/strf/ft_strf_adjust.c
+        src/strf/ft_strf_adjust_dioux.c
+        src/strf/ft_strf_adjust_pfsc.c
+        src/strf/ft_strf_format.c
+        src/strf/ft_strf_format_prec.c
+        src/strf/ft_strf_format_width.c
+        src/strf/ft_strf_format_zero.c
+        src/strf/ft_strf_resolve.c
+        src/strf/ft_strf_parse.c
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME}
         PRIVATE
-        ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/includes
         )
 
 target_include_directories(${PROJECT_NAME}
         PRIVATE
-        ${PROJECT_SOURCE_DIR}/libft/include
+        ${PROJECT_SOURCE_DIR}/libft/includes
         )
 
 add_subdirectory(libft)
