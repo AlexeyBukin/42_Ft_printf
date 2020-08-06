@@ -22,7 +22,7 @@
 NAME = libftprintf.a
 
 FLAGS = -Wall -Wextra -Werror
-DEBUG = ""
+DEBUG = -g
 
 LIB_FT = libft/
 LIB_FT_FILE = $(LIB_FT)/libft.a
