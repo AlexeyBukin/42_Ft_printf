@@ -6,12 +6,28 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 16:50:14 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 19:07:04 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
 #include "ft_strf.h"
+
+void		ft_strflags_init(t_strflags *flags)
+{
+	if (flags == NULL)
+		return ;
+	flags->dot = 0;
+	flags->precision = -1;
+	flags->width = -1;
+	flags->plus = 0;
+	flags->minus = 0;
+	flags->zero = 0;
+	flags->space = 0;
+	flags->sharp = 0;
+	flags->type = '-';
+	flags->num_zero = 0;
+	flags->cast = CAST_NO;
+}
 
 int			ft_strf_parse_cast(char const *args, size_t *pos, t_strflags *flags)
 {
@@ -57,7 +73,10 @@ int			ft_strf_parse_digits(char *args, size_t *pos, t_strflags *flags)
 	else if (flags->precision < 0)
 		flags->precision = flag_val;
 	else
+	{
+		write (1, "err\n", 4);
 		return (-1);
+	}
 	return (0);
 }
 
@@ -86,14 +105,17 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 {
 	size_t		i;
 
-	if (args == NULL || flags == NULL || parsed_len == 0)
+	if (args == NULL || flags == NULL || parsed_len == NULL)
 		return (-1);
 	ft_strflags_init(flags);
 	i = 1;
 	while (ft_strf_is_in_args(args[i]) == 1)
 	{
-		if (ft_strf_parse_elem(&(args[i]), &i, flags))
+		if (ft_strf_parse_elem(args, &i, flags))
+		{
+
 			return (-1);
+		}
 		i++;
 	}
 	*parsed_len = i + 1;
@@ -101,5 +123,16 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 		return (-1);
 	else
 		flags->type = args[i];
+	ft_putstr("\ntype: ");
+	ft_putchar(flags->type);
+	ft_putstr("\nwidth: ");
+	ft_putnbr(flags->width);
+	ft_putstr("\ndot: ");
+	ft_putnbr(flags->dot);
+	ft_putstr("\nprec: ");
+	ft_putnbr(flags->precision);
+	ft_putstr("\nspace: ");
+	ft_putnbr(flags->space);
+	ft_putstr("\n");
 	return (0);
 }

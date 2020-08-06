@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 16:49:48 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 19:08:23 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,25 @@
 # include "libft.h"
 # include "ldouble.h"
 
-//typedef enum	e_format_cast
-//{
-//	CAST_NO,
-//	CAST_HH,
-//	CAST_H,
-//	CAST_L,
-//	CAST_LL,
-//	CAST_BIG_L
-//}				t_format_cast;
+typedef enum	e_format_cast
+{
+	CAST_NO,
+	CAST_HH,
+	CAST_H,
+	CAST_L,
+	CAST_LL,
+	CAST_BIG_L
+}				t_format_cast;
+
+typedef enum	e_format_cast
+{
+	CAST_NO,
+	CAST_HH,
+	CAST_H,
+	CAST_L,
+	CAST_LL,
+	CAST_BIG_L
+}				t_format_cast;
 
 //# define CAST_NO    0
 //# define CAST_HH    1
@@ -46,19 +56,6 @@
 # define NULL_IN_THE_END       2
 
 # define PREC_INTENDED_ZERO -1
-
-# define PRECISION  0
-# define PLUS       1
-# define MINUS      2
-# define ZERO       3
-# define SPACE      4
-# define WIDTH      5
-# define SHARP      6
-# define CAST       7
-# define C_GOT_NULL 8
-# define FLAG       9
-# define SPECIAL    10
-# define FLAGS_LEN  11
 
 # define LEN 0
 # define IS_X_BIG 1
@@ -84,12 +81,9 @@ typedef struct	s_strflags
 #define FT_PRECISION_DEFAULT -1
 
 int				ft_strf_is_in_args(int ch);
-void			ft_strflags_init(t_strflags *flags);
+
 
 char			*ft_strf(const char *restrict format, ...);
-
-char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
-int				ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len);
 
 /*
 ** resolving
@@ -99,17 +93,7 @@ int				ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list ar
 int				ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *insertion);
 int				ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg);
 
-/*
-** formatting
-*/
-
-int				is_flag_num(char type);
-
-
-char			*ft_strf_format(char *string, t_strflags *flags);
-char			*ft_strf_format_prec(char *string, t_strflags *flags);
-char			*ft_strf_format_width(char *string, t_strflags *flags);
-char			*ft_strf_format_zero(char *string, t_strflags *flags);
+int				ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len);
 
 /*
 ** flag adjustments
@@ -127,6 +111,26 @@ void			ft_strf_adjust_f(t_strflags *flags);
 void			ft_strf_adjust_s(t_strflags *flags);
 void			ft_strf_adjust_c(t_strflags *flags);
 void			ft_strf_adjust_perc(t_strflags *flags);
+
+/*
+** flags
+*/
+
+char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_perc(t_strflags *flags);
+//char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
+
+/*
+** formatting
+*/
+
+int				is_flag_num(char type);
+char			*ft_strf_format(char *string, t_strflags *flags);
+char			*ft_strf_format_prec(char *string, t_strflags *flags);
+char			*ft_strf_format_width(char *string, t_strflags *flags);
+char			*ft_strf_format_zero(char *string, t_strflags *flags);
+
+
 
 
 

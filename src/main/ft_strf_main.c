@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 14:57:26 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 19:04:24 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 ** printf("gg_printf: \'"STR"\'\n", ARGS);
 */
 
-//gcc src/main/ft_strf_main.c src/ft_srtf_format/*.c libft/libft.a -I libft/includes src/ft_strf.c -I includes
+// gcc src/main/ft_strf_main.c src/strf/*.c  libft/libft.a -I libft/includes -I includes
 
-// gcc src/main/ft_strf_main.c src/ft_strf_format/*.c src/ft_strf_resolve.c src/ft_strf_adjust/*.c  libft/libft.a -I libft/includes src/ft_strf.c -I includes
 #include "printf.h"
 #include "ft_strf.h"
 #include <math.h>
@@ -35,9 +34,8 @@ int		main(void)
 {
 	{
 		double a = 0;
-		printf("printf: \'%10.5s\' \'%+020.20d\'\n", "abc", 22);
-//		write(1, "ft_strf_1\n", 11);
-		printf("\"%s\"\n", ft_strf("-format-s-is-\'%.5s\'-", "abc"));
+		printf("\"gg_printf: \'%10.5s\' \'%+020.20d\'\n", "abc", 22);
+		printf("\"%s\"\n", ft_strf("ft_printf: \'%10.5s\'-\'%5.5%\'", "abc"));
 	}
 	return (0);
 }

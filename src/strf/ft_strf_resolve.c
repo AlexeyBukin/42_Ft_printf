@@ -6,25 +6,22 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 16:22:23 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 19:05:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
 #include "ft_strf.h"
 
 int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 {
-	char		*string;
-
 	if (insertion == NULL || flags == NULL)
 		return (-1);
 	if (flags->type == 's')
 		*insertion = ft_strf_flag_s(arg, flags);
 //	else if (flags->type == 'c')
 //		string = flags->flag_c_func (arg, flags);
-//	else if (flags->type == '%')
-//		string = ft_insert_percentage(flags);
+	else if (flags->type == '%')
+		*insertion = ft_strf_flag_perc(flags);
 //	t for tint: colorful output
 //	else if (flags->type == 't')
 //		string = ft_insert_percentage(flags);
@@ -92,7 +89,10 @@ int			ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg
 	if (source == NULL || pos == NULL || flags == NULL)
 		return (-1);
 	if (ft_strf_parse(&((*source)[*pos]), flags, &parsed_len))
+	{
+
 		return (-1);
+	}
 	ft_strf_adjust(flags);
 //	if ((res = ft_strf_resolve_nums(&(source[pos]), &insertion, flags, args)))
 //		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
@@ -100,5 +100,7 @@ int			ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg
 //		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
 	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
 		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
+
+
 	return (-1);
 }

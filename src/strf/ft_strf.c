@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 16:50:00 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 19:01:11 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,19 @@ int			ft_strf_is_in_args(int ch)
 	return (0);
 }
 
-void		ft_strflags_init(t_strflags *flags)
-{
-	if (flags == NULL)
-		return ;
-	flags->precision = 5;
-	flags->width = -1;
-	flags->minus = 0;
-}
-
-char		*ft_strf_flag_s(va_list arg, t_strflags *flags)
-{
-	char		*insert;
-
-	if (flags == NULL)
-		return (NULL);
-	if ((insert = va_arg(arg, char*)) != NULL)
-		insert = ft_strdup(insert);
-	else
-		insert = ft_strdup("(null)");
-	ft_strf_adjust_s(flags);
-	return (ft_strf_format(insert, flags));
-}
+//char		*ft_strf_flag_s(va_list arg, t_strflags *flags)
+//{
+//	char		*insert;
+//
+//	if (flags == NULL)
+//		return (NULL);
+//	if ((insert = va_arg(arg, char*)) != NULL)
+//		insert = ft_strdup(insert);
+//	else
+//		insert = ft_strdup("(null)");
+//	ft_strf_adjust_s(flags);
+//	return (ft_strf_format(insert, flags));
+//}
 
 char		*ft_strf(const char *restrict format, ...)
 {
@@ -68,11 +59,13 @@ char		*ft_strf(const char *restrict format, ...)
 	{
 		if (res[i] == '%')
 		{
+			ft_putendl(res);
 			if (ft_strf_resolve(&res, &i, &sflags, arg))
 			{
 				free(res);
 				return (NULL);
 			}
+			ft_putendl(res);
 		}
 		i++;
 	}

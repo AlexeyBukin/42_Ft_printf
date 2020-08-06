@@ -14,12 +14,14 @@
 
 char		*ft_strf_format_plus(char *string, t_strflags *flags)
 {
+	(void)flags;
 //	if (is_flag_num(flags->type) || ;
 	return (string);
 }
 
 char		*ft_strf_format_space(char *string, t_strflags *flags)
 {
+	(void)flags;
 //	if (is_flag_num(flags->type) || ;
 	return (string);
 }

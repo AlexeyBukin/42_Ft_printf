@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:28:09 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 14:28:09 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 17:32:49 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ char		*ft_strf_format_prec(char *string, t_strflags *flags)
 	len = ft_strlen(string);
 	if (flags->type == 's')
 	{
+		write (1, "lol\n", 4);
 		if ((size_t)flags->precision < len && flags->precision >= 0)
 			string[flags->precision] = '\0';
 	}
 	if (is_flag_num(flags->type))
 	{
 		if ((size_t)flags->precision > len)
-			string = ft_strjoin_free(ft_str_spam("0", (size_t)flags->precision - len), string);
+			string = ft_strjoin_free(ft_str_spam("0", (flags->precision) - (int)len), string);
 	}
 	return (string);
 }

@@ -25,12 +25,12 @@
 # include "libft.h"
 # include "ldouble.h"
 
-# define CAST_NO    0
-# define CAST_HH    1
-# define CAST_H     2
-# define CAST_L     3
-# define CAST_LL    4
-# define CAST_BIG_L 5
+//# define CAST_NO    0
+//# define CAST_HH    1
+//# define CAST_H     2
+//# define CAST_L     3
+//# define CAST_LL    4
+//# define CAST_BIG_L 5
 
 # define F_N0_SPECIAL   1
 # define F_NAN          2
