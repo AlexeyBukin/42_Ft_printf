@@ -27,7 +27,7 @@ set(SOURCES
         src/flags/flags_u.c
         src/flags/flags_x.c
         src/ft_printf.c
-        src/ft_strf.c
+        src/strf/ft_strf.c
         src/main/main.c
         src/parse_flags.c
         src/resolve_arg.c

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 15:02:56 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/06 15:21:51 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 //	return (1);
 //}
 
+/*
+** TODO ft_free replace
+*/
+
 int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *insertion)
 {
 	size_t		src_len;
@@ -72,8 +76,8 @@ int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *i
 	ft_strncpy(res, *source, *pos);
 	ft_strcat(res, insertion);
 	ft_strcat(res, &((*source)[*pos + parsed_len]));
-	ft_free(*source);
-	ft_free(insertion);
+	free(*source);
+	free(insertion);
 	*pos += ins_len;
 	*source = res;
 	return (0);
