@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 08:08:02 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 08:56:33 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:37:30 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static int			ft_strf_flag_di_cast(long long *d, t_strflags *flags, va_list arg)
 	return (0);
 }
 
+int		ft_strf_get_sign_or_zero(int num)
+{
+	return ((num /= (num != 0) ? ft_abs(num) : 1));
+}
+
 char		*ft_strf_flag_di(va_list arg, t_strflags *flags)
 {
 	char			*res;
@@ -38,6 +43,7 @@ char		*ft_strf_flag_di(va_list arg, t_strflags *flags)
 
 	if (flags == NULL || ft_strf_flag_di_cast(&d, flags, arg))
 		return (NULL);
+	flags->num_sign = (char)d;
 	res = (flags->precision == 0 && d == 0)
 			? ft_strdup("") : ft_ulltoa(ft_absl(d));
 	ft_strf_adjust_di(flags);

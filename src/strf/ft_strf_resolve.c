@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/07 14:01:14 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:18:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 		*source = ft_strf_flag_o(arg, flags);
 	else if (flags->type == 'x' || flags->type == 'X')
 		*source = ft_strf_flag_x(arg, flags);
-//	else if (flags->type == 'f' || flags->type == 'F')
-//		*source = ft_float(arg, flags);
+	else if (flags->type == 'f' || flags->type == 'F')
+		*source = ft_strf_flag_f(arg, flags);
 	else
 		return (0);
 	if (*source == NULL)

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:06:25 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:38:06 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ typedef enum	e_format_cast
 	CAST_BIG_L
 }				t_format_cast;
 
-//typedef enum	e_format_cast
-//{
-//	CAST_NO,
-//	CAST_HH,
-//	CAST_H,
-//	CAST_L,
-//	CAST_LL,
-//	CAST_BIG_L
-//}				t_format_cast;
+typedef enum	e_float_special
+{
+	F_UNSET,
+	F_N0_SPECIAL,
+	F_NAN,
+	F_INF,
+	F_ROUND_NO,
+	F_ROUND_YES,
+}				t_float_special;
 
 //# define CAST_NO    0
 //# define CAST_HH    1
@@ -46,11 +46,11 @@ typedef enum	e_format_cast
 //# define CAST_LL    4
 //# define CAST_BIG_L 5
 
-# define F_N0_SPECIAL   1
-# define F_NAN          2
-# define F_INF          3
-# define F_ROUND_NO     4
-# define F_ROUND_YES    5
+//# define F_N0_SPECIAL   1
+//# define F_NAN          2
+//# define F_INF          3
+//# define F_ROUND_NO     4
+//# define F_ROUND_YES    5
 
 # define NULL_IN_THE_BEGINNING 1
 # define NULL_IN_THE_END       2
@@ -72,13 +72,13 @@ typedef struct	s_strflags
 	int			precision;
 	char		dot;
 	int			width;
-	char		num_zero;
+	char		num_sign;
 	char		cast;
-	char 		*(*flag_c_func)(char*, struct s_strflags *);
 }				t_strflags;
 
 
 #define FT_PRECISION_DEFAULT -1
+#define FT_PRECISION_FLOAT 6
 #define FT_WIDTH_DEFAULT -1
 
 int				ft_strf_is_in_args(int ch);
@@ -127,6 +127,15 @@ char			*ft_strf_flag_o(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_u(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_x(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_p(va_list arg, t_strflags *flags);
+
+/*
+** floats
+*/
+
+int				float_is_special(long double num);
+char			*float_get_special(t_strflags *flags);
+char			*float_get_str(t_strflags *flags, long double d);
+char			*ft_strf_flag_f(va_list arg, t_strflags *flags);
 
 /*
 ** formatting

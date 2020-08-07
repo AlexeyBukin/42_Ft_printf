@@ -20,6 +20,7 @@ char		*ft_strf_flag_o(va_list arg, t_strflags *flags)
 	if (flags == NULL || ft_strf_flag_cast_ull(&d, flags, arg))
 		return (NULL);
 	ft_strf_adjust_o(flags);
+	flags->num_sign = (char)(d);
 	if (flags->precision == 0 && d == 0 && flags->sharp == 0)
 		res = ft_strdup("");
 	else

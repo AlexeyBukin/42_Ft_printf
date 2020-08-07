@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 13:18:50 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:06:52 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:02:19 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char		*ft_strf_flag_x(va_list arg, t_strflags *flags)
 	if (flags == NULL || ft_strf_flag_cast_ull(&d, flags, arg))
 		return (NULL);
 	ft_strf_adjust_x(flags);
+	flags->num_sign = (char)(d);
 	if (flags->precision == 0 && d == 0)
 		res = ft_strdup("");
 	else

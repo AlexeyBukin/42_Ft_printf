@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 13:57:12 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:21:17 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_strflags_init(t_strflags *flags)
 	flags->space = 0;
 	flags->sharp = 0;
 	flags->type = '-';
-	flags->num_zero = 0;
+	flags->special = F_UNSET;
 	flags->cast = CAST_NO;
 }
 
@@ -75,7 +75,7 @@ int			ft_strf_parse_digits(char *args, size_t *pos, t_strflags *flags)
 	(*pos)--;
 	if (flags->dot == 0)
 		flags->width = flag_val;
-	else if (flags->precision < 0)
+	else if (flags->precision <= 0)
 		flags->precision = flag_val;
 	else
 		return (-1);
@@ -95,10 +95,13 @@ int			ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags)
 	else if (args[*pos] == '#')
 		flags->sharp = 1;
 	else if (args[*pos] == '.')
+	{
+		flags->precision = 0;
 		flags->dot = 1;
+	}
 	else if (ft_isdigit(args[*pos]))
 		return (ft_strf_parse_digits(args, pos, flags));
-	else if (ft_strchr("lhHL", args[*pos]) != NULL)
+	else if (ft_strchr("lhL", args[*pos]) != NULL)
 		return (ft_strf_parse_cast(args, pos, flags));
 	return (0);
 }
@@ -115,7 +118,7 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 	{
 		if (ft_strf_parse_elem(args, &i, flags))
 		{
-
+			ft_putstr("here\n");
 			return (-1);
 		}
 		i++;

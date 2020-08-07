@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:18:18 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:21:40 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #include <math.h>
 #include <limits.h>
 
-#define STR "|%20.p|"
-#define ARGS &a
+#define STR "|%020i|"
+#define ARGS -1
 
 int		main(void)
 {

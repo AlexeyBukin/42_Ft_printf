@@ -23,6 +23,8 @@ set(SOURCES
         src/strf/ft_strf_resolve.c
         src/strf/ft_strf_parse.c
         src/strf/ft_strf_flag_cast.c
+        src/strf/float/ft_strf_flag_f.c
+        src/strf/float/ft_strf_flag_f_special.c
         src/strf/ft_strf_flag_s.c
         src/strf/ft_strf_flag_di.c
         src/strf/ft_strf_flag_p.c
