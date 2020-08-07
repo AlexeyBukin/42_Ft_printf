@@ -41,7 +41,7 @@ char	*ft_insert_p(va_list arg, int *flags)
 	char				*zero;
 	int					len;
 
-	d = (unsigned long long)va_arg(arg, long long int);
+	d = (unsigned long long)va_arg(arg, unsigned long long);
 	zero = ft_strdup("0x");
 	if (flags[PRECISION] == -1 && d == 0)
 		num = ft_strdup("");

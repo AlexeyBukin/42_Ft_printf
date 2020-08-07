@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 19:07:04 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 13:57:12 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void		ft_strflags_init(t_strflags *flags)
 	if (flags == NULL)
 		return ;
 	flags->dot = 0;
-	flags->precision = -1;
-	flags->width = -1;
+	flags->precision = FT_PRECISION_DEFAULT;
+	flags->width = FT_WIDTH_DEFAULT;
 	flags->plus = 0;
 	flags->minus = 0;
 	flags->zero = 0;
@@ -62,6 +62,11 @@ int			ft_strf_parse_digits(char *args, size_t *pos, t_strflags *flags)
 
 	if (args == NULL || pos == NULL)
 		return (-1);
+	if (flags->dot == 0 && args[*pos] == '0')
+	{
+		flags->zero = 1;
+		return (0);
+	}
 	if (!ft_isdigit(args[*pos]))
 		return (0);
 	flag_val = ft_atoi(&(args[*pos]));
@@ -73,10 +78,7 @@ int			ft_strf_parse_digits(char *args, size_t *pos, t_strflags *flags)
 	else if (flags->precision < 0)
 		flags->precision = flag_val;
 	else
-	{
-		write (1, "err\n", 4);
 		return (-1);
-	}
 	return (0);
 }
 
@@ -133,6 +135,10 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 //	ft_putnbr(flags->precision);
 //	ft_putstr("\nspace: ");
 //	ft_putnbr(flags->space);
+//	ft_putstr("\nzero: ");
+//	ft_putnbr(flags->zero);
+//	ft_putstr("\nsharp: ");
+//	ft_putnbr(flags->sharp);
 //	ft_putstr("\n");
 	return (0);
 }

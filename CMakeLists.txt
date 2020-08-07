@@ -22,8 +22,13 @@ set(SOURCES
         src/strf/ft_strf_format_zero.c
         src/strf/ft_strf_resolve.c
         src/strf/ft_strf_parse.c
+        src/strf/ft_strf_flag_cast.c
         src/strf/ft_strf_flag_s.c
         src/strf/ft_strf_flag_di.c
+        src/strf/ft_strf_flag_p.c
+        src/strf/ft_strf_flag_o.c
+        src/strf/ft_strf_flag_u.c
+        src/strf/ft_strf_flag_x.c
         src/strf/ft_strf_flag_perc.c
         )
 

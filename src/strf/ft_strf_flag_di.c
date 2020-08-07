@@ -12,7 +12,7 @@
 
 #include "ft_strf.h"
 
-int			ft_strf_flag_di_cast(long long *d, t_strflags *flags, va_list arg)
+static int			ft_strf_flag_di_cast(long long *d, t_strflags *flags, va_list arg)
 {
 	if (flags == NULL || d == NULL)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 08:15:47 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 14:06:25 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct	s_strflags
 
 
 #define FT_PRECISION_DEFAULT -1
+#define FT_WIDTH_DEFAULT -1
 
 int				ft_strf_is_in_args(int ch);
 
@@ -116,9 +117,16 @@ void			ft_strf_adjust_perc(t_strflags *flags);
 ** flags
 */
 
+int				ft_strf_flag_cast_ull(unsigned long long *d,
+					t_strflags *flags, va_list arg);
+
 char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_perc(t_strflags *flags);
 char			*ft_strf_flag_di(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_o(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_u(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_x(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_p(va_list arg, t_strflags *flags);
 
 /*
 ** formatting
@@ -173,6 +181,7 @@ char			*f_get_special(int *flags);
 int				f_is_special(long double num);
 
 char			*width_format(int *flags, char *str, char sign);
+char			*ft_strf_flag_x(va_list arg, t_strflags *flags);
 
 
 #endif
