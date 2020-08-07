@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 19:08:23 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 08:15:47 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ typedef enum	e_format_cast
 	CAST_BIG_L
 }				t_format_cast;
 
-typedef enum	e_format_cast
-{
-	CAST_NO,
-	CAST_HH,
-	CAST_H,
-	CAST_L,
-	CAST_LL,
-	CAST_BIG_L
-}				t_format_cast;
+//typedef enum	e_format_cast
+//{
+//	CAST_NO,
+//	CAST_HH,
+//	CAST_H,
+//	CAST_L,
+//	CAST_LL,
+//	CAST_BIG_L
+//}				t_format_cast;
 
 //# define CAST_NO    0
 //# define CAST_HH    1
@@ -118,7 +118,7 @@ void			ft_strf_adjust_perc(t_strflags *flags);
 
 char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_perc(t_strflags *flags);
-//char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_di(va_list arg, t_strflags *flags);
 
 /*
 ** formatting
@@ -129,6 +129,8 @@ char			*ft_strf_format(char *string, t_strflags *flags);
 char			*ft_strf_format_prec(char *string, t_strflags *flags);
 char			*ft_strf_format_width(char *string, t_strflags *flags);
 char			*ft_strf_format_zero(char *string, t_strflags *flags);
+
+char			*ft_strf_format_di(char *string, t_strflags *flags);
 
 
 

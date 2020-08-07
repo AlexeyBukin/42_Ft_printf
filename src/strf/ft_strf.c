@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 19:01:11 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 08:28:56 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,11 @@ char		*ft_strf(const char *restrict format, ...)
 	{
 		if (res[i] == '%')
 		{
-			ft_putendl(res);
 			if (ft_strf_resolve(&res, &i, &sflags, arg))
 			{
 				free(res);
 				return (NULL);
 			}
-			ft_putendl(res);
 		}
 		i++;
 	}

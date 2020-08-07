@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 19:04:24 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 08:53:08 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@
 #include <math.h>
 #include <limits.h>
 
-#define STR "|%-.8f|"
-#define ARGS -1245.02 * 10000000000L * 1000000000000L * 200000000000000L
+#define STR "|%-+20.i|"
+#define ARGS 1245
 
 int		main(void)
 {
 	{
 		double a = 0;
-		printf("\"gg_printf: \'%10.5s\' \'%+020.20d\'\n", "abc", 22);
-		printf("\"%s\"\n", ft_strf("ft_printf: \'%10.5s\'-\'%5.5%\'", "abc"));
+		(void)a;
+		printf("gg_printf: "STR"\n", ARGS);
+		printf("%s", ft_strf("ft_printf: "STR"\n", ARGS));
 	}
 	return (0);
 }

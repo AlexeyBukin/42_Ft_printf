@@ -25,7 +25,7 @@ char		*ft_strf_format_zero(char *string, t_strflags *flags)
 			len++;
 		len = (flags->sharp == 1 && !(flags->num_zero)) ? len + 1 : len;
 		if (len < (size_t)flags->width)
-			string = ft_strjoin_free(ft_str_spam("0", (size_t)flags->width - len), string);
+			string = ft_strjoin_free(ft_str_spam("0", flags->width - (int)len), string);
 	}
 	return (string);
 }

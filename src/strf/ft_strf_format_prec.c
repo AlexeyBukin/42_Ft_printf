@@ -21,13 +21,12 @@ char		*ft_strf_format_prec(char *string, t_strflags *flags)
 	len = ft_strlen(string);
 	if (flags->type == 's')
 	{
-		write (1, "lol\n", 4);
 		if ((size_t)flags->precision < len && flags->precision >= 0)
 			string[flags->precision] = '\0';
 	}
 	if (is_flag_num(flags->type))
 	{
-		if ((size_t)flags->precision > len)
+		if (flags->precision > (int)len)
 			string = ft_strjoin_free(ft_str_spam("0", (flags->precision) - (int)len), string);
 	}
 	return (string);

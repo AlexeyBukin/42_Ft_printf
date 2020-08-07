@@ -123,16 +123,16 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 		return (-1);
 	else
 		flags->type = args[i];
-	ft_putstr("\ntype: ");
-	ft_putchar(flags->type);
-	ft_putstr("\nwidth: ");
-	ft_putnbr(flags->width);
-	ft_putstr("\ndot: ");
-	ft_putnbr(flags->dot);
-	ft_putstr("\nprec: ");
-	ft_putnbr(flags->precision);
-	ft_putstr("\nspace: ");
-	ft_putnbr(flags->space);
-	ft_putstr("\n");
+//	ft_putstr("\ntype: ");
+//	ft_putchar(flags->type);
+//	ft_putstr("\nwidth: ");
+//	ft_putnbr(flags->width);
+//	ft_putstr("\ndot: ");
+//	ft_putnbr(flags->dot);
+//	ft_putstr("\nprec: ");
+//	ft_putnbr(flags->precision);
+//	ft_putstr("\nspace: ");
+//	ft_putnbr(flags->space);
+//	ft_putstr("\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/06 19:05:20 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 08:32:52 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 	return (1);
 }
 
-//int			ft_strf_resolve_nums(char **source, va_list arg, t_strflags *flags)
-//{
-//	if (source == NULL || flags == NULL)
-//		return (-1);
-//	if (flags->type == 'd' || flags->type == 'i')
-//		*source = ft_insert_d(arg, flags);
+int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
+{
+	if (source == NULL || flags == NULL)
+		return (-1);
+	if (flags->type == 'd' || flags->type == 'i')
+		*source = ft_strf_flag_di(arg, flags);
 //	else if (flags->type == 'u')
 //		*source = ft_insert_u(arg, flags);
 //	else if (flags->type == 'p')
@@ -48,10 +48,12 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 //		*source = ft_insert_x(arg, flags);
 //	else if (flags->type == 'f' || flags->type == 'F')
 //		*source = ft_float(arg, flags);
-//	else
-//		return (0);
-//	return (1);
-//}
+	else
+		return (0);
+	if (*source == NULL)
+		return (-1);
+	return (1);
+}
 
 /*
 ** TODO ft_free replace
@@ -90,12 +92,15 @@ int			ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg
 		return (-1);
 	if (ft_strf_parse(&((*source)[*pos]), flags, &parsed_len))
 	{
-
 		return (-1);
 	}
 	ft_strf_adjust(flags);
-//	if ((res = ft_strf_resolve_nums(&(source[pos]), &insertion, flags, args)))
-//		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
+	if ((res = ft_strf_resolve_nums(&insertion, flags, arg)))
+	{
+//		write (1, "lol\n", 4);
+//		ft_putendl(insertion);
+		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
+	}
 //	if ((res = ft_strf_resolve_float(&insertion, flags, arg)))
 //		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
 	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
