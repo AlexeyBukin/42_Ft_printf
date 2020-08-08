@@ -14,7 +14,6 @@
 
 char		*ft_strf_flag_s(va_list arg, t_strflags *flags)
 {
-	int 		len;
 	char		*insert;
 
 	if (flags == NULL)

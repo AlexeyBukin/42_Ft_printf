@@ -12,6 +12,8 @@ project(ft_printf)
 
 # find src -type f -name '*.c' | sed "s/^/        /"
 set(SOURCES
+        src/strf/ft_printf.c
+        src/strf/ft_printf_resolve.c
         src/strf/ft_strf.c
         src/strf/ft_strf_adjust.c
         src/strf/ft_strf_adjust_dioux.c
@@ -21,7 +23,9 @@ set(SOURCES
         src/strf/ft_strf_parse.c
         src/strf/ft_strf_flag_cast.c
         src/strf/float/ft_strf_flag_f.c
+        src/strf/float/ft_strf_flag_f_str.c
         src/strf/float/ft_strf_flag_f_special.c
+        src/strf/ft_strf_flag_c.c
         src/strf/ft_strf_flag_s.c
         src/strf/ft_strf_flag_di.c
         src/strf/ft_strf_flag_p.c

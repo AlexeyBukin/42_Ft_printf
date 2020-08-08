@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:53 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:56:52 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 13:51:18 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strf_float_format(t_strflags *flags, char *str, char sign)
 		else if (flags->minus == 1)
 			str = ft_strjoin_free(str, ft_str_spam(" ", w - len));
 	}
-	if (flags->space == 1 && sign > 0 && flags->plus == 0)
+	if (flags->space == 1 && sign >= 0 && flags->plus == 0)
 		str = ft_strjoin_free(ft_strdup(" "), str);
 	if (sign < 0)
 		str = ft_strjoin_free(ft_strdup("-"), str);
@@ -62,6 +62,6 @@ char		*ft_strf_flag_f(va_list arg, t_strflags *flags)
 		flags->precision = FT_PRECISION_FLOAT;
 	flags->special = float_is_special(d);
 	res = (flags->special == F_N0_SPECIAL) ? float_get_str(flags, d) : float_get_special(flags);
-	res = ft_strf_float_format(flags, res, (d < 0) ? -1 : 1);
+	res = ft_strf_float_format(flags, res, (char)d);
 	return (res);
 }

@@ -6,42 +6,18 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 08:08:02 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 15:37:30 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 14:57:06 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
-
-static int			ft_strf_flag_di_cast(long long *d, t_strflags *flags, va_list arg)
-{
-	if (flags == NULL || d == NULL)
-		return (-1);
-	if (flags->cast == CAST_NO)
-		*d = va_arg(arg, int);
-	else if (flags->cast == CAST_HH)
-		*d = (char)va_arg(arg, int);
-	else if (flags->cast == CAST_H)
-		*d = (short)va_arg(arg, int);
-	else if (flags->cast == CAST_L)
-		*d = va_arg(arg, long int);
-	else if (flags->cast == CAST_LL)
-		*d = va_arg(arg, long long int);
-	else
-		return (-1);
-	return (0);
-}
-
-int		ft_strf_get_sign_or_zero(int num)
-{
-	return ((num /= (num != 0) ? ft_abs(num) : 1));
-}
 
 char		*ft_strf_flag_di(va_list arg, t_strflags *flags)
 {
 	char			*res;
 	long long int	d;
 
-	if (flags == NULL || ft_strf_flag_di_cast(&d, flags, arg))
+	if (flags == NULL || ft_strf_cast_flag_lli(&d, flags, arg))
 		return (NULL);
 	flags->num_sign = (char)d;
 	res = (flags->precision == 0 && d == 0)

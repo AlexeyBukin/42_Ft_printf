@@ -6,13 +6,13 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:05:04 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:05:31 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 14:56:29 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
 
-int			ft_strf_flag_cast_ull(unsigned long long *d, t_strflags *flags, va_list arg)
+int			ft_strf_cast_flag_ull(unsigned long long *d, t_strflags *flags, va_list arg)
 {
 	if (flags == NULL || d == NULL)
 		return (-1);
@@ -26,6 +26,25 @@ int			ft_strf_flag_cast_ull(unsigned long long *d, t_strflags *flags, va_list ar
 		*d = (unsigned long)va_arg(arg, long int);
 	else if (flags->cast == CAST_LL)
 		*d = (unsigned long long)va_arg(arg, long long int);
+	else
+		return (-1);
+	return (0);
+}
+
+int			ft_strf_cast_flag_lli(long long *d, t_strflags *flags, va_list arg)
+{
+	if (flags == NULL || d == NULL)
+		return (-1);
+	if (flags->cast == CAST_NO)
+		*d = va_arg(arg, int);
+	else if (flags->cast == CAST_HH)
+		*d = (char)va_arg(arg, int);
+	else if (flags->cast == CAST_H)
+		*d = (short)va_arg(arg, int);
+	else if (flags->cast == CAST_L)
+		*d = va_arg(arg, long int);
+	else if (flags->cast == CAST_LL)
+		*d = va_arg(arg, long long int);
 	else
 		return (-1);
 	return (0);

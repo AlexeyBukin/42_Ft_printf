@@ -17,7 +17,7 @@ char		*ft_strf_flag_o(va_list arg, t_strflags *flags)
 	char				*res;
 	unsigned long long	d;
 
-	if (flags == NULL || ft_strf_flag_cast_ull(&d, flags, arg))
+	if (flags == NULL || ft_strf_cast_flag_ull(&d, flags, arg))
 		return (NULL);
 	ft_strf_adjust_o(flags);
 	flags->num_sign = (char)(d);

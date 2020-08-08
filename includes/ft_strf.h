@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 13:38:28 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 16:46:38 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <stdarg.h>
 # include "libft.h"
 # include "ldouble.h"
+# include "ft_strf.h"
+
+# define ASCII_UNREADABLE_BEFORE ((t_byte)0x20)
+# define ASCII_UNREADABLE_AFTER ((t_byte)0xA0)
+# define ASCII_UNREADABLE_DIFF ((t_byte)0x40)
+# define ASCII_DEL ((t_byte)0x7F)
+# define ASCII_NEWLINE ((t_byte)0x0A)
 
 typedef enum	e_format_cast
 {
@@ -93,6 +100,7 @@ char			*ft_strf(const char *restrict format, ...);
 int				ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg);
 int				ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *insertion);
 int				ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg);
+int				ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg);
 
 int				ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len);
 
@@ -114,12 +122,19 @@ void			ft_strf_adjust_c(t_strflags *flags);
 void			ft_strf_adjust_perc(t_strflags *flags);
 
 /*
+** casts
+*/
+
+int				ft_strf_cast_flag_ull(unsigned long long *d,
+						t_strflags *flags, va_list arg);
+int				ft_strf_cast_flag_lli(long long *d,
+						t_strflags *flags, va_list arg);
+
+/*
 ** flags
 */
 
-int				ft_strf_flag_cast_ull(unsigned long long *d,
-					t_strflags *flags, va_list arg);
-
+char			*ft_strf_flag_c(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_perc(t_strflags *flags);
 char			*ft_strf_flag_di(va_list arg, t_strflags *flags);
@@ -190,7 +205,7 @@ char			*f_get_special(int *flags);
 int				f_is_special(long double num);
 
 char			*width_format(int *flags, char *str, char sign);
-char			*ft_strf_flag_x(va_list arg, t_strflags *flags);
+//char			*ft_strf_flag_x(va_list arg, t_strflags *flags);
 
 
 #endif
