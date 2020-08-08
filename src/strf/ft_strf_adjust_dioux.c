@@ -43,3 +43,9 @@ void		ft_strf_adjust_x(t_strflags *flags)
 	flags->plus = 0;
 	flags->space = 0;
 }
+
+void		ft_strf_adjust_f(t_strflags *flags)
+{
+	if (flags == NULL)
+		return ;
+}

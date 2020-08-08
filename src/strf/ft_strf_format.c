@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:24:54 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 13:33:41 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:35:31 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,18 @@ char		*ft_strf_format_width(char *string, t_strflags *flags)
 	return (string);
 }
 
+int			ft_strf_is_flag_num(int ch)
+{
+	if (ft_strchr("diouxXfF%", ch))
+		return (1);
+	return (0);
+}
+
 char		*ft_strf_format_zero(char *string, t_strflags *flags)
 {
 	size_t		len;
 
-	if (ft_strchr("diouxXfF%", flags->type) == NULL)
+	if (!ft_strf_is_flag_num(flags->type))
 		return (string);
 	if (flags->zero == 1 && flags->precision == FT_PRECISION_DEFAULT && flags->minus == 0)
 	{

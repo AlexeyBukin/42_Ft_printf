@@ -17,7 +17,7 @@ set(SOURCES
         src/strf/ft_strf.c
         src/strf/ft_strf_adjust.c
         src/strf/ft_strf_adjust_dioux.c
-        src/strf/ft_strf_adjust_pfsc.c
+        src/strf/ft_strf_adjust_psc.c
         src/strf/ft_strf_format.c
         src/strf/ft_strf_resolve.c
         src/strf/ft_strf_parse.c
@@ -33,6 +33,7 @@ set(SOURCES
         src/strf/ft_strf_flag_u.c
         src/strf/ft_strf_flag_x.c
         src/strf/ft_strf_flag_perc.c
+        src/strf/ft_strf_flag_unknown.c
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})

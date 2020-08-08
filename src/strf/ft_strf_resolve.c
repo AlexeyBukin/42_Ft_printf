@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/08 16:40:15 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:32:54 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 //	t for tint: colorful output
 //	else if (flags->type == 't')
 //		string = ft_insert_percentage(flags);
+	else if (flags->type == FT_STRF_TYPE_UNKNOWN)
+		*insertion = ft_strf_flag_unknown(flags);
 	else
 		return (0);
 	if (*insertion == NULL)
 		return (-1);
 	return (1);
 }
+
+// TODO add binary ('b') flag
+// TODO add tinted ('t') flag
 
 int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 {

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 15:21:17 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:29:51 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,20 @@ int			ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags)
 	return (0);
 }
 
+int			ft_strf_is_known_flag(int ch)
+{
+	if (ft_strchr("scp%diouxXfF", ch))
+		return (1);
+	return (0);
+}
+
+int			ft_strf_is_parsable(int ch)
+{
+	if (ft_strchr(".1234567890-+ #Llh", ch))
+		return (1);
+	return (0);
+}
+
 int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 {
 	size_t		i;
@@ -114,20 +128,24 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 		return (-1);
 	ft_strflags_init(flags);
 	i = 1;
-	while (ft_strf_is_in_args(args[i]) == 1)
+	while (ft_strf_is_parsable(args[i]))
 	{
 		if (ft_strf_parse_elem(args, &i, flags))
-		{
-			ft_putstr("here\n");
 			return (-1);
-		}
 		i++;
 	}
-	*parsed_len = i + 1;
-	if (ft_strf_is_in_args(args[i]) != 2)
-		return (-1);
-	else
+	if (ft_strf_is_known_flag(args[i]))
+	{
 		flags->type = args[i];
+		*parsed_len = i + 1;
+	}
+	else
+	{
+		*parsed_len = i;
+		flags->type = FT_STRF_TYPE_UNKNOWN;
+		if (ft_isalpha(args[i]))
+			(*parsed_len)++;
+	}
 //	ft_putstr("\ntype: ");
 //	ft_putchar(flags->type);
 //	ft_putstr("\nwidth: ");
@@ -142,6 +160,8 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 //	ft_putnbr(flags->zero);
 //	ft_putstr("\nsharp: ");
 //	ft_putnbr(flags->sharp);
+//	ft_putstr("\nparsed_len: ");
+//	ft_putnbr(*parsed_len);
 //	ft_putstr("\n");
 	return (0);
 }

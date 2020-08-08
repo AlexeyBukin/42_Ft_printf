@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 16:46:38 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:26:05 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef enum	e_float_special
 # define LEN 0
 # define IS_X_BIG 1
 
+#define FT_STRF_TYPE_UNKNOWN '?'
+
 typedef struct	s_strflags
 {
 	char		type;
@@ -114,12 +116,13 @@ void			ft_strf_adjust_di(t_strflags *flags);
 void			ft_strf_adjust_o(t_strflags *flags);
 void			ft_strf_adjust_u(t_strflags *flags);
 void			ft_strf_adjust_x(t_strflags *flags);
+void			ft_strf_adjust_f(t_strflags *flags);
 
 void			ft_strf_adjust_p(t_strflags *flags);
-void			ft_strf_adjust_f(t_strflags *flags);
 void			ft_strf_adjust_s(t_strflags *flags);
 void			ft_strf_adjust_c(t_strflags *flags);
 void			ft_strf_adjust_perc(t_strflags *flags);
+void			ft_strf_adjust_unknown(t_strflags *flags);
 
 /*
 ** casts
@@ -134,14 +137,16 @@ int				ft_strf_cast_flag_lli(long long *d,
 ** flags
 */
 
-char			*ft_strf_flag_c(va_list arg, t_strflags *flags);
-char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
-char			*ft_strf_flag_perc(t_strflags *flags);
 char			*ft_strf_flag_di(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_o(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_u(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_x(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_p(va_list arg, t_strflags *flags);
+
+char			*ft_strf_flag_c(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_s(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_perc(t_strflags *flags);
+char			*ft_strf_flag_unknown(t_strflags *flags);
 
 /*
 ** floats
