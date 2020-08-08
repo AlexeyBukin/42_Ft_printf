@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/08 18:52:47 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 19:45:13 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			ft_printf_resolve_c_ins(char **source, size_t *pos, size_t parsed_len, cha
 	return (0);
 }
 
-int			ft_printf_resolve_c(char **insertion, t_strflags *flags, va_list arg)
+int			ft_printf_resolve_c(t_list sourse_pos, size_t parsed_len, t_strflags *flags, va_list arg)
 {
 	t_byte		*res;
 
@@ -72,6 +72,8 @@ int			ft_printf_resolve_c(char **insertion, t_strflags *flags, va_list arg)
 	return (1);
 }
 
+flags, arg, source, pos, parsed_len
+
 int			ft_printf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg)
 {
 	char			*insertion;
@@ -83,9 +85,15 @@ int			ft_printf_resolve(char **source, size_t *pos, t_strflags *flags, va_list a
 	if (ft_strf_parse(&((*source)[*pos]), flags, &parsed_len))
 		return (-1);
 	ft_strf_adjust(flags);
-	(void)res;
+	if (flags->type == 'c')
+	{
+		if ((res = ft_printf_resolve_c(&insertion, flags, arg)))
+			return (-1);
+
+		return (0);
+	}
 	if ((res = ft_printf_resolve_c(&insertion, flags, arg)))
-		return ((res > 0) ? ft_printf_resolve_c_ins(source, pos, parsed_len, insertion) : -1);
+		return ((res > 0) ? 0 : -1);
 	(void)res;
 	if ((res = ft_strf_resolve_nums(&insertion, flags, arg)))
 		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
