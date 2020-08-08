@@ -21,6 +21,7 @@ set(SOURCES
         src/strf/ft_strf_format.c
         src/strf/ft_strf_resolve.c
         src/strf/ft_strf_parse.c
+        src/strf/ft_strf_parse_utils.c
         src/strf/ft_strf_flag_cast.c
         src/strf/float/ft_strf_flag_f.c
         src/strf/float/ft_strf_flag_f_str.c

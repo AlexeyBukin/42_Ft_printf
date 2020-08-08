@@ -6,28 +6,11 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 17:29:51 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:47:41 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
-
-void		ft_strflags_init(t_strflags *flags)
-{
-	if (flags == NULL)
-		return ;
-	flags->dot = 0;
-	flags->precision = FT_PRECISION_DEFAULT;
-	flags->width = FT_WIDTH_DEFAULT;
-	flags->plus = 0;
-	flags->minus = 0;
-	flags->zero = 0;
-	flags->space = 0;
-	flags->sharp = 0;
-	flags->type = '-';
-	flags->special = F_UNSET;
-	flags->cast = CAST_NO;
-}
 
 int			ft_strf_parse_cast(char const *args, size_t *pos, t_strflags *flags)
 {
@@ -106,20 +89,6 @@ int			ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags)
 	return (0);
 }
 
-int			ft_strf_is_known_flag(int ch)
-{
-	if (ft_strchr("scp%diouxXfF", ch))
-		return (1);
-	return (0);
-}
-
-int			ft_strf_is_parsable(int ch)
-{
-	if (ft_strchr(".1234567890-+ #Llh", ch))
-		return (1);
-	return (0);
-}
-
 int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 {
 	size_t		i;
@@ -141,10 +110,8 @@ int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
 	}
 	else
 	{
-		*parsed_len = i;
 		flags->type = FT_STRF_TYPE_UNKNOWN;
-		if (ft_isalpha(args[i]))
-			(*parsed_len)++;
+		*parsed_len = i;
 	}
 //	ft_putstr("\ntype: ");
 //	ft_putchar(flags->type);

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:12:34 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 17:30:21 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 18:55:31 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void		ft_strf_adjust_c(t_strflags *flags)
 {
 	if (flags == NULL)
 		return ;
+	flags->zero = 0;
+	flags->sharp = 0;
+	flags->plus = 0;
+	flags->space = 0;
+	flags->precision = FT_PRECISION_DEFAULT;
 }
 
 void		ft_strf_adjust_perc(t_strflags *flags)
@@ -50,4 +55,9 @@ void		ft_strf_adjust_unknown(t_strflags *flags)
 	if (flags == NULL)
 		return ;
 	flags->width--;
+	flags->precision = FT_PRECISION_DEFAULT;
+	flags->zero = 0;
+	flags->sharp = 0;
+	flags->plus = 0;
+	flags->space = 0;
 }

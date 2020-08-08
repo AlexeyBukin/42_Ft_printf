@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 17:26:05 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 17:42:43 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,10 @@ int				ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg);
 int				ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg);
 
 int				ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len);
+
+void			ft_strflags_init(t_strflags *flags);
+int				ft_strf_is_known_flag(int ch);
+int				ft_strf_is_parsable(int ch);
 
 /*
 ** flag adjustments

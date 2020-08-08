@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 17:29:07 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 18:55:02 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #include <math.h>
 #include <limits.h>
 
-#define STR "|%-20f|%3.5i|%20s|%c|%c|%c|%b"
+#define STR "|%-20f|%3.5i|%20s|%c|%c|%- 3.3%|%b|"
 #define ARGS -1.0, 228, "asdfghjkl", '\n', 159, 160, 3
 
 int		main(void)
