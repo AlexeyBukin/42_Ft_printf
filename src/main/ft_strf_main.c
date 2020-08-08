@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 15:21:40 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/07 15:43:35 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@
 ** printf("gg_printf: \'"STR"\'\n", ARGS);
 */
 
-// gcc src/main/ft_strf_main.c src/strf/*.c  libft/libft.a -I libft/includes -I includes
+// gcc src/main/ft_strf_main.c src/strf/*.c src/strf/float/*.c  libft/libft.a -I libft/includes -I includes
 
 #include "printf.h"
 #include "ft_strf.h"
 #include <math.h>
 #include <limits.h>
 
-#define STR "|%020i|"
-#define ARGS -1
+#define STR "|%-20f|"
+#define ARGS -1.0
 
 int		main(void)
 {

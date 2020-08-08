@@ -27,10 +27,6 @@ void		ft_strf_adjust_f(t_strflags *flags)
 {
 	if (flags == NULL)
 		return ;
-	if (flags->plus == 1)
-		flags->space = 0;
-	if (flags->minus == 1)
-		flags->zero = 0;
 }
 
 void		ft_strf_adjust_s(t_strflags *flags)

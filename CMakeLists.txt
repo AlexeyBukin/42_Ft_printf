@@ -17,9 +17,6 @@ set(SOURCES
         src/strf/ft_strf_adjust_dioux.c
         src/strf/ft_strf_adjust_pfsc.c
         src/strf/ft_strf_format.c
-        src/strf/ft_strf_format_prec.c
-        src/strf/ft_strf_format_width.c
-        src/strf/ft_strf_format_zero.c
         src/strf/ft_strf_resolve.c
         src/strf/ft_strf_parse.c
         src/strf/ft_strf_flag_cast.c

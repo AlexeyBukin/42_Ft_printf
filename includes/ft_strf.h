@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 15:38:06 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 13:38:28 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ char			*ft_strf_flag_f(va_list arg, t_strflags *flags);
 */
 
 int				is_flag_num(char type);
-char			*ft_strf_format(char *string, t_strflags *flags);
+//char			*ft_strf_format(char *string, t_strflags *flags);
 char			*ft_strf_format_prec(char *string, t_strflags *flags);
 char			*ft_strf_format_width(char *string, t_strflags *flags);
 char			*ft_strf_format_zero(char *string, t_strflags *flags);

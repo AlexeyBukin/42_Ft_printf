@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:03:29 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 18:04:54 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 13:32:09 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 char		*ft_strf_flag_perc(t_strflags *flags)
 {
+	char 	*str;
+
 	if (flags == NULL)
 		return (NULL);
 	ft_strf_adjust_perc(flags);
-	return (ft_strf_format(ft_strdup("%"), flags));
+	str = ft_strdup("%");
+	str = ft_strf_format_width(str, flags);
+	str = ft_strf_format_zero(str, flags);
+	return (str);
 }

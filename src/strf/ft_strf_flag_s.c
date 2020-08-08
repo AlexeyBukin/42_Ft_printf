@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:59:17 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/06 17:59:18 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/08 13:28:24 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char		*ft_strf_flag_s(va_list arg, t_strflags *flags)
 {
+	int 		len;
 	char		*insert;
 
 	if (flags == NULL)
@@ -23,5 +24,9 @@ char		*ft_strf_flag_s(va_list arg, t_strflags *flags)
 	else
 		insert = ft_strdup("(null)");
 	ft_strf_adjust_s(flags);
-	return (ft_strf_format(insert, flags));
+	if (flags->precision < (int)ft_strlen(insert) && flags->precision >= 0)
+		insert[flags->precision] = '\0';
+	insert = ft_strf_format_width(insert, flags);
+	insert = ft_strf_format_zero(insert, flags);
+	return (insert);
 }
