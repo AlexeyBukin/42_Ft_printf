@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/08 17:32:54 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:47:03 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,19 @@ int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *i
 		return (-1);
 	src_len = (*pos + ft_strlen(&((*source)[*pos])));
 	ins_len = ft_strlen(insertion);
-	res = (char*)ft_memalloc(src_len + ins_len);
+	res = (char*)ft_memalloc(src_len + ins_len + 1);
 	if (res == NULL)
 		return (-1);
-	ft_strncpy(res, *source, *pos);
-	ft_strcat(res, insertion);
-	ft_strcat(res, &((*source)[*pos + parsed_len]));
+	ft_memcpy(res, *source, *pos);
+//	ft_strncpy(res, *source, *pos);
+
+	ft_memcpy(&(res[*pos]), insertion, ins_len);
+
+//	ft_strcat(res, insertion);
+
+//	ft_strcat(res, &((*source)[*pos + parsed_len]));
+	ft_memcpy(&(res[*pos + ins_len]), &((*source)[*pos + parsed_len]), (src_len - *pos - parsed_len));
+
 	free(*source);
 	free(insertion);
 	*pos += ins_len;
