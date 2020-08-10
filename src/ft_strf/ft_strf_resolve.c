@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/10 14:47:26 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/10 22:26:42 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,6 @@ int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 	return (1);
 }
 
-/*
-** TODO ft_free replace
-*/
-
 int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *insertion)
 {
 	size_t		src_len;
@@ -79,10 +75,11 @@ int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *i
 		return (-1);
 	ft_memcpy(res, *source, *pos);
 	ft_memcpy(&(res[*pos]), insertion, ins_len);
-	ft_memcpy(&(res[*pos + ins_len]), &((*source)[*pos + parsed_len]), (src_len - *pos - parsed_len));
+	ft_memcpy(&(res[*pos + ins_len]),
+			&((*source)[*pos + parsed_len]), (src_len - *pos - parsed_len));
 	ft_free(*source);
 	ft_free(insertion);
-	*pos += ins_len;
+	*pos += (ins_len - 1);
 	*source = res;
 	return (0);
 }

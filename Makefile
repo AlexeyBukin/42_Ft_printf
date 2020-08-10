@@ -55,7 +55,7 @@ all: $(NAME)
 
 $(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
 	@ranlib $(NAME)
-	libtool -static -o $(NAME) $(NAME) $(LIB_FT_FILE)
+	@libtool -static -o $(NAME) $(NAME) $(LIB_FT_FILE)
 	@echo $(SRC_FILES)
 
 $(LIB_FT_FILE):
@@ -66,10 +66,10 @@ $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
 
 $(O_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) -c $(FLAGS) $(DEBUG) $(INCLUDES) -o $@ $<
+	@$(CC) -c $(FLAGS) $(DEBUG) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
 
-exe:
+exe: all
 	$(CC) $(FLAGS) $(DEBUG) $(MAIN_DIR)/main.c $(INCLUDES) $(NAME) -o grind_me.exe
 
 run: exe
@@ -82,7 +82,7 @@ grind: exe
 	@echo ".................................................."
 	@echo ".....       grinding     grind.exe           ....."
 	@echo "..................................................\n"
-	@valgrind --track-origins=yes --show-leak-kinds=all --leak-check=full ./grind_me.exe
+	@valgrind --track-origins=yes --leak-check=full ./grind_me.exe
 
 clean:
 	@make clean -C $(LIB_FT)

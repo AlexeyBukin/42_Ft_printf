@@ -64,7 +64,7 @@ int				ft_isdigit(int c);
 typedef struct	s_list
 {
 	void			*content;
-	size_t			content_size;
+	size_t			size;
 	struct s_list	*next;
 }				t_list;
 
