@@ -21,6 +21,7 @@
 
 NAME = libftprintf.a
 
+CC = gcc
 FLAGS = -Wall -Wextra -Werror
 DEBUG = -g
 
@@ -32,7 +33,17 @@ O_DIR = objects/
 SRC_DIR = src/
 MAIN_DIR = src/main
 
-SRC_FILES = $(shell find $(SRC_DIR) -not \( -path $(MAIN_DIR) -prune \) -type f -name "*.c")
+SRC_FILES = \
+src/flags/float/ft_strf_flag_f.c  src/flags/float/ft_strf_flag_f_special.c  src/flags/float/ft_strf_flag_f_str.c  \
+src/flags/ft_strf_flag_c.c        src/flags/ft_strf_flag_cast.c             src/flags/ft_strf_flag_di.c           \
+src/flags/ft_strf_flag_o.c        src/flags/ft_strf_flag_p.c                src/flags/ft_strf_flag_perc.c         \
+src/flags/ft_strf_flag_s.c        src/flags/ft_strf_flag_u.c                src/flags/ft_strf_flag_unknown.c      \
+src/flags/ft_strf_flag_x.c        \
+src/ft_printf/ft_printf.c         src/ft_printf/ft_printf_resolve.c         src/ft_strf/ft_strf.c                 \
+src/ft_strf/ft_strf_adjust.c      src/ft_strf/ft_strf_adjust_dioux.c        src/ft_strf/ft_strf_adjust_psc.c      \
+src/ft_strf/ft_strf_format.c      src/ft_strf/ft_strf_parse.c               src/ft_strf/ft_strf_parse_utils.c     \
+src/ft_strf/ft_strf_resolve.c
+
 O_FILES = $(patsubst $(SRC_DIR)%.c, $(O_DIR)%.o, $(SRC_FILES))
 
 SRC_DIRS = $(shell find $(SRC_DIR) -type d)
@@ -44,6 +55,7 @@ all: $(NAME)
 
 $(NAME): $(LIB_FT_FILE) $(O_DIRS) $(O_FILES)
 	@ranlib $(NAME)
+	libtool -static -o $(NAME) $(NAME) $(LIB_FT_FILE)
 	@echo $(SRC_FILES)
 
 $(LIB_FT_FILE):
@@ -54,11 +66,11 @@ $(O_DIRS):
 	@mkdir -vp $(O_DIRS)
 
 $(O_DIR)%.o: $(SRC_DIR)%.c
-	clang -c $(FLAGS) $(DEBUG) $(INCLUDES) -o $@ $<
+	$(CC) -c $(FLAGS) $(DEBUG) $(INCLUDES) -o $@ $<
 	@ar rc $(NAME) $@
 
 exe:
-	@clang $(FLAGS) $(DEBUG) $(MAIN_DIR)/main.c $(INCLUDES) $(NAME) -o grind_me.exe
+	$(CC) $(FLAGS) $(DEBUG) $(MAIN_DIR)/main.c $(INCLUDES) $(NAME) -o grind_me.exe
 
 run: exe
 	@echo ".................................................."

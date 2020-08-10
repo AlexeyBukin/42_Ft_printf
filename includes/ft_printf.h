@@ -16,7 +16,6 @@
 # include <math.h>
 # include <float.h>
 # include <stdarg.h>
-# include "libft.h"
 # include "ft_strf.h"
 
 int			ft_printf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg);

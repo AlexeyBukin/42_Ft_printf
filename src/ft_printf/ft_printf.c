@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strf.c                                          :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/08 16:35:39 by kcharla          ###   ########.fr       */
+/*   Created: 2020/08/10 14:50:35 by kcharla           #+#    #+#             */
+/*   Updated: 2020/08/10 14:50:35 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "ft_strf.h"
+#include "ft_printf.h"
 
-char		*ft_strf(const char *restrict format, ...)
+int			ft_printf(const char *restrict format, ...)
 {
 	t_strflags		sflags;
 	va_list			arg;
@@ -27,13 +26,14 @@ char		*ft_strf(const char *restrict format, ...)
 	{
 		if (res[i] == '%')
 		{
-			if (ft_strf_resolve(&res, &i, &sflags, arg))
+			if (ft_printf_resolve(&res, &i, &sflags, arg))
 			{
 				free(res);
-				return (NULL);
+				return (-1);
 			}
 		}
 		i++;
 	}
-	return (res);
+	write (1, res, i);
+	return (i);
 }

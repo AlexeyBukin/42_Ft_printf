@@ -79,6 +79,8 @@ t_list			*ft_lstnew(void const *content, size_t content_size);
 /*
 ** mem
 */
+
+void			ft_free(void *buf);
 void			*ft_mem_rev(void *pointer_v, size_t count);
 void			*ft_memalloc(size_t size);
 void			*ft_memccpy(void *d, const void *s, int c, size_t count);

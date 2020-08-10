@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/09 20:47:03 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/10 14:47:26 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,10 @@ int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *i
 	if (res == NULL)
 		return (-1);
 	ft_memcpy(res, *source, *pos);
-//	ft_strncpy(res, *source, *pos);
-
 	ft_memcpy(&(res[*pos]), insertion, ins_len);
-
-//	ft_strcat(res, insertion);
-
-//	ft_strcat(res, &((*source)[*pos + parsed_len]));
 	ft_memcpy(&(res[*pos + ins_len]), &((*source)[*pos + parsed_len]), (src_len - *pos - parsed_len));
-
-	free(*source);
-	free(insertion);
+	ft_free(*source);
+	ft_free(insertion);
 	*pos += ins_len;
 	*source = res;
 	return (0);
@@ -103,23 +96,11 @@ int			ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg
 	if (source == NULL || pos == NULL || flags == NULL)
 		return (-1);
 	if (ft_strf_parse(&((*source)[*pos]), flags, &parsed_len))
-	{
 		return (-1);
-	}
 	ft_strf_adjust(flags);
 	if ((res = ft_strf_resolve_nums(&insertion, flags, arg)))
-	{
-//		write (1, "lol\n", 4);
-//		ft_putendl(insertion);
 		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
-	}
-//	if ((res = ft_strf_resolve_float(&insertion, flags, arg)))
-//		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
 	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
 		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
-
-//	ft_putendl("next one is:");
-//	ft_putendl(&((*source)[*pos]));
-
 	return (-1);
 }

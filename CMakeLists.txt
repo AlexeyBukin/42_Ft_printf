@@ -12,29 +12,29 @@ project(ft_printf)
 
 # find src -type f -name '*.c' | sed "s/^/        /"
 set(SOURCES
-        src/strf/ft_printf.c
-        src/strf/ft_printf_resolve.c
-        src/strf/ft_strf.c
-        src/strf/ft_strf_adjust.c
-        src/strf/ft_strf_adjust_dioux.c
-        src/strf/ft_strf_adjust_psc.c
-        src/strf/ft_strf_format.c
-        src/strf/ft_strf_resolve.c
-        src/strf/ft_strf_parse.c
-        src/strf/ft_strf_parse_utils.c
-        src/strf/ft_strf_flag_cast.c
-        src/strf/float/ft_strf_flag_f.c
-        src/strf/float/ft_strf_flag_f_str.c
-        src/strf/float/ft_strf_flag_f_special.c
-        src/strf/ft_strf_flag_c.c
-        src/strf/ft_strf_flag_s.c
-        src/strf/ft_strf_flag_di.c
-        src/strf/ft_strf_flag_p.c
-        src/strf/ft_strf_flag_o.c
-        src/strf/ft_strf_flag_u.c
-        src/strf/ft_strf_flag_x.c
-        src/strf/ft_strf_flag_perc.c
-        src/strf/ft_strf_flag_unknown.c
+        src/ft_printf/ft_printf.c
+        src/ft_printf/ft_printf_resolve.c
+        src/ft_strf/ft_strf.c
+        src/ft_strf/ft_strf_adjust.c
+        src/ft_strf/ft_strf_adjust_dioux.c
+        src/ft_strf/ft_strf_adjust_psc.c
+        src/ft_strf/ft_strf_format.c
+        src/ft_strf/ft_strf_resolve.c
+        src/ft_strf/ft_strf_parse.c
+        src/ft_strf/ft_strf_parse_utils.c
+        src/flags/ft_strf_flag_cast.c
+        src/flags/float/ft_strf_flag_f.c
+        src/flags/float/ft_strf_flag_f_str.c
+        src/flags/float/ft_strf_flag_f_special.c
+        src/flags/ft_strf_flag_c.c
+        src/flags/ft_strf_flag_s.c
+        src/flags/ft_strf_flag_di.c
+        src/flags/ft_strf_flag_p.c
+        src/flags/ft_strf_flag_o.c
+        src/flags/ft_strf_flag_u.c
+        src/flags/ft_strf_flag_x.c
+        src/flags/ft_strf_flag_perc.c
+        src/flags/ft_strf_flag_unknown.c
         )
 
 add_library(${PROJECT_NAME} ${SOURCES})

@@ -2,7 +2,6 @@ ft_pft*
 cmake-build-debug*
 */.*
 .*
-*.exe
 
 # Prerequisites
 *.d

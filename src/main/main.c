@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 19:26:48 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/10 16:27:30 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 ** printf("gg_printf: \'"STR"\'\n", ARGS);
 */
 
-#include "printf.h"
+#include "ft_printf.h"
+#include <stdio.h>
 #include <math.h>
 #include <limits.h>
 
