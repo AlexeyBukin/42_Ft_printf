@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:10:00 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:17:29 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 09:21:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,16 @@ char		*ft_strf_flag_p(va_list arg, t_strflags *flags)
 		return (NULL);
 	d = (unsigned long long)va_arg(arg, unsigned long long);
 	ft_strf_adjust_p(flags);
-	if (flags->precision == 0 && d == 0)
+	if ((flags->precision == 0) && d == 0)
 		res = ft_strdup("");
 	else
 		res = ft_ulltoa_base(d, BASE16L);
+
+//	//TODO delete
+//	ft_putendl("prec:");
+//	ft_putnbr(flags->precision);
+//	ft_putendl("");
+
 	res = ft_strf_format_prec(res, flags);
 	res = ft_strjoin_free(ft_strdup("0x"), res);
 	res = ft_strf_format_zero(res, flags);

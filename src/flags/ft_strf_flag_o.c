@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 13:50:49 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 14:07:00 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 10:38:50 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		*ft_strf_flag_o(va_list arg, t_strflags *flags)
 {
 	char				*res;
-	uintmax_t			d;
+	t_uintmax			d;
 
 	if (flags == NULL || ft_strf_cast_flag_ull(&d, flags, arg))
 		return (NULL);
@@ -25,10 +25,10 @@ char		*ft_strf_flag_o(va_list arg, t_strflags *flags)
 		res = ft_strdup("");
 	else
 		res = ft_ulltoa_base(d, BASE8);
-	res = ft_strf_format_prec(res, flags);
-	res = ft_strf_format_zero(res, flags);
 	if (flags->sharp == 1 && d != 0)
 		res = ft_strjoin_free(ft_strdup("0"), res);
+	res = ft_strf_format_prec(res, flags);
+	res = ft_strf_format_zero(res, flags);
 	res = ft_strf_format_width(res, flags);
 	return (res);
 }

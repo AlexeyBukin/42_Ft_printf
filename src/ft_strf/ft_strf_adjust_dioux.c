@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:59:17 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/07 13:56:47 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 09:09:36 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		ft_strf_adjust_x(t_strflags *flags)
 		return ;
 	flags->plus = 0;
 	flags->space = 0;
+	flags->num_sign = 0;
 }
 
 void		ft_strf_adjust_f(t_strflags *flags)

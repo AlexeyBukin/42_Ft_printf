@@ -20,7 +20,6 @@ void		ft_strf_adjust_p(t_strflags *flags)
 	flags->sharp = 0;
 	flags->space = 0;
 	flags->plus = 0;
-	flags->precision = FT_PRECISION_DEFAULT;
 }
 
 void		ft_strf_adjust_s(t_strflags *flags)
