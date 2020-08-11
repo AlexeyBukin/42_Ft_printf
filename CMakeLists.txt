@@ -26,6 +26,8 @@ set(SOURCES
         src/flags/float/ft_strf_flag_f.c
         src/flags/float/ft_strf_flag_f_str.c
         src/flags/float/ft_strf_flag_f_special.c
+        src/flags/float/ft_strf_flag_f_round.c
+        src/flags/float/ft_strf_flag_f_fast.c
         src/flags/ft_strf_flag_c.c
         src/flags/ft_strf_flag_s.c
         src/flags/ft_strf_flag_di.c

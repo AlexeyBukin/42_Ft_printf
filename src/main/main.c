@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:52:05 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/11 10:41:12 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 12:42:05 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include <limits.h>
 
 
-#define INPUT "{%0*3d}", 10, 22
+#define INPUT "{%f}", -9999910.52
 //#define INPUT "%jd, %jd", -9223372036854775808, 9223372036854775807
 //#define INPUT "%3d, %i, %zd, %zhd, %jhd", -1, 2, -1, 4294967296, 9223372036854775807
 //#define INPUT "|%-.8d|%30.5s|%12c|", -1245, "wanna check some leaks?", 0

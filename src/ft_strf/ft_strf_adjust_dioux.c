@@ -51,4 +51,6 @@ void		ft_strf_adjust_f(t_strflags *flags)
 {
 	if (flags == NULL)
 		return ;
+	if (flags->precision == FT_PRECISION_DEFAULT)
+		flags->precision = FT_PRECISION_FLOAT;
 }

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/11 04:50:20 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 23:39:57 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <float.h>
 # include <stdarg.h>
 # include "libft.h"
-# include "ldouble.h"
 
 # define ASCII_UNREADABLE_BEFORE ((t_byte)0x20)
 # define ASCII_UNREADABLE_AFTER ((t_byte)0xA0)
@@ -134,10 +133,14 @@ char			*ft_strf_flag_unknown(t_strflags *flags);
 ** floats
 */
 
+#define FT_FLOAT_FAST_PREC 10
+
 int				float_is_special(long double num);
 char			*float_get_special(t_strflags *flags);
 char			*float_get_str(t_strflags *flags, long double d);
 char			*ft_strf_flag_f(va_list arg, t_strflags *flags);
+char			*ft_strf_flag_f_round(char *str);
+char			*ft_strf_flag_f_fast(double d);
 
 /*
 ** formatting
@@ -147,7 +150,19 @@ char			*ft_strf_format_prec(char *string, t_strflags *flags);
 char			*ft_strf_format_width(char *string, t_strflags *flags);
 char			*ft_strf_format_zero(char *string, t_strflags *flags);
 
+typedef struct			s_float10
+{
+	unsigned long long	mantissa;
+	unsigned int		exponent : 15;
+	unsigned int		sign : 1;
+}						t_float10_s;
 
+typedef union			u_float10
+{
+	long double			num;
+	t_float10_s			parts;
+	unsigned char		bytes[10];
+}						t_float10_u;
 
 
 

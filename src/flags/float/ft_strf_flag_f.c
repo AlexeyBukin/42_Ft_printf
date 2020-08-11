@@ -6,13 +6,32 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 14:21:53 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 13:51:18 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 23:53:00 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
 
-static int			ft_strf_flag_f_cast(long double *d, t_strflags *flags, va_list arg)
+char		*ft_strf_float_format_prec(int prec, char *str)
+{
+	int		i;
+	int		j;
+
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (str[i] != '\0' && str[i] != '.')
+		i++;
+	if (str[i] != '.')
+		return (NULL);
+	j = 0;
+	while (str[i + j] != '\0' && j <= prec)
+		j++;
+	str[i + j] = '\0';
+	return (str);
+}
+
+int			ft_strf_flag_f_cast(long double *d, t_strflags *flags, va_list arg)
 {
 	if (flags == NULL || d == NULL)
 		return (-1);
@@ -47,6 +66,7 @@ char	*ft_strf_float_format(t_strflags *flags, char *str, char sign)
 		str = ft_strjoin_free(ft_strdup("+"), str);
 	if (len < w && flags->minus == 0 && flags->zero == 0)
 		str = ft_strjoin_free(ft_str_spam(" ", w - len), str);
+	str = ft_strf_float_format_prec(flags->precision, str);
 	return (str);
 }
 
@@ -58,10 +78,8 @@ char		*ft_strf_flag_f(va_list arg, t_strflags *flags)
 	if (flags == NULL || ft_strf_flag_f_cast(&d, flags, arg))
 		return (NULL);
 	ft_strf_adjust_f(flags);
-	if (flags->precision == FT_PRECISION_DEFAULT)
-		flags->precision = FT_PRECISION_FLOAT;
 	flags->special = float_is_special(d);
 	res = (flags->special == F_N0_SPECIAL) ? float_get_str(flags, d) : float_get_special(flags);
-	res = ft_strf_float_format(flags, res, (char)d);
+	res = ft_strf_float_format(flags, res, d < 0 ? -1 : 1);
 	return (res);
 }
