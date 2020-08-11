@@ -14,7 +14,7 @@
 
 char		*ft_strf_flag_perc(t_strflags *flags)
 {
-	char 	*str;
+	char	*str;
 
 	if (flags == NULL)
 		return (NULL);

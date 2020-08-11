@@ -25,12 +25,6 @@ char		*ft_strf_flag_p(va_list arg, t_strflags *flags)
 		res = ft_strdup("");
 	else
 		res = ft_ulltoa_base(d, BASE16L);
-
-//	//TODO delete
-//	ft_putendl("prec:");
-//	ft_putnbr(flags->precision);
-//	ft_putendl("");
-
 	res = ft_strf_format_prec(res, flags);
 	res = ft_strjoin_free(ft_strdup("0x"), res);
 	res = ft_strf_format_zero(res, flags);
