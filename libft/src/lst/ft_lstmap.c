@@ -25,7 +25,7 @@ t_list			*ft_lstmap(t_list *old, t_list *(*f)(t_list *elem))
 
 	if (old == 0)
 		return (0);
-	list = ft_lstnew(old->content, old->content_size);
+	list = ft_lstnew(old->content, old->size);
 	list = f(list);
 	if (list == 0)
 		return (0);
@@ -33,7 +33,7 @@ t_list			*ft_lstmap(t_list *old, t_list *(*f)(t_list *elem))
 	while (old->next != 0)
 	{
 		old = old->next;
-		list->next = ft_lstnew(old->content, old->content_size);
+		list->next = ft_lstnew(old->content, old->size);
 		list->next = f(list->next);
 		if (list->next == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 19:12:07 by kcharla           #+#    #+#             */
-/*   Updated: 2020/01/31 15:39:39 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 08:30:53 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef unsigned char	t_byte;
-typedef char			t_bool;
+typedef long long			t_intmax;
+typedef unsigned long long	t_uintmax;
+typedef unsigned char		t_byte;
+typedef char				t_bool;
 
+# define FT_INTMAX 9223372036854775808
 # define FALSE 0
 # define TRUE  1
 
@@ -29,11 +32,17 @@ typedef char			t_bool;
 int				ft_atoi(const char *s);
 int				ft_atoi_base(const char *s, char base);
 
+
+
+
 # define BASE16U "0123456789ABCDEF"
 # define BASE16L "0123456789abcdef"
 # define BASE8   "01234567"
 
+t_uintmax		ft_abs_max(t_intmax a);
 char			*ft_itoa(int n);
+char			*ft_itoa_max(t_uintmax n);
+//char					*ft_itoa_max_di(t_uintmax n);
 char			*ft_itoa_base(int value, char *base);
 char			*ft_ulltoa_base(unsigned long long int value, char *base);
 

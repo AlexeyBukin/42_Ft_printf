@@ -13,6 +13,7 @@ SRC_FILES = \
 src/atoi_itoa/ft_atoi.c       src/atoi_itoa/ft_atoi_base.c  src/atoi_itoa/ft_itoa.c    \
 src/atoi_itoa/ft_itoa_base.c  src/atoi_itoa/ft_lltoa.c      src/atoi_itoa/ft_mtob.c    \
 src/atoi_itoa/ft_mtob_raw.c   src/atoi_itoa/ft_ulltoa.c     src/atoi_itoa/ft_utoa.c    \
+src/atoi_itoa/ft_itoa_max.c   \
 src/atoi_itoa/ft_utoa_base.c  src/ft_abs.c                  src/ft_bzero.c             \
 src/ft_char_to_str.c          src/ft_free_char_2d_arr.c     src/ft_pow.c               \
 src/ft_power_ten.c            src/ft_return.c               src/ft_tolower.c           \

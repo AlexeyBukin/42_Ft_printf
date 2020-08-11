@@ -34,6 +34,8 @@ void		ft_strf_adjust_u(t_strflags *flags)
 	flags->space = 0;
 	flags->plus = 0;
 	flags->sharp = 0;
+	if (flags->type == 'U')
+		flags->cast = CAST_LL;
 }
 
 void		ft_strf_adjust_x(t_strflags *flags)

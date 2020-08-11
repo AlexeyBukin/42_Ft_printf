@@ -6,13 +6,18 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/10 22:26:42 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 08:47:53 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
 
-int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
+/*
+** TODO add binary flag 'b'
+*/
+
+int			ft_strf_resolve_text(char **insertion,
+				t_strflags *flags, va_list arg)
 {
 	if (insertion == NULL || flags == NULL)
 		return (-1);
@@ -22,9 +27,6 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 		*insertion = ft_strf_flag_c(arg, flags);
 	else if (flags->type == '%')
 		*insertion = ft_strf_flag_perc(flags);
-//	t for tint: colorful output
-//	else if (flags->type == 't')
-//		string = ft_insert_percentage(flags);
 	else if (flags->type == FT_STRF_TYPE_UNKNOWN)
 		*insertion = ft_strf_flag_unknown(flags);
 	else
@@ -34,16 +36,13 @@ int			ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg)
 	return (1);
 }
 
-// TODO add binary ('b') flag
-// TODO add tinted ('t') flag
-
 int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 {
 	if (source == NULL || flags == NULL)
 		return (-1);
 	if (flags->type == 'd' || flags->type == 'i')
 		*source = ft_strf_flag_di(arg, flags);
-	else if (flags->type == 'u')
+	else if (flags->type == 'u' || flags->type == 'U')
 		*source = ft_strf_flag_u(arg, flags);
 	else if (flags->type == 'p')
 		*source = ft_strf_flag_p(arg, flags);
@@ -60,7 +59,7 @@ int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 	return (1);
 }
 
-int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *insertion)
+int			ft_strf_resolve_ins(char **source, size_t *pos, char *insertion)
 {
 	size_t		src_len;
 	size_t		ins_len;
@@ -76,28 +75,28 @@ int			ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *i
 	ft_memcpy(res, *source, *pos);
 	ft_memcpy(&(res[*pos]), insertion, ins_len);
 	ft_memcpy(&(res[*pos + ins_len]),
-			&((*source)[*pos + parsed_len]), (src_len - *pos - parsed_len));
+			&((*source)[*pos]), (src_len - *pos) < 0 ? 0 : (src_len - *pos));
 	ft_free(*source);
 	ft_free(insertion);
-	*pos += (ins_len - 1);
+	*pos += (ins_len);
 	*source = res;
 	return (0);
 }
 
-int			ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg)
+int			ft_strf_resolve(char **source, size_t *pos,
+					t_strflags *flags, va_list arg)
 {
 	char			*insertion;
-	size_t			parsed_len;
 	int				res;
 
 	if (source == NULL || pos == NULL || flags == NULL)
 		return (-1);
-	if (ft_strf_parse(&((*source)[*pos]), flags, &parsed_len))
+	if (ft_strf_parse(source, *pos, flags))
 		return (-1);
 	ft_strf_adjust(flags);
 	if ((res = ft_strf_resolve_nums(&insertion, flags, arg)))
-		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
+		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
 	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
-		return ((res > 0) ? ft_strf_resolve_ins(source, pos, parsed_len, insertion) : -1);
+		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
 	return (-1);
 }

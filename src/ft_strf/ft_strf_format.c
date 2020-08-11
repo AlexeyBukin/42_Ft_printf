@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:24:54 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/10 18:05:35 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 08:46:33 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char		*ft_strf_format_prec(char *string, t_strflags *flags)
 		return (NULL);
 	len = (int)ft_strlen(string);
 	if (flags->precision > len)
-		string = ft_strjoin_free(ft_str_spam("0", (flags->precision) - len), string);
+		string = ft_strjoin_free(ft_str_spam("0",
+				(flags->precision) - len), string);
 	return (string);
 }
 
@@ -39,26 +40,21 @@ char		*ft_strf_format_width(char *string, t_strflags *flags)
 	return (string);
 }
 
-int			ft_strf_is_flag_num(int ch)
-{
-	if (ft_strchr("diouxXfF%", ch))
-		return (1);
-	return (0);
-}
-
 char		*ft_strf_format_zero(char *string, t_strflags *flags)
 {
-	size_t		len;
+	int			len;
 
-	if (flags->zero == 1 && flags->precision == FT_PRECISION_DEFAULT && flags->minus == 0)
+	if (flags->zero == 1 && flags->precision == FT_PRECISION_DEFAULT
+			&& flags->minus == 0)
 	{
-		len = ft_strlen(string);
+		len = (int)ft_strlen(string);
 		if (flags->plus == 1 || flags->space == 1 || flags->num_sign < 0)
 			len++;
 		if (flags->sharp == 1 && (flags->num_sign != 0))
 			len += (flags->type == 'x' || flags->type == 'X') ? 2 : 1;
-		if ((int)len < flags->width)
-			string = ft_strjoin_free(ft_str_spam("0", flags->width - (int)len), string);
+		if (len <= flags->width)
+			string = ft_strjoin_free(ft_str_spam("0",
+					flags->width - len), string);
 	}
 	return (string);
 }

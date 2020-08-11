@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 14:50:35 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/10 22:30:06 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 01:22:54 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ int			ft_printf(const char *restrict format, ...)
 	{
 		if (res[i] == '%')
 		{
-			if (ft_printf_resolve(&res, &i, &sflags, arg))
-			{
-				ft_free(res);
-				va_end(arg);
-				return (-1);
-			}
+			ft_printf_resolve(&res, &i, &sflags, arg);
 		}
-		i++;
+		else
+		{
+			i++;
+		}
 	}
 	write(1, res, i);
 	ft_free(res);

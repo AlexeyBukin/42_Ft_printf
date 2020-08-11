@@ -15,7 +15,7 @@
 char		*ft_strf_flag_o(va_list arg, t_strflags *flags)
 {
 	char				*res;
-	unsigned long long	d;
+	uintmax_t			d;
 
 	if (flags == NULL || ft_strf_cast_flag_ull(&d, flags, arg))
 		return (NULL);

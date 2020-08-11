@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 17:47:41 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 08:48:22 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 int			ft_strf_parse_cast(char const *args, size_t *pos, t_strflags *flags)
 {
+	char		cast;
+
 	if (args == NULL || pos == NULL || flags == NULL)
 		return (-1);
-	if (flags->cast != CAST_NO)
-		return (-1);
 	if (args[*pos] == 'l')
-	{
-		if (args[*pos + 1] == 'l')
-			flags->cast = CAST_LL;
-		else
-			flags->cast = CAST_L;
-	}
+		cast = (args[*pos + 1] == 'l') ? CAST_LL : CAST_L;
 	else if (args[*pos] == 'h')
-	{
-		if (args[*pos + 1] == 'h')
-			flags->cast = CAST_HH;
-		else
-			flags->cast = CAST_H;
-	}
+		cast = (args[*pos + 1] == 'h') ? CAST_HH : CAST_H;
 	else if (args[*pos] == 'L')
-		flags->cast = CAST_BIG_L;
-	if (flags->cast == CAST_HH || flags->cast == CAST_LL)
+		cast = CAST_BIG_L;
+	else if (args[*pos] == 'j')
+		cast = CAST_J;
+	else if (args[*pos] == 'z')
+		cast = CAST_Z;
+	else if (args[*pos] == 't')
+		cast = CAST_T;
+	if (flags->cast < cast)
+		flags->cast = cast;
+	if (cast == CAST_HH || cast == CAST_LL)
 		(*pos)++;
 	return (0);
 }
@@ -84,51 +82,33 @@ int			ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags)
 	}
 	else if (ft_isdigit(args[*pos]))
 		return (ft_strf_parse_digits(args, pos, flags));
-	else if (ft_strchr("lhL", args[*pos]) != NULL)
+	else if (ft_strchr("lhLjzt", args[*pos]) != NULL)
 		return (ft_strf_parse_cast(args, pos, flags));
 	return (0);
 }
 
-int			ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len)
+int			ft_strf_parse(char **source, size_t pos, t_strflags *flags)
 {
+	char		*string;
 	size_t		i;
 
-	if (args == NULL || flags == NULL || parsed_len == NULL)
+	if (source == NULL || flags == NULL)
 		return (-1);
+	if ((string = *source) == NULL)
+		return (-1);
+	string = &(string[pos]);
 	ft_strflags_init(flags);
 	i = 1;
-	while (ft_strf_is_parsable(args[i]))
+	while (ft_strf_is_parsable(string[i]))
 	{
-		if (ft_strf_parse_elem(args, &i, flags))
+		if (ft_strf_parse_elem(string, &i, flags))
 			return (-1);
 		i++;
 	}
-	if (ft_strf_is_known_flag(args[i]))
-	{
-		flags->type = args[i];
-		*parsed_len = i + 1;
-	}
+	if (ft_strf_is_known_flag(string[i]))
+		flags->type = string[i++];
 	else
-	{
 		flags->type = FT_STRF_TYPE_UNKNOWN;
-		*parsed_len = i;
-	}
-//	ft_putstr("\ntype: ");
-//	ft_putchar(flags->type);
-//	ft_putstr("\nwidth: ");
-//	ft_putnbr(flags->width);
-//	ft_putstr("\ndot: ");
-//	ft_putnbr(flags->dot);
-//	ft_putstr("\nprec: ");
-//	ft_putnbr(flags->precision);
-//	ft_putstr("\nspace: ");
-//	ft_putnbr(flags->space);
-//	ft_putstr("\nzero: ");
-//	ft_putnbr(flags->zero);
-//	ft_putstr("\nsharp: ");
-//	ft_putnbr(flags->sharp);
-//	ft_putstr("\nparsed_len: ");
-//	ft_putnbr(*parsed_len);
-//	ft_putstr("\n");
+	ft_strcpy(string, &(string[i]));
 	return (0);
 }

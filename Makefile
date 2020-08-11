@@ -22,7 +22,7 @@
 NAME = libftprintf.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = #-Wall -Wextra -Werror
 DEBUG = -g
 
 LIB_FT = libft/
@@ -70,7 +70,7 @@ $(O_DIR)%.o: $(SRC_DIR)%.c
 	@ar rc $(NAME) $@
 
 exe: all
-	$(CC) $(FLAGS) $(DEBUG) $(MAIN_DIR)/main.c $(INCLUDES) $(NAME) -o grind_me.exe
+	@$(CC) $(FLAGS) $(DEBUG) $(MAIN_DIR)/main.c $(INCLUDES) $(NAME) -o grind_me.exe
 
 run: exe
 	@echo ".................................................."

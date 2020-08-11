@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 08:08:02 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/08 14:57:06 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 07:45:36 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 char		*ft_strf_flag_di(va_list arg, t_strflags *flags)
 {
 	char			*res;
-	long long int	d;
+	t_intmax		d;
+	t_uintmax		ud;
 
 	if (flags == NULL || ft_strf_cast_flag_lli(&d, flags, arg))
 		return (NULL);
 	flags->num_sign = (char)d;
-	res = (flags->precision == 0 && d == 0)
-			? ft_strdup("") : ft_ulltoa(ft_absl(d));
+	if (d < 0)
+		ud = (d == -FT_INTMAX) ? FT_INTMAX : d * (-1);
+	else
+		ud = (t_uintmax)d;
+	res = ((flags->precision == 0) && (d == 0)) ?
+			ft_strdup("") :
+			ft_itoa_max(ud);
 	ft_strf_adjust_di(flags);
 	res = ft_strf_format_prec(res, flags);
 	res = ft_strf_format_zero(res, flags);

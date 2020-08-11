@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/09 18:29:25 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/11 04:50:20 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef enum	e_format_cast
 	CAST_H,
 	CAST_L,
 	CAST_LL,
+	CAST_J,
+	CAST_T,
+	CAST_Z,
 	CAST_BIG_L
 }				t_format_cast;
 
@@ -73,11 +76,13 @@ char			*ft_strf(const char *restrict format, ...);
 */
 
 int				ft_strf_resolve(char **source, size_t *pos, t_strflags *flags, va_list arg);
-int				ft_strf_resolve_ins(char **source, size_t *pos, size_t parsed_len, char *insertion);
+int				ft_strf_resolve_ins(char **source, size_t *pos, char *insertion);
 int				ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg);
 int				ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg);
 
-int				ft_strf_parse(char *args, t_strflags *flags, size_t *parsed_len);
+//TODO left only new, delete old
+int				ft_strf_parse(char **source, size_t pos, t_strflags *flags);
+int				ft_strf_parse_old(char *args, t_strflags *flags, size_t *parsed_len);
 
 void			ft_strflags_init(t_strflags *flags);
 int				ft_strf_is_known_flag(int ch);
@@ -105,9 +110,9 @@ void			ft_strf_adjust_unknown(t_strflags *flags);
 ** casts
 */
 
-int				ft_strf_cast_flag_ull(unsigned long long *d,
+int				ft_strf_cast_flag_ull(t_uintmax *d,
 						t_strflags *flags, va_list arg);
-int				ft_strf_cast_flag_lli(long long *d,
+int				ft_strf_cast_flag_lli(t_intmax *d,
 						t_strflags *flags, va_list arg);
 
 /*
