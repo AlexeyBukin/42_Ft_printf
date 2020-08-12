@@ -6,11 +6,16 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/11 08:33:45 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 21:39:10 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
+
+/*
+** resolving 'c' flag for ft_printf
+** do not work with wide chars (for now)
+*/
 
 int			ft_printf_resolve_c(size_t *pos, char **source,
 				t_strflags *flags, va_list arg)
@@ -39,6 +44,12 @@ int			ft_printf_resolve_c(size_t *pos, char **source,
 	*source = res;
 	return (1);
 }
+
+/*
+** resolving function for ft_printf
+** works the same as ft_strf_resolve, but use ft_printf_resolve_c
+** to resolve 'c' flag
+*/
 
 int			ft_printf_resolve(char **src, size_t *pos,
 				t_strflags *flags, va_list arg)

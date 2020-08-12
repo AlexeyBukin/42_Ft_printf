@@ -6,11 +6,15 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:59:17 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/11 09:09:36 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 22:06:32 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
+
+/*
+** adjustment functions for 'nums' flags
+*/
 
 void		ft_strf_adjust_di(t_strflags *flags)
 {

@@ -6,11 +6,17 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:24:54 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/11 09:13:49 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 22:00:02 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
+
+/*
+** formats precision for 'nums' flags
+** basically fills with  zeros in the beginning
+** returns (NULL) on error
+*/
 
 char		*ft_strf_format_prec(char *string, t_strflags *flags)
 {
@@ -24,6 +30,12 @@ char		*ft_strf_format_prec(char *string, t_strflags *flags)
 				(flags->precision) - len), string);
 	return (string);
 }
+
+/*
+** formats width
+** basically fills with spaces th match width
+** returns (NULL) on error
+*/
 
 char		*ft_strf_format_width(char *string, t_strflags *flags)
 {
@@ -39,6 +51,12 @@ char		*ft_strf_format_width(char *string, t_strflags *flags)
 		string = ft_strjoin_free(ft_str_spam(" ", len), string);
 	return (string);
 }
+
+/*
+** formats 'zero' flag
+** basically fills with zeros (where needed)
+** returns (NULL) on error
+*/
 
 char		*ft_strf_format_zero(char *string, t_strflags *flags)
 {

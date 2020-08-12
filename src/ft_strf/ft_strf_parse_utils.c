@@ -12,6 +12,10 @@
 
 #include "ft_strf.h"
 
+/*
+** helpful parsing functions
+*/
+
 void		ft_strflags_init(t_strflags *flags)
 {
 	if (flags == NULL)

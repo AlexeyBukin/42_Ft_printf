@@ -6,11 +6,51 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:47:56 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/11 08:48:22 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 21:56:19 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
+
+/*
+** parses 'source' string starting at 'pos'
+** into 'flags' structure
+** returns negative integer on error
+** returns zero on success
+*/
+
+int			ft_strf_parse(char **source, size_t pos, t_strflags *flags)
+{
+	char		*string;
+	size_t		i;
+
+	if (source == NULL || flags == NULL)
+		return (-1);
+	if ((string = *source) == NULL)
+		return (-1);
+	string = &(string[pos]);
+	ft_strflags_init(flags);
+	i = 1;
+	while (ft_strf_is_parsable(string[i]))
+	{
+		if (ft_strf_parse_elem(string, &i, flags))
+			return (-1);
+		i++;
+	}
+	if (ft_strf_is_known_flag(string[i]))
+		flags->type = string[i++];
+	else
+		flags->type = FT_STRF_TYPE_UNKNOWN;
+	ft_strcpy(string, &(string[i]));
+	return (0);
+}
+
+/*
+** parses one 'cast' element
+** updates one field in 'flags' structure
+** returns negative integer on error
+** returns zero on success
+*/
 
 int			ft_strf_parse_cast(char const *args, size_t *pos, t_strflags *flags)
 {
@@ -36,6 +76,15 @@ int			ft_strf_parse_cast(char const *args, size_t *pos, t_strflags *flags)
 		(*pos)++;
 	return (0);
 }
+
+/*
+** parses one 'digits' element
+** decides if it is width or precision
+** fills one field in 'flags' structure
+** with parsed element
+** returns negative integer on error
+** returns zero on success
+*/
 
 int			ft_strf_parse_digits(char *args, size_t *pos, t_strflags *flags)
 {
@@ -63,6 +112,14 @@ int			ft_strf_parse_digits(char *args, size_t *pos, t_strflags *flags)
 	return (0);
 }
 
+/*
+** parses one 'element' from 'args' string
+** one element means one 'flags' field
+** into 'flags' structure
+** returns negative integer on error
+** returns zero on success
+*/
+
 int			ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags)
 {
 	if (args == NULL || pos == NULL)
@@ -84,31 +141,5 @@ int			ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags)
 		return (ft_strf_parse_digits(args, pos, flags));
 	else if (ft_strchr("lhLjzt", args[*pos]) != NULL)
 		return (ft_strf_parse_cast(args, pos, flags));
-	return (0);
-}
-
-int			ft_strf_parse(char **source, size_t pos, t_strflags *flags)
-{
-	char		*string;
-	size_t		i;
-
-	if (source == NULL || flags == NULL)
-		return (-1);
-	if ((string = *source) == NULL)
-		return (-1);
-	string = &(string[pos]);
-	ft_strflags_init(flags);
-	i = 1;
-	while (ft_strf_is_parsable(string[i]))
-	{
-		if (ft_strf_parse_elem(string, &i, flags))
-			return (-1);
-		i++;
-	}
-	if (ft_strf_is_known_flag(string[i]))
-		flags->type = string[i++];
-	else
-		flags->type = FT_STRF_TYPE_UNKNOWN;
-	ft_strcpy(string, &(string[i]));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kcharla <kcharla@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:18:21 by kcharla           #+#    #+#             */
-/*   Updated: 2020/08/11 23:39:57 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 21:54:55 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,8 @@ int				ft_strf_resolve_ins(char **source, size_t *pos, char *insertion);
 int				ft_strf_resolve_text(char **insertion, t_strflags *flags, va_list arg);
 int				ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg);
 
-//TODO left only new, delete old
 int				ft_strf_parse(char **source, size_t pos, t_strflags *flags);
-int				ft_strf_parse_old(char *args, t_strflags *flags, size_t *parsed_len);
+int				ft_strf_parse_elem(char *args, size_t *pos, t_strflags *flags);
 
 void			ft_strflags_init(t_strflags *flags);
 int				ft_strf_is_known_flag(int ch);

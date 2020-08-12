@@ -26,7 +26,7 @@
 #include <limits.h>
 
 
-#define INPUT "{%f}", -9999910.52
+#define INPUT "{%f}_%c|||", -9999910.52, 0
 //#define INPUT "%jd, %jd", -9223372036854775808, 9223372036854775807
 //#define INPUT "%3d, %i, %zd, %zhd, %jhd", -1, 2, -1, 4294967296, 9223372036854775807
 //#define INPUT "|%-.8d|%30.5s|%12c|", -1245, "wanna check some leaks?", 0

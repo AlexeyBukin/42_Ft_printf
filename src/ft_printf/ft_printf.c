@@ -12,6 +12,12 @@
 
 #include "ft_printf.h"
 
+/*
+** main ft_printf function
+** uses ft_strf functions to format and join all flags except 'c'
+** uses 'write' only once, in the end, no buffer
+*/
+
 int			ft_printf(const char *restrict format, ...)
 {
 	t_strflags		sflags;

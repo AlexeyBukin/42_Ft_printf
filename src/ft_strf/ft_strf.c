@@ -6,11 +6,17 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/08 16:35:39 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 21:40:10 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
+
+/*
+** main ft_strf function
+** concatenates all flags and format to one string
+** returns (NULL) on error
+*/
 
 char		*ft_strf(const char *restrict format, ...)
 {

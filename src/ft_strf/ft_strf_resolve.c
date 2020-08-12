@@ -6,14 +6,48 @@
 /*   By: kcharla <kcharla@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:57:18 by lmelina           #+#    #+#             */
-/*   Updated: 2020/08/11 08:47:53 by kcharla          ###   ########.fr       */
+/*   Updated: 2020/08/12 22:00:39 by kcharla          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_strf.h"
 
 /*
+** fulfills 'flags' structure and inserts
+** formatted flag string into shared 'source' string
+** also shifts 'pos' to the end of insertion
+** returns non-zero integer on error
+** returns zero on success
+*/
+
+int			ft_strf_resolve(char **source, size_t *pos,
+							   t_strflags *flags, va_list arg)
+{
+	char			*insertion;
+	int				res;
+
+	if (source == NULL || pos == NULL || flags == NULL)
+		return (-1);
+	if (ft_strf_parse(source, *pos, flags))
+		return (-1);
+	ft_strf_adjust(flags);
+	if ((res = ft_strf_resolve_nums(&insertion, flags, arg)))
+		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
+	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
+		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
+	return (-1);
+}
+
+/*
 ** TODO add binary flag 'b'
+*/
+
+/*
+** resolves 'text' flags
+** (also will resolve bonus flags in future)
+** returns negative integer on error
+** returns positive integer on succes
+** returns zero if no flag matched
 */
 
 int			ft_strf_resolve_text(char **insertion,
@@ -35,6 +69,14 @@ int			ft_strf_resolve_text(char **insertion,
 		return (-1);
 	return (1);
 }
+
+/*
+** resolves 'nums' flags
+** (also will resolve bonus flags in future)
+** returns negative integer on error
+** returns positive integer on succes
+** returns zero if no flag matched
+*/
 
 int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 {
@@ -59,6 +101,13 @@ int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 	return (1);
 }
 
+/*
+** inserts resolved flag string into 'source' string
+** skips (NULL) characters in the middle of string
+** returns non-zero on error
+** returns zero on success
+*/
+
 int			ft_strf_resolve_ins(char **source, size_t *pos, char *insertion)
 {
 	size_t		src_len;
@@ -81,22 +130,4 @@ int			ft_strf_resolve_ins(char **source, size_t *pos, char *insertion)
 	*pos += (ins_len);
 	*source = res;
 	return (0);
-}
-
-int			ft_strf_resolve(char **source, size_t *pos,
-					t_strflags *flags, va_list arg)
-{
-	char			*insertion;
-	int				res;
-
-	if (source == NULL || pos == NULL || flags == NULL)
-		return (-1);
-	if (ft_strf_parse(source, *pos, flags))
-		return (-1);
-	ft_strf_adjust(flags);
-	if ((res = ft_strf_resolve_nums(&insertion, flags, arg)))
-		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
-	if ((res = ft_strf_resolve_text(&insertion, flags, arg)))
-		return ((res > 0) ? ft_strf_resolve_ins(source, pos, insertion) : -1);
-	return (-1);
 }
