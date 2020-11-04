@@ -14,6 +14,7 @@
 
 char		*float_get_str(t_strflags *flags, long double d)
 {
+	(void)flags;
 //	char 	*raw;
 //	char 	*ready;
 
