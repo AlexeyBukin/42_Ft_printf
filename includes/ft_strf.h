@@ -141,6 +141,8 @@ char			*ft_strf_flag_f(va_list arg, t_strflags *flags);
 char			*ft_strf_flag_f_round(char *str);
 char			*ft_strf_flag_f_fast(double d);
 
+char			*ft_strf_flag_e(va_list arg, t_strflags *flags);
+
 /*
 ** formatting
 */
@@ -148,6 +150,8 @@ char			*ft_strf_flag_f_fast(double d);
 char			*ft_strf_format_prec(char *string, t_strflags *flags);
 char			*ft_strf_format_width(char *string, t_strflags *flags);
 char			*ft_strf_format_zero(char *string, t_strflags *flags);
+char			*ft_strf_float_format(t_strflags *flags, char *str, char sign);
+int				ft_strf_flag_f_cast(long double *d, t_strflags *flags, va_list arg);
 
 typedef struct			s_float10
 {

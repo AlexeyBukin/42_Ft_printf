@@ -33,16 +33,21 @@ O_DIR = objects/
 SRC_DIR = src/
 MAIN_DIR = src/main
 
+# find src -type f -name '*.c' | sort | column -c 150 | sed 's/$/ \\/'
+
 SRC_FILES = \
-src/flags/float/ft_strf_flag_f.c  src/flags/float/ft_strf_flag_f_special.c  src/flags/float/ft_strf_flag_f_str.c  \
-src/flags/ft_strf_flag_c.c        src/flags/ft_strf_flag_cast.c             src/flags/ft_strf_flag_di.c           \
-src/flags/ft_strf_flag_o.c        src/flags/ft_strf_flag_p.c                src/flags/ft_strf_flag_perc.c         \
-src/flags/ft_strf_flag_s.c        src/flags/ft_strf_flag_u.c                src/flags/ft_strf_flag_unknown.c      \
-src/flags/ft_strf_flag_x.c        src/flags/float/ft_strf_flag_f_fast.c     src/flags/float/ft_strf_flag_f_round.c\
-src/ft_printf/ft_printf.c         src/ft_printf/ft_printf_resolve.c         src/ft_strf/ft_strf.c                 \
-src/ft_strf/ft_strf_adjust.c      src/ft_strf/ft_strf_adjust_dioux.c        src/ft_strf/ft_strf_adjust_psc.c      \
-src/ft_strf/ft_strf_format.c      src/ft_strf/ft_strf_parse.c               src/ft_strf/ft_strf_parse_utils.c     \
-src/ft_strf/ft_strf_resolve.c
+src/flags/float/ft_strf_flag_f.c                src/flags/ft_strf_flag_s.c                      src/ft_strf/ft_strf.c \
+src/flags/float/ft_strf_flag_f_fast.c           src/flags/ft_strf_flag_u.c                      src/ft_strf/ft_strf_adjust.c \
+src/flags/float/ft_strf_flag_f_round.c          src/flags/ft_strf_flag_unknown.c                src/ft_strf/ft_strf_adjust_dioux.c \
+src/flags/float/ft_strf_flag_f_special.c        src/flags/ft_strf_flag_x.c                      src/ft_strf/ft_strf_adjust_psc.c \
+src/flags/float/ft_strf_flag_f_str.c            src/ft_strf/ft_strf_format.c \
+src/flags/ft_strf_flag_c.c                      src/ft_strf/ft_strf_parse.c \
+src/flags/ft_strf_flag_cast.c                   src/ft_strf/ft_strf_parse_utils.c \
+src/flags/ft_strf_flag_di.c                     src/ft_strf/ft_strf_resolve.c \
+src/flags/ft_strf_flag_e.c \
+src/flags/ft_strf_flag_o.c \
+src/flags/ft_strf_flag_p.c                      src/ft_printf/ft_printf.c \
+src/flags/ft_strf_flag_perc.c                   src/ft_printf/ft_printf_resolve.c
 
 O_FILES = $(patsubst $(SRC_DIR)%.c, $(O_DIR)%.o, $(SRC_FILES))
 

@@ -94,6 +94,8 @@ int			ft_strf_resolve_nums(char **source, t_strflags *flags, va_list arg)
 		*source = ft_strf_flag_x(arg, flags);
 	else if (flags->type == 'f' || flags->type == 'F')
 		*source = ft_strf_flag_f(arg, flags);
+	else if (flags->type == 'e' || flags->type == 'E')
+		*source = ft_strf_flag_e(arg, flags);
 	else
 		return (0);
 	if (*source == NULL)

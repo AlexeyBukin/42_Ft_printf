@@ -21,7 +21,7 @@ typedef unsigned long long	t_uintmax;
 typedef unsigned char		t_byte;
 typedef char				t_bool;
 
-# define FT_INTMAX 9223372036854775808
+# define FT_INTMAX 9223372036854775807
 # define FALSE 0
 # define TRUE  1
 

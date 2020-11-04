@@ -35,7 +35,7 @@ void		ft_strflags_init(t_strflags *flags)
 
 int			ft_strf_is_known_flag(int ch)
 {
-	if (ft_strchr("scp%diouUxXfF", ch))
+	if (ft_strchr("scp%diouUxXfFeE", ch))
 		return (1);
 	return (0);
 }
